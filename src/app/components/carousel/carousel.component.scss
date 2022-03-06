@@ -1,7 +1,12 @@
 .carousel {
     display: flex;
+    flex-direction: column;
     justify-content: space-evenly;
     align-items: center;
+
+    @media(min-width: 1024px) {
+        flex-direction: row;
+    }
 }
 
 .slider {
@@ -11,15 +16,30 @@
     margin: 0;
     padding: 0;
 
-    img {
-        height: 300px;
+    .images {
+        height: 238px;
+        max-width: 100%;
+        width: 1023px;
+
+        @media(min-width: 1024px) {
+            min-width: 860px;
+            height: 300px;
+        }
+
+        @media(min-width: 1280px) {
+            min-width: 1080px;
+        }
 
         @media(min-width: 1440px) {
-            width: 1320px;
+            min-width: 1180px;
         }
     
         @media(min-width: 1680px) {
-            width: 1700px;
+            min-width: 1520px;
+        }
+
+        @media(min-width: 1920px) {
+            min-width: 1700px;
         }
     }
 }
@@ -37,23 +57,63 @@ ul {
 }
 
 .next {
-    position: relative;
-    background-color: transparent;
-    border: 0px;
-    margin-left: 10px;
-    width: 58px;
-    height: 100%;
-    padding: 0;
+    display: none;
 
-    .nextButton {
+    @media(min-width: 1024px) {
+        display: block;
         position: relative;
-        box-shadow: 2px 1px #8b0000;
-        border-radius: 50%;
-        left: -1px;
+        background-color: transparent;
+        border: 0px;
+        margin-left: 10px;
+        margin-right: 10px;
+        width: 58px;
+        height: 100%;
+        padding: 0;
+
+        .nextButton {
+            position: relative;
+            box-shadow: 2px 1px #8b0000;
+            border-radius: 50%;
+            left: -1px;
+        }
     }
+    
 }
 
 .previous {
+    display: none;
+
+    @media(min-width: 1024px) {
+        display: block;
+        position: relative;
+        background-color: transparent;
+        border: 0px;
+        margin-right: 10px;
+        margin-left: 10px;
+        width: 58px;
+        height: 100%;
+        padding: 0;
+
+        .previousButton {
+            position: relative;
+            box-shadow: -3px 1px #8b0000;
+            border-radius: 50%;
+            right: -1px;
+        }
+    }
+}
+
+.mobile-buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    @media(min-width: 1024px) {
+        display: none;
+    }
+}
+
+.mobile-previous {
     position: relative;
     background-color: transparent;
     border: 0px;
@@ -62,10 +122,27 @@ ul {
     height: 100%;
     padding: 0;
 
-    .previousButton {
+    .mobilePreviousButton {
         position: relative;
-        box-shadow: -3px 1px #8b0000;
+        box-shadow: 0px 1px #8b0000;
         border-radius: 50%;
         right: -1px;
+    }
+}
+
+.mobile-next {
+    position: relative;
+    background-color: transparent;
+    border: 0px;
+    margin-left: 10px;
+    width: 58px;
+    height: 100%;
+    padding: 0;
+
+    .mobileNextButton {
+        position: relative;
+        box-shadow: 0px 1px #8b0000;
+        border-radius: 50%;
+        left: -1px;
     }
 }

@@ -10,7 +10,7 @@ nav {
         justify-content: center;
     }
 
-    @media(min-width: 768px) {
+    @media(min-width: 1024px) {
         display: flex;
         flex-direction: row;
         justify-content: space-between;
@@ -30,7 +30,7 @@ nav {
         justify-content: right;
         height: 70px;
 
-        @media(min-width: 768px) {
+        @media(min-width: 1024px) {
             padding-right: 20px;
         }
     }
@@ -42,7 +42,7 @@ nav {
         height: 70px;
         font-size: 36px;
 
-        @media(min-width: 768px) {
+        @media(min-width: 1024px) {
             padding-left: 20px;
             font-size: 24px;
         }

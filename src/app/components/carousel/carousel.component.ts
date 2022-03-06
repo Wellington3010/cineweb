@@ -12,6 +12,9 @@ export class CarouselComponent implements OnInit {
   lastMovie!: number;
   nextButtonOver!: boolean;
   previousButtonOver!: boolean;
+  mobileNextButtonOver!: boolean;
+  mobilePreviousButtonOver!: boolean;
+  userSliderClickCounter: number = 0;
 
   constructor() {
   }
@@ -56,17 +59,23 @@ export class CarouselComponent implements OnInit {
 
   nextSlide() {
     this.nextMovie();
+    this.userSliderClickCounter += 1;
 
-    setInterval(() => {
-        this.nextMovie();
-    }, 30000);
+    if(this.userSliderClickCounter == 1) {
+      setInterval(() => {
+          this.nextMovie();
+      }, 25000);
+    }
   }
 
   previousSlide() {
     this.previousMovie();
+    this.userSliderClickCounter += 1;
 
-    setInterval(() => {
-        this.previousMovie();
-    }, 30000);
+    if(this.userSliderClickCounter == 1) {
+      setInterval(() => {
+          this.previousMovie();
+      }, 25000);
+    }
   }
 }
