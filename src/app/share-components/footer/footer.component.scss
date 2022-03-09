@@ -2,7 +2,7 @@ footer {
     background-color: #FF9533;
     color: #FFFFFF;
     width: 100%;
-    position: absolute;
+    position: relative;
     bottom: 0;
     left: 0;
 
@@ -19,6 +19,7 @@ footer {
         justify-content: space-between;
         width: 100%;
         align-items: center;
+        position: absolute;
     }
     
     .footer-link {

@@ -1,0 +1,34 @@
+.title-box {
+    display: none;
+    
+    @media(min-width: 1024px) {
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column-reverse;
+    }
+}
+
+.title {
+    font-size: 28px;
+    color: #FF9533;
+    background-color: #600C0C;
+    background-size: 240px;
+    width: 140px;
+    height: 50px;
+    top: 13px;
+    position: absolute;
+    text-align: center;
+}
+
+.line {
+    position: relative;
+    top: -42px;
+}
+
+.background-title {
+    background-color: #600C0C;
+    width: 100px;
+    height: 100px;
+}

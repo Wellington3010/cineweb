@@ -1,0 +1,19 @@
+<div [ngClass]="'home-menu'">
+    <ul [ngClass]="'home-menu-items'">
+        <li [class.button-over]="buttonOverOne" (mouseover)="buttonOverOne = true" (mouseout)="buttonOverOne = false">
+            <a [ngClass]="'home-menu-link'" href="" [routerLink]="['em-cartaz']">
+                <img [ngClass]="'home-menu-item'" src="assets/images/cartaz.svg" alt=""/> <p>Em Cartaz</p>
+            </a>
+        </li>
+        <li [class.button-over]="buttonOverTwo" (mouseover)="buttonOverTwo = true" (mouseout)="buttonOverTwo = false">
+            <a [ngClass]="'home-menu-link'" href="" [routerLink]="['em-breve']">
+                <img [ngClass]="'home-menu-item'" src="assets/images/breve.svg" alt=""/> <p>Em Breve</p>
+            </a>
+        </li>
+        <li [class.button-over]=buttonOverThree (mouseover)="buttonOverThree = true" (mouseout)="buttonOverThree = false"> 
+            <a [ngClass]="'home-menu-link'" href="" [routerLink]="">
+                <img [ngClass]="'home-menu-item login'" src="assets/images/login.svg" alt=""/> <p>Login</p>
+            </a>
+        </li>
+    </ul>
+</div>

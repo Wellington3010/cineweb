@@ -64,7 +64,7 @@ export class CarouselComponent implements OnInit {
     if(this.userSliderClickCounter == 1) {
       setInterval(() => {
           this.nextMovie();
-      }, 25000);
+      }, 20000);
     }
   }
 
@@ -75,7 +75,7 @@ export class CarouselComponent implements OnInit {
     if(this.userSliderClickCounter == 1) {
       setInterval(() => {
           this.previousMovie();
-      }, 25000);
+      }, 20000);
     }
   }
 }
