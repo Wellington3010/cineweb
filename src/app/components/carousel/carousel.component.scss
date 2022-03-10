@@ -146,3 +146,32 @@ ul {
         left: -1px;
     }
 }
+
+
+.data-movie {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    justify-content: center;
+    position: absolute;
+    width: 90px;
+    height: 40px;
+    top: 10px;
+    left: 10px;
+    border-radius: 40px;
+    border: 7px solid #600C0C;
+    background-color: #FF9533;
+    color: #600C0C;
+    font-weight: 600;
+    text-transform: capitalize;
+    font-size: 12px;
+    
+    @media(min-width: 1024px) {
+        font-weight: 700;
+        font-size: 16px;
+        width: 140px;
+        height: 50px;
+        top: 15px;
+        left: 20px;
+    }
+}

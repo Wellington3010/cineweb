@@ -28,12 +28,15 @@
     </button>
     <ul [ngClass]="'slider'">
         <li id="slider-1" [class.visible-movie]="currentMovie == 1" [class.hidden-movie]="currentMovie != 1">
+            <div [ngClass]="'data-movie'"> Em breve <br> 15/04 </div>
             <img [ngClass]="'images'" src="assets/images/slider_1.png" />
         </li>
         <li id="slider-2" [class.visible-movie]="currentMovie == 2" [class.hidden-movie]="currentMovie != 2">
+            <div [ngClass]="'data-movie'"> Em breve <br> 15/04</div>
             <img [ngClass]="'images'" src="assets/images/slider_2.png" />
         </li>
         <li id="slider-3" [class.visible-movie]="currentMovie == 3" [class.hidden-movie]="currentMovie != 3">
+            <div [ngClass]="'data-movie'"> Em breve <br> 15/04 </div>
             <img [ngClass]="'images'" src="assets/images/slider_3.png" />
         </li>
     </ul>

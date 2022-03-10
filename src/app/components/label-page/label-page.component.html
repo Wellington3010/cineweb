@@ -4,7 +4,10 @@
     </svg>
     <div [ngClass]="'background-title'">
     </div>
-    <h2 [ngClass]="'title'">{{ page }}</h2>
+    <h2 [class.home-title]="page == 'Home'"
+        [class.breve-title]="page == 'Em Breve'"
+        [class.cartaz-title]="page == 'Em Cartaz'" >{{ page }}
+    </h2>
 </div>
 
 

@@ -9,9 +9,10 @@ export class LabelPageComponent implements OnInit {
 
   @Input() page!: string;
   
-  constructor() { }
+  constructor() { 
+  }
 
   ngOnInit(): void {
   }
-
+  
 }
