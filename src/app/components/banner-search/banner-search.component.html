@@ -1,3 +1,23 @@
-<div [ngClass]="'banner-search'">
-
-</div>
+<section [ngClass]="'banner-search'">
+    <form [ngClass]="'search-fields'">
+        <div [ngClass]="'search-group'">
+            <label for="title">Título</label>
+            <input id="title" [ngClass]="'form-item'" type="text">
+        </div>
+        <div [ngClass]="'search-group'">
+            <label for="data">Data</label>
+            <input id="data" [ngClass]="'form-item date'" type="date" name="" id="">
+        </div>
+        <div [ngClass]="'search-group'">
+            <label for="genre">Gênero</label>
+            <select id="genre" [ngClass]="'form-item select'" name="movies">
+                <option value="volvo">Ação</option>
+                <option value="saab">Aventura</option>
+                <option value="fiat">Terror</option>
+                <option value="audi">Drama</option>
+                <option value="audi">Comédia</option>
+            </select>
+        </div>
+    </form>
+    <button [ngClass]="'search-button'">Pesquisar</button>
+</section>

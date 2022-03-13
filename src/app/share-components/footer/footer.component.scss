@@ -17,9 +17,12 @@ footer {
         flex-direction: row;
         justify-content: space-between;
         width: 100%;
+        height: 100%;
         align-items: center;
-        position: absolute;
+        top: 20vh;
     }
+
+
     
     .footer-link {
         padding: 10px;
