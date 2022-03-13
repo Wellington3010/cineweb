@@ -5,6 +5,7 @@ import { RouterModule } from '@angular/router';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BannerHomeComponent } from './components/banner-home/banner-home.component';
+import { BannerSearchComponent } from './components/banner-search/banner-search.component';
 import { CarouselComponent } from './components/carousel/carousel.component';
 import { HomeMenuComponent } from './components/home-menu/home-menu.component';
 import { LabelPageComponent } from './components/label-page/label-page.component';
@@ -25,7 +26,8 @@ import { TopbarComponent } from './share-components/topbar/topbar.component';
     CarouselComponent,
     BannerHomeComponent,
     HomeMenuComponent,
-    LabelPageComponent
+    LabelPageComponent,
+    BannerSearchComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }),
