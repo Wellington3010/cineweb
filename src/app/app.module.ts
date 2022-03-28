@@ -15,6 +15,7 @@ import { HomeComponent } from './page-components/home/home.component';
 import { FooterComponent } from './share-components/footer/footer.component';
 import { TopbarComponent } from './share-components/topbar/topbar.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { SearchMoviesCarouselComponent } from './components/search-movies-carousel/search-movies-carousel.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     BannerHomeComponent,
     HomeMenuComponent,
     LabelPageComponent,
-    BannerSearchComponent
+    BannerSearchComponent,
+    SearchMoviesCarouselComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }),

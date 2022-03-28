@@ -1,0 +1,14 @@
+<div [ngClass]="'search-movies-carousel'">
+    <button [ngClass]="'next'" (click)="nextSlide()">
+        <img [class.nextButton]="nextButtonOver" (mouseover)="nextButtonOver = true" (mouseout)="nextButtonOver = false" src="assets/images/next_button.png" alt=""/>
+    </button>
+    <ul [ngClass]="'slider'" [ngIf]="movies.length >= 1">
+        <li id="slider-1" ngFor="let movie in movies; index as i">
+            <div [ngClass]="'desc-movie'"> Em breve <br> {{ movie.data }} </div>
+            <img [ngClass]="'images'" src="assets/images/slider_1.png" />
+        </li>
+    </ul>
+    <button [ngClass]="'search-movies-carousel-previous'" (click)="previousSlide()">
+        <img [class.previousButton]="previousButtonOver" (mouseover)="previousButtonOver = true" (mouseout)="previousButtonOver = false" src="assets/images/previous_button.png" alt=""/>
+    </button>
+</div>
