@@ -14,6 +14,7 @@ import { FutureMoviesComponent } from './page-components/future-movies/future-mo
 import { HomeComponent } from './page-components/home/home.component';
 import { FooterComponent } from './share-components/footer/footer.component';
 import { TopbarComponent } from './share-components/topbar/topbar.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { TopbarComponent } from './share-components/topbar/topbar.component';
       { path: '', component: HomeComponent },
       { path: 'em-cartaz', component: CurrentMoviesComponent },
       { path: 'em-breve', component: FutureMoviesComponent },
-    ])
+    ]),
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

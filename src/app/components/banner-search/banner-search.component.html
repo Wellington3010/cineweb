@@ -4,18 +4,18 @@
             <label for="title">Título</label>
             <input id="title" [ngClass]="'form-item'" type="text">
         </div>
-        <div [ngClass]="'search-group'">
-            <label for="data">Data</label>
-            <input id="data" [ngClass]="'form-item date'" type="date" name="" id="">
+        <div [ngClass]="'search-group date'">
+            <label for="data">A partir</label>
+            <input id="data" [ngClass]="'form-item'" type="date" name="" id="">
         </div>
         <div [ngClass]="'search-group'">
             <label for="genre">Gênero</label>
             <select id="genre" [ngClass]="'form-item select'" name="movies">
-                <option value="volvo">Ação</option>
-                <option value="saab">Aventura</option>
-                <option value="fiat">Terror</option>
-                <option value="audi">Drama</option>
-                <option value="audi">Comédia</option>
+                <option value="volvo">AÇÃO</option>
+                <option value="saab">AVENTURA</option>
+                <option value="fiat">TERROR</option>
+                <option value="audi">DRAMA</option>
+                <option value="audi">COMÉDIA</option>
             </select>
         </div>
     </form>
