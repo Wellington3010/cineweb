@@ -1,4 +1,4 @@
-<div [ngClass]="'carousel'">
+<div [class.carousel]="currentPage == 'home'" [class.hidden]="currentPage != 'home'">
     <div [ngClass]="'mobile-buttons'">
         <button [ngClass]="'mobile-next'" (click)="nextSlide()">
             <svg [class.mobileNextButton]="mobileNextButtonOver" (mouseover)="mobileNextButtonOver = true" (mouseout)="mobileNextButtonOver = false" width="62" height="59" viewBox="0 0 62 59" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -42,6 +42,20 @@
     </ul>
     <button [ngClass]="'previous'" (click)="previousSlide()">
         <img [class.previousButton]="previousButtonOver" (mouseover)="previousButtonOver = true" (mouseout)="previousButtonOver = false" src="assets/images/previous_button.png" alt=""/>
+    </button>
+</div>
+
+<div [class.hidden]="currentPage == 'home'" [class.carousel-pages]="currentPage != 'home'">
+    <button>
+        <img src="assets/images/next_button.png" alt=""/>
+    </button>
+    <ul>
+        <li id="slider-1">
+            <img [ngClass]="'images'" src="" />
+        </li>
+    </ul>
+    <button>
+        <img src="assets/images/previous_button.png" alt=""/>
     </button>
 </div>
   

@@ -1,5 +1,4 @@
-import { ThisReceiver } from '@angular/compiler';
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-carousel',
@@ -8,6 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CarouselComponent implements OnInit {
 
+  @Input() currentPage!: string;
   currentMovie!: number;
   lastMovie!: number;
   nextButtonOver!: boolean;

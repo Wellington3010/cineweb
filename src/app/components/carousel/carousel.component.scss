@@ -9,6 +9,21 @@
     }
 }
 
+.carousel-pages {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+
+    @media(min-width: 1024px) {
+        flex-direction: row;
+    }
+}
+
+.hidden {
+    display: none;
+}
+
 .slider {
     display: flex;
     justify-content: center;

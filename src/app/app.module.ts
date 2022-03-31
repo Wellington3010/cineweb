@@ -4,7 +4,6 @@ import { RouterModule } from '@angular/router';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { BannerHomeComponent } from './components/banner-home/banner-home.component';
 import { BannerSearchComponent } from './components/banner-search/banner-search.component';
 import { CarouselComponent } from './components/carousel/carousel.component';
 import { HomeMenuComponent } from './components/home-menu/home-menu.component';
@@ -15,7 +14,7 @@ import { HomeComponent } from './page-components/home/home.component';
 import { FooterComponent } from './share-components/footer/footer.component';
 import { TopbarComponent } from './share-components/topbar/topbar.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { SearchMoviesCarouselComponent } from './components/search-movies-carousel/search-movies-carousel.component';
+import { BannerComponent } from './components/banner/banner.component';
 
 @NgModule({
   declarations: [
@@ -26,11 +25,10 @@ import { SearchMoviesCarouselComponent } from './components/search-movies-carous
     TopbarComponent,
     FooterComponent,
     CarouselComponent,
-    BannerHomeComponent,
     HomeMenuComponent,
     LabelPageComponent,
     BannerSearchComponent,
-    SearchMoviesCarouselComponent
+    BannerComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }),
