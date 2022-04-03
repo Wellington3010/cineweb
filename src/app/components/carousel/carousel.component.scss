@@ -18,6 +18,19 @@
     @media(min-width: 1024px) {
         flex-direction: row;
     }
+
+    > button {
+        border: 0;
+        background: transparent;
+
+        > img {
+            filter: brightness(6.5);
+        }
+    }
+}
+
+.carouselButtonOver {
+    filter: drop-shadow(2px 4px 6px black);
 }
 
 .hidden {
@@ -189,4 +202,28 @@ ul {
         top: 15px;
         left: 20px;
     }
+}
+
+.images {
+    display: block;
+}
+
+.groupMoviesVisible {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0;
+
+    > li {
+        padding: 20px;
+    }
+
+    .carousel-movies-pages-images {
+        width: 180px;
+        height: 270px;
+    }
+}
+
+.groupMoviesInvisible {
+    display: none;
 }

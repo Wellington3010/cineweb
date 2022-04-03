@@ -11,5 +11,4 @@ export class FutureMoviesComponent implements OnInit {
 
   ngOnInit(): void {
   }
-
 }

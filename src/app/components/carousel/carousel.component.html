@@ -46,15 +46,15 @@
 </div>
 
 <div [class.hidden]="currentPage == 'home'" [class.carousel-pages]="currentPage != 'home'">
-    <button>
+    <button (click)="nextGroupMovie()" [class.carouselButtonOver]="previousButtonOver" (mouseover)="previousButtonOver = true" (mouseout)="previousButtonOver = false">
         <img src="assets/images/next_button.png" alt=""/>
     </button>
-    <ul>
-        <li id="slider-1">
-            <img [ngClass]="'images'" src="" />
+    <ul *ngFor="let group of images;index as i;" [class.groupMoviesVisible]="group.visible" [class.groupMoviesInvisible]="!group.visible">
+        <li *ngFor="let image of group.imagesGroup;index as z" id="slider-1">
+            <img [ngClass]="'carousel-movies-pages-images'" src={{image.path}} />
         </li>
     </ul>
-    <button>
+    <button (click)="nextGroupMovie()" [class.carouselButtonOver]="nextButtonOver" (mouseover)="nextButtonOver = true" (mouseout)="nextButtonOver = false">
         <img src="assets/images/previous_button.png" alt=""/>
     </button>
 </div>
