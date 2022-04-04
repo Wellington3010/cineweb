@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 
 @Component({
   selector: 'app-banner-search',
@@ -7,9 +7,23 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BannerSearchComponent implements OnInit {
 
-  constructor() { }
+  searchType!: string;
+ 
+  constructor() {
+  }
 
   ngOnInit(): void {
   }
 
+  elementFocus(event?: Event) {
+    var elementFocus = (event?.target as HTMLElement);
+    this.searchType = elementFocus.id;
+    elementFocus.removeAttribute("readonly");
+  }
+
+  elementFocusOut(event?: Event) {
+    var elementFocusOut = (event?.target as HTMLElement);
+    elementFocusOut.style.content = '';
+    elementFocusOut.setAttribute("readonly", "readonly");
+  }
 }

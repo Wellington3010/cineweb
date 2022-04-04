@@ -2,11 +2,11 @@
     <form [ngClass]="'search-fields'">
         <div [ngClass]="'search-group'">
             <label for="title">Título</label>
-            <input id="title" [ngClass]="'form-item'" type="text">
+            <input id="title" [ngClass]="'form-item'" type="text" (focusout)="elementFocusOut($event)" (focus)="elementFocus($event)">
         </div>
         <div [ngClass]="'search-group date'">
             <label for="data">A partir</label>
-            <input id="data" [ngClass]="'form-item'" type="date" name="" id="">
+            <input id="data" [ngClass]="'form-item'" type="date" (focusout)="elementFocusOut($event)" (focus)="elementFocus($event)">
         </div>
         <div [ngClass]="'search-group'">
             <label for="genre">Gênero</label>
@@ -18,6 +18,8 @@
                 <option value="audi">COMÉDIA</option>
             </select>
         </div>
+        <div>
+            <button [ngClass]="'search-button'">Pesquisar</button>
+        </div>
     </form>
-    <button [ngClass]="'search-button'">Pesquisar</button>
 </section>

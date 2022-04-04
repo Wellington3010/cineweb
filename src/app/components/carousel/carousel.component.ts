@@ -30,6 +30,7 @@ export class CarouselComponent implements OnInit {
           {path: 'assets/images/movie2.jpg'},
           {path: 'assets/images/movie3.jpg'},
           {path: 'assets/images/movie4.jpg'},
+          {path: 'assets/images/movie4.jpg'},
           {path: 'assets/images/movie5.jpg'},
         ],
         visible: true
@@ -40,6 +41,7 @@ export class CarouselComponent implements OnInit {
           {path: 'assets/images/movie6.jpg'},
           {path: 'assets/images/movie7.jpg'},
           {path: 'assets/images/movie8.jpg'},
+          {path: 'assets/images/movie9.jpg'},
           {path: 'assets/images/movie9.jpg'},
           {path: 'assets/images/movie10.jpg'}
         ],
