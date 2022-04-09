@@ -15,6 +15,7 @@ import { FooterComponent } from './share-components/footer/footer.component';
 import { TopbarComponent } from './share-components/topbar/topbar.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BannerComponent } from './components/banner/banner.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import { BannerComponent } from './components/banner/banner.component';
       { path: 'em-cartaz', component: CurrentMoviesComponent },
       { path: 'em-breve', component: FutureMoviesComponent },
     ]),
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

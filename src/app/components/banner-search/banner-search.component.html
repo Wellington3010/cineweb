@@ -1,16 +1,16 @@
 <section [ngClass]="'banner-search'">
-    <form [ngClass]="'search-fields'">
+    <form [formGroup]="movieForm" (ngSubmit)="submitForm()" [ngClass]="'search-fields'">
         <div [ngClass]="'search-group'">
             <label for="title">Título</label>
-            <input id="title" [ngClass]="'form-item'" type="text" (focusout)="elementFocusOut($event)" (focus)="elementFocus($event)">
+            <input id="title" [class.high-opacity]="disableTitle" [ngClass]="'form-item'" type="text" formControlName="title" (focus)="focusEvent($event)" (focusout)="focusEvent($event)">
         </div>
         <div [ngClass]="'search-group date'">
-            <label for="data">A partir</label>
-            <input id="data" [ngClass]="'form-item'" type="date" (focusout)="elementFocusOut($event)" (focus)="elementFocus($event)">
+            <label for="date">A partir</label>
+            <input id="date" [class.high-opacity]="disableDate" [ngClass]="'form-item'" type="date" formControlName="date" (focus)="focusEvent($event)" (focusout)="focusEvent($event)">
         </div>
         <div [ngClass]="'search-group'">
             <label for="genre">Gênero</label>
-            <select id="genre" [ngClass]="'form-item select'" name="movies">
+            <select id="genre" [class.high-opacity]="disableGenre" [ngClass]="'form-item select'" formControlName="genre" (focus)="focusEvent($event)" (focusout)="focusEvent($event)">
                 <option value="volvo">AÇÃO</option>
                 <option value="saab">AVENTURA</option>
                 <option value="fiat">TERROR</option>
@@ -19,7 +19,7 @@
             </select>
         </div>
         <div>
-            <button [ngClass]="'search-button'">Pesquisar</button>
+            <button [class.search-button-over]="searchButtonOver" (mouseover)="setSearchButtonOver()" (mouseout)="setSearchButtonOver()" [ngClass]="'search-button'">Pesquisar</button>
         </div>
     </form>
 </section>

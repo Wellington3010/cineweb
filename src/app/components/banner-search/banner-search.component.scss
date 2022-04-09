@@ -78,6 +78,10 @@
     }
 }
 
+.search-button-over {
+    filter: drop-shadow(2px 4px 6px black);
+}
+
 .search-group {
     padding: 10px;
     display: flex;
@@ -96,4 +100,8 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     cursor: pointer;
     filter: invert(0.7) brightness(60%) sepia(60%) saturate(4500%) hue-rotate(20deg);
     padding-right: 20px;
+}
+
+.high-opacity {
+    opacity: 80%;
 }
