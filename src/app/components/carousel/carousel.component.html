@@ -1,6 +1,6 @@
 <div [class.carousel]="currentPage == 'home'" [class.hidden]="currentPage != 'home'">
     <div [ngClass]="'mobile-buttons'">
-        <button [ngClass]="'mobile-next'" (click)="nextSlide()">
+        <button [ngClass]="'mobile-next'" (click)="nextClick()">
             <svg [class.mobileNextButton]="mobileNextButtonOver" (mouseover)="mobileNextButtonOver = true" (mouseout)="mobileNextButtonOver = false" width="62" height="59" viewBox="0 0 62 59" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                 <rect x="0.5" y="58.5" width="58" height="61" rx="29" transform="rotate(-90 0.5 58.5)" fill="url(#pattern0)"/>
                 <defs>
@@ -11,7 +11,7 @@
                 </defs>
             </svg>           
         </button>
-        <button [ngClass]="'mobile-previous'" (click)="previousSlide()">
+        <button [ngClass]="'mobile-previous'" (click)="previousClick()">
             <svg [class.mobilePreviousButton]="mobilePreviousButtonOver" (mouseover)="mobilePreviousButtonOver = true" (mouseout)="mobilePreviousButtonOver = false" width="62" height="59" viewBox="0 0 62 59" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                 <rect x="61.5" y="0.500031" width="58" height="61" rx="29" transform="rotate(90 61.5 0.500031)" fill="url(#pattern0)"/>
                 <defs>
@@ -23,38 +23,32 @@
             </svg>
         </button>
     </div>
-    <button [ngClass]="'next'" (click)="nextSlide()">
+    <button [ngClass]="'next'" (click)="previousClick()">
         <img [class.nextButton]="nextButtonOver" (mouseover)="nextButtonOver = true" (mouseout)="nextButtonOver = false" src="assets/images/next_button.png" alt=""/>
     </button>
     <ul [ngClass]="'slider'">
-        <li id="slider-1" [class.visible-movie]="currentMovie == 1" [class.hidden-movie]="currentMovie != 1">
-            <div [ngClass]="'data-movie'"> Em breve <br> 15/04 </div>
-            <img [ngClass]="'images'" src="assets/images/slider_1.png" />
-        </li>
-        <li id="slider-2" [class.visible-movie]="currentMovie == 2" [class.hidden-movie]="currentMovie != 2">
-            <div [ngClass]="'data-movie'"> Em breve <br> 15/04</div>
-            <img [ngClass]="'images'" src="assets/images/slider_2.png" />
-        </li>
-        <li id="slider-3" [class.visible-movie]="currentMovie == 3" [class.hidden-movie]="currentMovie != 3">
-            <div [ngClass]="'data-movie'"> Em breve <br> 15/04 </div>
-            <img [ngClass]="'images'" src="assets/images/slider_3.png" />
+        <li *ngFor="let movie of homeMovies;index as i;" id="slider-1">
+            <div [class.hidden-movie]="currentMovie.title != movie.title" [class.visible-movie]="currentMovie.title == movie.title">
+                <div [ngClass]="'data-movie'"> Em breve <br> {{ movie.date | date: 'dd/MM/yyyy' }} </div>
+                <img [ngClass]="'images'" src={{movie.moviePoster}} />
+            </div>
         </li>
     </ul>
-    <button [ngClass]="'previous'" (click)="previousSlide()">
+    <button [ngClass]="'previous'" (click)="nextClick()">
         <img [class.previousButton]="previousButtonOver" (mouseover)="previousButtonOver = true" (mouseout)="previousButtonOver = false" src="assets/images/previous_button.png" alt=""/>
     </button>
 </div>
 
 <div [class.hidden]="currentPage == 'home'" [class.carousel-pages]="currentPage != 'home'">
-    <button (click)="nextGroupMovie()" [class.carouselButtonOver]="previousButtonOver" (mouseover)="previousButtonOver = true" (mouseout)="previousButtonOver = false">
+    <button (click)="nextGroupMovie()" [ngClass]="'buttonCarrouselPageTop'" [class.carouselButtonOver]="previousButtonOver" (mouseover)="previousButtonOver = true" (mouseout)="previousButtonOver = false">
         <img src="assets/images/next_button.png" alt=""/>
     </button>
-    <ul *ngFor="let group of images;index as i;" [class.groupMoviesVisible]="group.visible" [class.groupMoviesInvisible]="!group.visible">
-        <li *ngFor="let image of group.imagesGroup;index as z" id="slider-1">
-            <img [ngClass]="'carousel-movies-pages-images'" src={{image.path}} />
+    <ul *ngFor="let group of arrayMovies;index as i;" [class.groupMoviesVisible]="group.visible" [class.groupMoviesInvisible]="!group.visible">
+        <li *ngFor="let movie of group.movies;index as z" id="slider-1">
+            <img [ngClass]="'carousel-movies-pages-images'" src={{movie.moviePoster}} />
         </li>
     </ul>
-    <button (click)="nextGroupMovie()" [class.carouselButtonOver]="nextButtonOver" (mouseover)="nextButtonOver = true" (mouseout)="nextButtonOver = false">
+    <button (click)="nextGroupMovie()" [ngClass]="'buttonCarrouselPageBottom'" [class.carouselButtonOver]="nextButtonOver" (mouseover)="nextButtonOver = true" (mouseout)="nextButtonOver = false">
         <img src="assets/images/previous_button.png" alt=""/>
     </button>
 </div>

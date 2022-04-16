@@ -3,7 +3,9 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  moviesApiBaseUrl: "https://cineweb-movies-api-app.herokuapp.com/movies",
+  usersApiBaseUrl:"https://cineweb-user-api-app.herokuapp.com/users"
 };
 
 /*
