@@ -10,7 +10,8 @@
     "dev:ssr": "ng run cineweb:serve-ssr",
     "serve:ssr": "node dist/cineweb/server/main.js",
     "build:ssr": "ng build && ng run cineweb:server",
-    "prerender": "ng run cineweb:prerender"
+    "prerender": "ng run cineweb:prerender",
+    "heroku-postbuild": "ng build --prod"
   },
   "private": true,
   "dependencies": {
