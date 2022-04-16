@@ -17,9 +17,10 @@ export class CarouselComponent implements OnInit {
   mobileNextButtonOver!: boolean;
   mobilePreviousButtonOver!: boolean;
   userSliderClickCounter: number = 0;
-  arrayMovies: any[] = []; 
+  arrayMovies: any[] = [];
   homeMovies!: IMovie[];
-  pageMovies!: IMovie[];
+  pageFutureMovies!: IMovie[];
+  pageCurrentMovies!: IMovie[];
   observableMovies!: any;
   currentMovieIndex: number = 1;
 
@@ -29,7 +30,7 @@ export class CarouselComponent implements OnInit {
 
   ngOnInit(): void {
     
-    if(this.homeMovies == null || this.pageMovies == null) {
+    if(this.homeMovies == null || this.pageCurrentMovies == null || this.pageFutureMovies == null) {
 
       switch(this.currentPage) {
         case "home":
@@ -44,8 +45,8 @@ export class CarouselComponent implements OnInit {
         case "future-movies":
           this.observableMovies = this.moviesService
             .getComingSoonMovies().subscribe((item) => {
-              this.pageMovies = item as IMovie[];
-              this.fillPageMovies();
+              this.pageFutureMovies = item as IMovie[];
+              this.fillPageMovies(this.pageFutureMovies);
               console.log(this.arrayMovies);
             }, (err) => {
               console.log(err);
@@ -54,8 +55,8 @@ export class CarouselComponent implements OnInit {
         default:
           this.observableMovies = this.moviesService
           .getCurrentMovies().subscribe((item) => {
-            this.pageMovies = item as IMovie[];
-            this.fillPageMovies();
+            this.pageCurrentMovies = item as IMovie[];
+            this.fillPageMovies(this.pageCurrentMovies);
           }, (err) => {
             console.log(err);
           });
@@ -64,7 +65,7 @@ export class CarouselComponent implements OnInit {
     }
   }
 
-  fillPageMovies() {
+  fillPageMovies(moviesList: IMovie[]) {
     let countGroup = 1;
     let countMovies = 1;
     let groupItem: any = { 
@@ -73,21 +74,23 @@ export class CarouselComponent implements OnInit {
       visible: true 
     };
 
-    if(this.pageMovies != undefined) {
-      this.pageMovies.forEach((x) => {
-          if(groupItem.movies.length < 5 || groupItem.movies == undefined) {
+    if(moviesList != undefined) {
+      moviesList.forEach((x) => {
+          if(groupItem.movies == undefined || groupItem.movies.length < moviesList.length) {
             groupItem.movies.push(x);
+
+            if(groupItem.movies.length == 5) {
+              this.arrayMovies.push(groupItem);
+              countGroup = countGroup + 1;
+              countMovies = 1;
+              groupItem = {
+                groupName: "group" + countGroup,
+                movies: [] as IMovie[],
+                visible: false 
+              };
+            }
+
             countMovies = countMovies + 1;
-          }
-          else {
-            this.arrayMovies.push(groupItem);
-            countGroup++;
-            countMovies = 1;
-            groupItem = {
-              groupName: "group" + countGroup,
-              movies: [] as IMovie[],
-              visible: false 
-            };
           }
       });
     }
