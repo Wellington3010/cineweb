@@ -11,7 +11,6 @@ export class CarouselComponent implements OnInit {
 
   @Input() currentPage!: string;
   currentMovie!: IMovie;
-  lastMovie!: number;
   nextButtonOver!: boolean;
   previousButtonOver!: boolean;
   mobileNextButtonOver!: boolean;
@@ -19,9 +18,6 @@ export class CarouselComponent implements OnInit {
   userSliderClickCounter: number = 0;
   arrayMovies: any[] = [];
   homeMovies!: IMovie[];
-  pageFutureMovies!: IMovie[];
-  pageCurrentMovies!: IMovie[];
-  observableMovies!: any;
   currentMovieIndex: number = 1;
 
   constructor(private moviesService: MoviesServiceService) {
@@ -29,71 +25,13 @@ export class CarouselComponent implements OnInit {
 
 
   ngOnInit(): void {
-    
-    if(this.homeMovies == null || this.pageCurrentMovies == null || this.pageFutureMovies == null) {
 
-      switch(this.currentPage) {
-        case "home":
-          this.observableMovies = this.moviesService
-            .getHomeMovies().subscribe((item) => {
-              this.homeMovies = item as IMovie[];
-              this.currentMovie = this.homeMovies[1];
-            }, (err) => {
-              console.log(err);
-            });
-          break;
-        case "future-movies":
-          this.observableMovies = this.moviesService
-            .getComingSoonMovies().subscribe((item) => {
-              this.pageFutureMovies = item as IMovie[];
-              this.fillPageMovies(this.pageFutureMovies);
-              console.log(this.arrayMovies);
-            }, (err) => {
-              console.log(err);
-            });
-          break;
-        default:
-          this.observableMovies = this.moviesService
-          .getCurrentMovies().subscribe((item) => {
-            this.pageCurrentMovies = item as IMovie[];
-            this.fillPageMovies(this.pageCurrentMovies);
-          }, (err) => {
-            console.log(err);
-          });
-          break;
-      }
-    }
-  }
-
-  fillPageMovies(moviesList: IMovie[]) {
-    let countGroup = 1;
-    let countMovies = 1;
-    let groupItem: any = { 
-      groupName: "group" + countGroup,
-      movies: [] as IMovie[],
-      visible: true 
-    };
-
-    if(moviesList != undefined) {
-      moviesList.forEach((x) => {
-          if(groupItem.movies == undefined || groupItem.movies.length < moviesList.length) {
-            groupItem.movies.push(x);
-
-            if(groupItem.movies.length == 5) {
-              this.arrayMovies.push(groupItem);
-              countGroup = countGroup + 1;
-              countMovies = 1;
-              groupItem = {
-                groupName: "group" + countGroup,
-                movies: [] as IMovie[],
-                visible: false 
-              };
-            }
-
-            countMovies = countMovies + 1;
-          }
+      let _ = this.moviesService.getHomeMovies().subscribe((item) => {
+        this.homeMovies = item as IMovie[];
+        this.currentMovie = this.homeMovies[1];
+      }, (err) => {
+        console.log(err);
       });
-    }
   }
 
   nextSlide() {
@@ -117,7 +55,6 @@ export class CarouselComponent implements OnInit {
       }, 20000);
     }
   }
-
 
   previousSlide() {
     this.currentMovieIndex = this.homeMovies.findIndex(x => x.title == this.currentMovie.title);

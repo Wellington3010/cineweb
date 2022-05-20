@@ -1,0 +1,13 @@
+<div [ngClass]="'carousel-pages'">
+    <button [ngClass]="'buttonCarrouselPageTop'" [class.carouselButtonOver]="pagesPreviousButtonOver" (mouseover)="pagesPreviousButtonOver = true" (mouseout)="pagesPreviousButtonOver = false">
+        <img src="assets/images/next_button.png" alt=""/>
+    </button>
+    <ul>
+        <li *ngFor="let movie of listMovies;index as i" id="slider-1">
+            <img [ngClass]="'carousel-movies-pages-images'" src={{movie.moviePoster}} />
+        </li>
+    </ul>
+    <button [ngClass]="'buttonCarrouselPageBottom'" [class.carouselButtonOver]="pagesNextButtonOver" (mouseover)="pagesNextButtonOver = true" (mouseout)="pagesNextButtonOver = false">
+        <img src="assets/images/previous_button.png" alt=""/>
+    </button>
+</div>

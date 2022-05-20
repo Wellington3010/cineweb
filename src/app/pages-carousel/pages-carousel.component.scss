@@ -1,0 +1,61 @@
+ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    padding: 0;
+
+    @media(min-width: 1024px) {
+        flex-direction: row;
+    }
+
+    > li {
+        padding: 10px;
+    }
+}
+.carousel-pages {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+
+    @media(min-width: 1024px) {
+        flex-direction: row;
+        position: relative;
+        top: 60px;
+    }
+
+    > button {
+        border: 0;
+        background: transparent;
+
+        > img {
+            filter: brightness(6.5);
+        }
+    }
+}
+
+.buttonCarrouselPageTop {
+    padding-top: 20px;
+
+    @media(min-width: 1024px) {
+        padding-top: unset;
+    }
+}
+
+.buttonCarrouselPageBottom {
+    padding-bottom: 20px;
+
+    @media(min-width: 1024px) {
+        padding-bottom: unset;
+    }
+}
+
+.carouselButtonOver {
+    filter: drop-shadow(2px 4px 6px black);
+}
+
+.carousel-movies-pages-images {
+    width: 180px;
+    height: 270px;
+}

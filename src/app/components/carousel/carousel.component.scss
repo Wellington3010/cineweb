@@ -9,57 +9,6 @@
     }
 }
 
-.carousel-pages {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-    align-items: center;
-
-    @media(min-width: 1024px) {
-        flex-direction: row;
-        position: relative;
-        top: 60px;
-    }
-
-    > button {
-        border: 0;
-        background: transparent;
-
-        > img {
-            filter: brightness(6.5);
-        }
-    }
-}
-
-.buttonCarrouselPageTop {
-    padding-top: 20px;
-
-    @media(min-width: 1024px) {
-        padding-top: unset;
-    }
-}
-
-.buttonCarrouselPageBottom {
-    padding-bottom: 20px;
-
-    @media(min-width: 1024px) {
-        padding-bottom: unset;
-    }
-}
-
-
-.carouselButtonOver {
-    filter: drop-shadow(2px 4px 6px black);
-}
-
-.carouselButtonOver {
-    filter: drop-shadow(2px 4px 6px black);
-}
-
-.hidden {
-    display: none;
-}
-
 .slider {
     display: flex;
     justify-content: center;
@@ -263,10 +212,5 @@ ul {
         @media(min-width: 1440px) {
             padding: 10px;
         }
-    }
-
-    .carousel-movies-pages-images {
-        width: 180px;
-        height: 270px;
     }
 }

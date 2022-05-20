@@ -18,6 +18,7 @@ import { BannerComponent } from './components/banner/banner.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
+import { PagesCarouselComponent } from './pages-carousel/pages-carousel.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { CommonModule } from '@angular/common';
     HomeMenuComponent,
     LabelPageComponent,
     BannerSearchComponent,
-    BannerComponent
+    BannerComponent,
+    PagesCarouselComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }),
