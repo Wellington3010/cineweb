@@ -25,7 +25,6 @@ export class CarouselComponent implements OnInit {
 
 
   ngOnInit(): void {
-
       let _ = this.moviesService.getHomeMovies().subscribe((item) => {
         this.homeMovies = item as IMovie[];
         this.currentMovie = this.homeMovies[1];
@@ -75,20 +74,6 @@ export class CarouselComponent implements OnInit {
      if(this.userSliderClickCounter == 1) {
       setInterval(() => {
           this.previousSlide();
-      }, 20000);
-    }
-  }
-
-  nextGroupMovie() {
-    if(this.arrayMovies.length > 1) {
-      this.arrayMovies.forEach((item) => {
-        item.visible = !item.visible;
-      });
-  
-      setInterval(() => {
-        this.arrayMovies.forEach((item) => {
-          item.visible = !item.visible;
-        });
       }, 20000);
     }
   }

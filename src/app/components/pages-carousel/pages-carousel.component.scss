@@ -1,13 +1,10 @@
 ul {
     list-style: none;
     display: flex;
-    flex-direction: column;
-    justify-content: space-around;
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
     padding: 0;
-
-    @media(min-width: 1024px) {
-        flex-direction: row;
-    }
 
     > li {
         padding: 10px;
@@ -31,6 +28,11 @@ ul {
 
         > img {
             filter: brightness(6.5);
+            transform: rotate(90deg);
+
+            @media(min-width: 1024px) {
+                transform: unset;
+            }
         }
     }
 }
