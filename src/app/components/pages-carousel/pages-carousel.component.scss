@@ -13,7 +13,7 @@ ul {
 .carousel-pages {
     display: flex;
     flex-direction: column;
-    justify-content: space-evenly;
+    justify-content: center;
     align-items: center;
 
     @media(min-width: 1024px) {
