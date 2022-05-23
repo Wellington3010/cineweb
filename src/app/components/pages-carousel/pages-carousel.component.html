@@ -5,7 +5,9 @@
     </button>
     <ul>
         <li *ngFor="let movie of listMovies | slice:startMovie:endMovie; index as i;">
-            <img [ngClass]="'carousel-movies-pages-images'" src={{movie.moviePoster}} />
+            <a [routerLink]="['/movie-details', movie.title]">
+                <img [ngClass]="'carousel-movies-pages-images'" src={{movie.moviePoster}} />
+            </a>
         </li>
     </ul>
     <button [ngClass]="'buttonCarrouselPageBottom'" [class.carouselButtonOver]="pagesNextButtonOver" 

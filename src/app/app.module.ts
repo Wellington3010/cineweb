@@ -10,6 +10,8 @@ import { HomeMenuComponent } from './components/home-menu/home-menu.component';
 import { LabelPageComponent } from './components/label-page/label-page.component';
 import { CurrentMoviesComponent } from './page-components/current-movies/current-movies.component';
 import { FutureMoviesComponent } from './page-components/future-movies/future-movies.component';
+import { DetailsMoviesComponent } from './page-components/details-movies/details-movies.component';
+import { NotFoundComponent } from './page-components/not-found/not-found.component';
 import { HomeComponent } from './page-components/home/home.component';
 import { FooterComponent } from './share-components/footer/footer.component';
 import { TopbarComponent } from './share-components/topbar/topbar.component';
@@ -26,6 +28,8 @@ import { PagesCarouselComponent } from './components/pages-carousel/pages-carous
     HomeComponent,
     CurrentMoviesComponent,
     FutureMoviesComponent,
+    DetailsMoviesComponent,
+    NotFoundComponent,
     TopbarComponent,
     FooterComponent,
     CarouselComponent,
@@ -42,6 +46,8 @@ import { PagesCarouselComponent } from './components/pages-carousel/pages-carous
       { path: '', component: HomeComponent },
       { path: 'em-cartaz', component: CurrentMoviesComponent },
       { path: 'em-breve', component: FutureMoviesComponent },
+      { path: 'movie-details/:title', component: DetailsMoviesComponent },
+      { path: '**', component: NotFoundComponent }
     ]),
     BrowserAnimationsModule,
     ReactiveFormsModule,
