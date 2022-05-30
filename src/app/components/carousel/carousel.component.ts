@@ -1,6 +1,6 @@
 import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { IMovie } from 'src/app/interfaces/IMovie';
-import { MoviesServiceService } from 'src/app/services/movies-service.service';
+import { MoviesService } from 'src/app/services/movies.service';
 
 @Component({
   selector: 'app-carousel',
@@ -20,7 +20,7 @@ export class CarouselComponent implements OnInit {
   homeMovies!: IMovie[];
   currentMovieIndex: number = 1;
 
-  constructor(private moviesService: MoviesServiceService) {
+  constructor(private moviesService: MoviesService) {
   }
 
 

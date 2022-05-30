@@ -1,0 +1,29 @@
+<section [ngClass]="'details'">
+    <div [ngClass]="'movie-information'">
+        <ng-template [ngIf]="movie != null">
+            <picture [ngClass]="'movie-poster'">
+                <img src={{movie.moviePoster}} alt="movie">
+            </picture>
+
+            <ul>
+                <li [ngClass]="'details-list-item'">
+                    <div>Título:</div>
+                    <div>{{movie.title}}</div>
+                </li>
+                <li [ngClass]="'details-list-item'">
+                    <div>Data:</div>
+                    <div>{{movie.date | date: 'dd/MM/yyyy'}}</div>
+                </li>
+                <li [ngClass]="'details-list-item'">
+                    <div>Horário:</div>
+                    <div>{{movie.date | date: 'hh:mm:ss'}}</div>
+                </li>
+                <li [ngClass]="'details-list-item'">
+                    <div>Gênero:</div>
+                    <div>{{movie.genre}}</div>
+                </li>
+            </ul>
+        </ng-template>
+    </div>
+    <div [ngClass]="'movie-poster'"></div>
+</section>

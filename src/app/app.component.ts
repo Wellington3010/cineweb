@@ -1,6 +1,4 @@
-import { Component } from '@angular/core';
-import { Router, NavigationEnd } from '@angular/router';
-import { Location } from "@angular/common";
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-root',
@@ -9,13 +7,7 @@ import { Location } from "@angular/common";
 })
 export class AppComponent {
   title = 'cineweb';
-  currentRouter!: string;
 
-  constructor(location: Location, router: Router) {
-    router.events.subscribe(item => {
-      if(item instanceof NavigationEnd) {
-       this.currentRouter = location.path();
-      }
-    });
+  constructor() {
   }
 }

@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Location } from "@angular/common";
 
 @Component({
   selector: 'app-topbar',
@@ -7,11 +8,17 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class TopbarComponent implements OnInit {
 
-  @Input() currentRouter!: string;
+  detailsMoviePage!: boolean;
+  currentRouter!: string;
+  topbarIconColor!: string;
 
-  constructor() {
+  constructor(private location: Location) {
   }
 
   ngOnInit(): void {
+    this.location.onUrlChange((url) => {
+      this.currentRouter = this.location.path(false);
+      this.detailsMoviePage = this.location.path(false).startsWith('/movie-details');
+    });
   }
 }

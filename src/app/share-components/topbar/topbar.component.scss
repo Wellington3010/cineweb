@@ -1,8 +1,4 @@
-nav {
-    background-color: #600C0C;
-    color: #FFFFFF;
-    width: 100%;
-
+@mixin commom-style {
     @media(min-width: 320px) {
         display: flex;
         flex-direction: column;
@@ -17,12 +13,6 @@ nav {
         width: 100%;
         align-items: center;
     }
-    
-    .topbar-link {
-        padding: 10px;
-        text-decoration: none;
-        color: #FF9533;
-     }
 
     .topbar-menu {
         display: flex;
@@ -52,6 +42,32 @@ nav {
         width: 30px;
         height: 30px;
     }
+}
+
+.default-topbar-secondary {
+    width: 100%;
+    background: linear-gradient(360deg, #F19E21 20%, #EF6416 100%);
+
+    .topbar-link {
+        padding: 10px;
+        text-decoration: none;
+        color: #600C0C;
+    }
+
+    @include commom-style();
+}
+
+.default-topbar {
+    background-color: #600C0C;
+    width: 100%;
+    
+    .topbar-link {
+        padding: 10px;
+        text-decoration: none;
+        color: #FF9533;
+    }
+
+    @include commom-style();
 }
 
 

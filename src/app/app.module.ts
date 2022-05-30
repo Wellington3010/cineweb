@@ -21,6 +21,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { PagesCarouselComponent } from './components/pages-carousel/pages-carousel.component';
+import { SynopsisComponent } from './components/synopsis/synopsis.component';
+import { DetailsComponent } from './components/details/details.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +31,7 @@ import { PagesCarouselComponent } from './components/pages-carousel/pages-carous
     CurrentMoviesComponent,
     FutureMoviesComponent,
     DetailsMoviesComponent,
+    DetailsComponent,
     NotFoundComponent,
     TopbarComponent,
     FooterComponent,
@@ -37,7 +40,8 @@ import { PagesCarouselComponent } from './components/pages-carousel/pages-carous
     LabelPageComponent,
     BannerSearchComponent,
     BannerComponent,
-    PagesCarouselComponent
+    PagesCarouselComponent,
+    SynopsisComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }),
@@ -46,7 +50,7 @@ import { PagesCarouselComponent } from './components/pages-carousel/pages-carous
       { path: '', component: HomeComponent },
       { path: 'em-cartaz', component: CurrentMoviesComponent },
       { path: 'em-breve', component: FutureMoviesComponent },
-      { path: 'movie-details/:title', component: DetailsMoviesComponent },
+      { path: 'movie-details', component: DetailsMoviesComponent },
       { path: '**', component: NotFoundComponent }
     ]),
     BrowserAnimationsModule,

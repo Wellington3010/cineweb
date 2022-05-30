@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { IMovie } from 'src/app/interfaces/IMovie';
-import { MoviesServiceService } from 'src/app/services/movies-service.service';
+import { MoviesService } from 'src/app/services/movies.service';
 
 @Component({
   selector: 'app-pages-carousel',
@@ -13,9 +13,9 @@ export class PagesCarouselComponent implements OnInit {
   pagesNextButtonOver: boolean = false;
   pagesPreviousButtonOver: boolean = false;
   startMovie: number = 0;
-  endMovie: number = 6;
+  endMovie: number = 3;
 
-  constructor(private moviesService: MoviesServiceService) { }
+  constructor(private moviesService: MoviesService) { }
 
   ngOnInit(): void {
     let movies = new Map<String, void>();
