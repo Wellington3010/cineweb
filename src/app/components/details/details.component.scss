@@ -34,6 +34,8 @@ ul {
 }
 
 picture {
+    text-align: center;
+
     @media(min-width: 720px) {
         padding: 10px;
     }
