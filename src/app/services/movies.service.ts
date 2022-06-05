@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { IMovie } from '../interfaces/IMovie';
 import { Observable, of } from 'rxjs';
-import { environment } from 'src/environments/environment';
+import { endpoints } from './endpoints';
 
 @Injectable({
   providedIn: 'root'
@@ -12,21 +11,21 @@ export class MoviesService {
   constructor(private http: HttpClient) { }
 
   getHomeMovies() {
-    return this.http.get(`https://cineweb-movies-api-app.herokuapp.com/movies/home`);
+    return this.http.get(endpoints.HOME_MOVIES);
   }
 
   getComingSoonMovies() {
-    return this.http.get(`https://cineweb-movies-api-app.herokuapp.com/movies/coming-soon`);
+    return this.http.get(endpoints.COMING_SOON_MOVIES);
   }
 
   getCurrentMovies() : Observable<any> {
-    return this.http.get("https://cineweb-movies-api-app.herokuapp.com/movies/current");
+    return this.http.get(endpoints.CURRENT_MOVIES);
   }
 
   getCurrentMoviesByDate(date: Date) {
     let params = new HttpParams().set('date', date.getDate());
 
-    return this.http.get(`https://cineweb-movies-api-app.herokuapp.com/movies/current/by-date`, {
+    return this.http.get(endpoints.CURRENT_MOVIES_BY_DATE, {
       params: params
     });
   }
@@ -34,7 +33,7 @@ export class MoviesService {
   getComingSoonMoviesByDate(date: Date) {
     let params = new HttpParams().set('date', date.getDate());
 
-    return this.http.get(`https://cineweb-movies-api-app.herokuapp.com/movies/coming-soon/by-date`, {
+    return this.http.get(endpoints.COMMING_SOON_MOVIES_BY_DATE, {
       params: params
     });
   }
@@ -42,7 +41,7 @@ export class MoviesService {
   getMoviesByParameter(parameter: string, parameterType: string) {
     let params = new HttpParams().set('parameter', parameter).set('parameterType', parameterType);
 
-    return this.http.get(`https://cineweb-movies-api-app.herokuapp.com/movies/by-parameter`, {
+    return this.http.get(endpoints.MOVIES_BY_PARAMETER, {
       params: params
     });
   }
