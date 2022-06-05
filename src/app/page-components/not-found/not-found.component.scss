@@ -1,0 +1,21 @@
+p {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #FF9533;
+    text-transform: capitalize;
+    font-size: 72px;
+    font-weight: 700;
+    text-align: center;
+    margin-top: 28vh;
+    margin-bottom: 27vh;
+
+    @media(min-width: 720px) {
+        margin-bottom: 22vh;
+        margin-top: 26vh;
+    }
+
+    @media(min-width: 1024px) {
+        margin-top: 28vh;
+    }
+}

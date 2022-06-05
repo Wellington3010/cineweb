@@ -10,14 +10,17 @@ footer {
         align-items: center;
         justify-content: center;
         flex-direction: row-reverse;
+        top: 10vh;
+    }
+
+    @media(min-width: 720px) {
+        top: 17vh;
     }
 
     @media(min-width: 1024px) {
-        display: flex;
         flex-direction: row;
         justify-content: space-between;
         width: 100%;
-        align-items: center;
         top: 22vh;
     }
 

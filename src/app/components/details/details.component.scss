@@ -2,6 +2,11 @@
     width: 100%;
     display: flex;
     justify-content: center;
+
+    @media(min-width: 1024px){
+        position: relative;
+        top: 40px;
+    }
 }
 
 .details-list-item {
