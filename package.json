@@ -28,6 +28,7 @@
     "@angular/platform-browser-dynamic": "~13.2.0",
     "@angular/platform-server": "~13.2.0",
     "@angular/router": "~13.2.0",
+    "@ngrx/store": "^13.2.0",
     "@nguniversal/express-engine": "^13.0.2",
     "browser-sync": "^2.27.7",
     "engine.io": "^6.1.3",
