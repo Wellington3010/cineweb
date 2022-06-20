@@ -3,8 +3,8 @@
     (mouseover)="pagesPreviousButtonOver = true" (mouseout)="pagesPreviousButtonOver = false" (click)="previousMovie()">
         <img src="assets/images/next_button.png" alt=""/>
     </button>
-    <ul>
-        <li *ngFor="let movie of listMovies | slice:startMovie:endMovie; index as i;">
+    <ul *ngIf="list != undefined">
+        <li *ngFor="let movie of list | slice:startMovie:endMovie;">
             <a [routerLink]="['/movie-details']"
                [queryParams]="{ title: movie.title }" >
                 <img [ngClass]="'carousel-movies-pages-images'" src={{movie.moviePoster}} />

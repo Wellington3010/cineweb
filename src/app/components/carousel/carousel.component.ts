@@ -1,6 +1,7 @@
 import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { Store } from '@ngrx/store';
 import { IMovie } from 'src/app/interfaces/IMovie';
-import { MoviesService } from 'src/app/services/movies.service';
+import { MovieEffects } from 'src/app/store/movies.effects';
 
 @Component({
   selector: 'app-carousel',
@@ -20,17 +21,16 @@ export class CarouselComponent implements OnInit {
   homeMovies!: IMovie[];
   currentMovieIndex: number = 1;
 
-  constructor(private moviesService: MoviesService) {
+  constructor(private store: Store<{movies: IMovie[]}>, private effect: MovieEffects) {
   }
 
-
   ngOnInit(): void {
-      let _ = this.moviesService.getHomeMovies().subscribe((item) => {
-        this.homeMovies = item as IMovie[];
-        this.currentMovie = this.homeMovies[1];
-      }, (err) => {
-        console.log(err);
-      });
+    this.effect.homeMovies$.subscribe((item) => {
+      this.homeMovies = item.payload;
+      this.currentMovie = this.homeMovies[1];
+    });
+
+    this.store.dispatch({ type: '[Home Movies] Movies'});
   }
 
   nextSlide() {

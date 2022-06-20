@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
+import { StoreModule } from '@ngrx/store';
+import { reducer as movieReducer } from './store/store';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -23,6 +25,8 @@ import { CommonModule } from '@angular/common';
 import { PagesCarouselComponent } from './components/pages-carousel/pages-carousel.component';
 import { SynopsisComponent } from './components/synopsis/synopsis.component';
 import { DetailsComponent } from './components/details/details.component';
+import { EffectsModule } from '@ngrx/effects';
+import { MovieEffects } from './store/movies.effects';
 
 @NgModule({
   declarations: [
@@ -46,6 +50,10 @@ import { DetailsComponent } from './components/details/details.component';
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }),
     AppRoutingModule,
+    EffectsModule.forRoot([MovieEffects]),
+    StoreModule.forRoot({
+      movies: movieReducer,
+    }),
     RouterModule.forRoot([
       { path: '', component: HomeComponent },
       { path: 'em-cartaz', component: CurrentMoviesComponent },
