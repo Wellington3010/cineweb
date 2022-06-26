@@ -10,7 +10,8 @@ export const getCurrentMovies = createAction(
 )
 
 export const getHomeMovies = createAction(
-    '[Home Movies] Movies')
+    '[Home Movies] Movies'
+)
 
 export const getComingSoonMovies = createAction(
     '[ComingSoonMovies Movies] Movies'

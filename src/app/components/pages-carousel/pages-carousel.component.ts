@@ -2,7 +2,6 @@ import { Component, Input, OnInit } from '@angular/core';
 import { IMovie } from 'src/app/interfaces/IMovie';
 import { Store } from '@ngrx/store';
 import { MovieEffects } from 'src/app/store/movies.effects';
-import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-pages-carousel',
