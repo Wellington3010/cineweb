@@ -1,4 +1,4 @@
-import { Action, createAction, props, createSelector } from "@ngrx/store";
+import { Action, createAction, props } from "@ngrx/store";
 import { IMovie } from "../interfaces/IMovie";
 
 export class ActionModel implements Action {
@@ -6,18 +6,14 @@ export class ActionModel implements Action {
 }
 
 export const getCurrentMovies = createAction(
-    '[CurrentMovies Movies] Movies',
-    props<{ movies: Array<IMovie> }>()
+    '[CurrentMovies Movies] Movies'
 )
 
 export const getHomeMovies = createAction(
-    '[Home Movies] Movies',
-    props<{ movies: Array<IMovie> }>()
-)
+    '[Home Movies] Movies')
 
 export const getComingSoonMovies = createAction(
-    '[ComingSoonMovies Movies] Movies',
-    props<{ movies: Array<IMovie> }>()
+    '[ComingSoonMovies Movies] Movies'
 )
 
 let movieState!: IterableIterator<IMovie>;

@@ -27,8 +27,8 @@
         <img [class.nextButton]="nextButtonOver" (mouseover)="nextButtonOver = true" (mouseout)="nextButtonOver = false" src="assets/images/next_button.png" alt=""/>
     </button>
     <ul [ngClass]="'slider'">
-        <li *ngFor="let movie of homeMovies;index as i;" id="slider-1">
-            <div [class.hidden-movie]="currentMovie.title != movie.title" [class.visible-movie]="currentMovie.title == movie.title">
+        <li *ngFor="let movie of homeMovies | slice:startMovie:endMovie;" id="slider-1">
+            <div>
                 <div [ngClass]="'data-movie'"> Em breve <br> {{ movie.date | date: 'dd/MM/yyyy' }} </div>
                 <img [ngClass]="'images'" src={{movie.moviePoster}} />
             </div>

@@ -1,4 +1,4 @@
 <section [class.banner-home]="page == 'home'" [class.banner-pages]="page != 'home'">
-    <app-carousel [class.hidden]="page != 'home'" currentPage="{{page}}"></app-carousel>
-    <app-pages-carousel [class.hidden]="page == 'home'" currentPage="{{page}}"></app-pages-carousel>
+    <app-carousel *ngIf="page == 'home'" currentPage="{{page}}"></app-carousel>
+    <app-pages-carousel *ngIf="page != 'home'" currentPage="{{page}}"></app-pages-carousel>
 </section>

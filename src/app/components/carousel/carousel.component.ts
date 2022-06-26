@@ -16,10 +16,9 @@ export class CarouselComponent implements OnInit {
   previousButtonOver!: boolean;
   mobileNextButtonOver!: boolean;
   mobilePreviousButtonOver!: boolean;
-  userSliderClickCounter: number = 0;
-  arrayMovies: any[] = [];
   homeMovies!: IMovie[];
-  currentMovieIndex: number = 1;
+  startMovie: number = 0;
+  endMovie: number = 1;
 
   constructor(private store: Store<{movies: IMovie[]}>, private effect: MovieEffects) {
   }
@@ -33,48 +32,17 @@ export class CarouselComponent implements OnInit {
     this.store.dispatch({ type: '[Home Movies] Movies'});
   }
 
-  nextSlide() {
-    this.currentMovieIndex = this.homeMovies.findIndex(x => x.title.trim() == this.currentMovie.title.trim());
-    if(this.currentMovieIndex == (this.homeMovies.length - 1)) {
-      this.currentMovieIndex = (this.homeMovies.length - this.homeMovies.length);
-    }
-    else {
-      this.currentMovieIndex = this.currentMovieIndex + 1; 
-    }
-    this.currentMovie = this.homeMovies[this.currentMovieIndex];
-    this.userSliderClickCounter += 1;
-  }
-
   nextClick() {
-    this.nextSlide();
-
-     if(this.userSliderClickCounter == 1) {
-      setInterval(() => {
-          this.nextSlide();
-      }, 20000);
+    if(this.endMovie < this.homeMovies.length) {
+      this.startMovie++;
+      this.endMovie++;
     }
-  }
-
-  previousSlide() {
-    this.currentMovieIndex = this.homeMovies.findIndex(x => x.title == this.currentMovie.title);
-    if(this.currentMovieIndex == 0) {
-      this.currentMovieIndex = (this.homeMovies.length - 1);
-    }
-    else {
-      this.currentMovieIndex = this.currentMovieIndex - 1;
-    }
-
-    this.currentMovie = this.homeMovies[this.currentMovieIndex];
-    this.userSliderClickCounter += 1;
   }
 
   previousClick() {
-    this.previousSlide();
-
-     if(this.userSliderClickCounter == 1) {
-      setInterval(() => {
-          this.previousSlide();
-      }, 20000);
+    if(this.startMovie > 0) {
+      this.startMovie--;
+      this.endMovie--;
     }
   }
 }
