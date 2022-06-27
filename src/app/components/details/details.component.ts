@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Store } from '@ngrx/store';
 import { IMovie } from 'src/app/interfaces/IMovie';
-import { MoviesService } from 'src/app/services/movies.service';
-import { StringLiteral } from 'typescript';
+import { MovieEffects } from 'src/app/store/movies.effects';
 
 @Component({
   selector: 'app-details',
@@ -12,12 +12,11 @@ export class DetailsComponent implements OnInit {
   movie!: IMovie;
   @Input() movieTitle!: string;
 
-  constructor(private moviesService: MoviesService ) { }
+  constructor(private effects: MovieEffects, private store: Store<{movies: IMovie[]}>) { }
 
   ngOnInit(): void {
-    this.moviesService
-    .getMoviesByParameter(this.movieTitle, "title").subscribe((item) => {
-      this.movie = (item as IMovie[])[0];
-    });
+    this.effects.findMovieByParameter$.subscribe((item) => this.movie = item.payload[0]);
+
+    this.store.dispatch({type: '[FindMoviesByParameter] Movies', title: this.movieTitle });
   }
 }

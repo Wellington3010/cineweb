@@ -1,10 +1,6 @@
 import { Action, createAction, props } from "@ngrx/store";
 import { IMovie } from "../interfaces/IMovie";
 
-export class ActionModel implements Action {
-    type: string = "";
-}
-
 export const getCurrentMovies = createAction(
     '[CurrentMovies Movies] Movies'
 )
@@ -17,6 +13,11 @@ export const getComingSoonMovies = createAction(
     '[ComingSoonMovies Movies] Movies'
 )
 
+export const findMoviesByParameter = createAction(
+    '[FindMoviesByParameter] Movies',
+    props<{title: string}>()
+)
+
 let movieState!: IterableIterator<IMovie>;
 
 export const reducer = (state = movieState, action: Action) => {
@@ -26,6 +27,8 @@ export const reducer = (state = movieState, action: Action) => {
         case '[ComingSoonMovies Movies] Movies':
             return state;
         case '[Current Movies] Movies':
+            return state;
+        case '[FindMoviesByParameter] Movies':
             return state;
         default:
             return state;

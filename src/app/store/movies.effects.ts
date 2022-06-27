@@ -1,9 +1,11 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
+import { props } from '@ngrx/store';
 import { EMPTY, Observable, of } from 'rxjs';
-import { map, mergeMap, catchError } from 'rxjs/operators';
+import { map, mergeMap, catchError, switchMap } from 'rxjs/operators';
 import { IMovie } from '../interfaces/IMovie';
 import { MoviesService } from '../services/movies.service';
+import { findMoviesByParameter } from './store';
  
 @Injectable()
 export class MovieEffects {
@@ -45,6 +47,17 @@ export class MovieEffects {
     )
   );
 
+  findMovieByParameter$ = createEffect(() => this.actions$.pipe(
+    ofType(findMoviesByParameter),
+    mergeMap((action) => this.findMoviesByParameter(action.title)
+    .pipe(
+      map(movies => {
+        return ({type: '[FindMoviesByParameter] Movies Loaded with sucess', payload: movies})
+      }),
+      catchError(() => EMPTY)
+    ))
+  ));
+
   homeMoviesWithCache() : Observable<IMovie[]> {
     if(this.cache.has("home-movies")) {
       console.log("Well from cache");
@@ -76,8 +89,20 @@ export class MovieEffects {
     }
     else {
       console.log("future-movies from api");
-      this.moviesService.getComingSoonMovies().subscribe(item  => this.cache.set("future-movies", item));
+      this.moviesService.getComingSoonMovies().subscribe((item)  => this.cache.set("future-movies", item));
       return this.moviesService.getComingSoonMovies();
+    }
+  }
+
+  findMoviesByParameter(title: string) : Observable<IMovie[]> {
+    if(this.cache.has(title)) {
+      console.log(title, " from cache");
+      return of(this.cache.get(title)) as Observable<IMovie[]>;
+    }
+    else {
+      console.log(title, " from api");
+      this.moviesService.getMoviesByParameter(title, "title").subscribe((item) => this.cache.set(title, item));
+      return this.moviesService.getMoviesByParameter(title, "title");
     }
   }
  
