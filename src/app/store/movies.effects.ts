@@ -49,7 +49,7 @@ export class MovieEffects {
 
   findMovieByParameter$ = createEffect(() => this.actions$.pipe(
     ofType(findMoviesByParameter),
-    mergeMap((action) => this.findMoviesByParameter(action.title)
+    mergeMap((action) => this.findMoviesByParameter(action.parameter, action.parameterType)
     .pipe(
       map(movies => {
         return ({type: '[FindMoviesByParameter] Movies Loaded with sucess', payload: movies})
@@ -60,7 +60,6 @@ export class MovieEffects {
 
   homeMoviesWithCache() : Observable<IMovie[]> {
     if(this.cache.has("home-movies")) {
-      console.log("Well from cache");
       return of(this.cache.get("home-movies")) as Observable<IMovie[]>;
     }
     else {
@@ -72,11 +71,9 @@ export class MovieEffects {
 
   currentMoviesWithCache() : Observable<IMovie[]> {
     if(this.cache.has("current-movies")) {
-      console.log("current-movies from cache");
       return of(this.cache.get("current-movies")) as Observable<IMovie[]>;
     }
     else {
-      console.log("current-movies from api");
       this.moviesService.getCurrentMovies().subscribe(item  => this.cache.set("current-movies", item));
       return this.moviesService.getCurrentMovies();
     }
@@ -84,25 +81,21 @@ export class MovieEffects {
 
   futureMoviesWithCache() : Observable<IMovie[]> {
     if(this.cache.has("future-movies")) {
-      console.log("future-movies from cache");
       return of(this.cache.get("future-movies")) as Observable<IMovie[]>;
     }
     else {
-      console.log("future-movies from api");
       this.moviesService.getComingSoonMovies().subscribe((item)  => this.cache.set("future-movies", item));
       return this.moviesService.getComingSoonMovies();
     }
   }
 
-  findMoviesByParameter(title: string) : Observable<IMovie[]> {
-    if(this.cache.has(title)) {
-      console.log(title, " from cache");
-      return of(this.cache.get(title)) as Observable<IMovie[]>;
+  findMoviesByParameter(parameter: string, parameterType: string) : Observable<IMovie[]> {
+    if(this.cache.has(parameter)) {
+      return of(this.cache.get(parameter)) as Observable<IMovie[]>;
     }
     else {
-      console.log(title, " from api");
-      this.moviesService.getMoviesByParameter(title, "title").subscribe((item) => this.cache.set(title, item));
-      return this.moviesService.getMoviesByParameter(title, "title");
+      this.moviesService.getMoviesByParameter(parameter, parameterType).subscribe((item) => this.cache.set(parameter, item));
+      return this.moviesService.getMoviesByParameter(parameter, parameterType);
     }
   }
  

@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { Store } from '@ngrx/store';
+import { IMovie } from 'src/app/interfaces/IMovie';
+import { MovieEffects } from 'src/app/store/movies.effects';
 
 @Component({
   selector: 'app-banner-search',
@@ -13,7 +16,7 @@ export class BannerSearchComponent implements OnInit {
   disableGenre: boolean = false;
   disableDate: boolean = false;
  
-  constructor(private formBuilder: FormBuilder) {
+  constructor(private formBuilder: FormBuilder, private store: Store<{movies: IMovie[]}>, private effects: MovieEffects) {
   }
 
   ngOnInit(): void {
@@ -28,8 +31,22 @@ export class BannerSearchComponent implements OnInit {
     });
   }
 
-  submitForm(){
+  submitForm() {
+
+    if(this.movieForm.value['title'] != null) {
+      this.store.dispatch({ type: '[FindMoviesByParameter] Movies', parameter: this.movieForm.value['title'], parameterType: "title" })
+    }
+
+    if(this.movieForm.value['date'] != null) {
+      this.store.dispatch({ type: '[FindMoviesByParameter] Movies', parameter: this.movieForm.value['date'], parameterType: "date" })
+    }
+
+    if(this.movieForm.value['genre'] != null) {
+      this.store.dispatch({ type: '[FindMoviesByParameter] Movies', parameter: this.movieForm.value['genre'], parameterType: "genre" })
+    }
+
     console.log(this.movieForm.value);
+    this.movieForm.reset();
   }
 
   setSearchButtonOver() {
@@ -46,22 +63,27 @@ export class BannerSearchComponent implements OnInit {
       this.movieForm.controls["title"].enable();
       this.movieForm.controls["date"].enable();
       this.movieForm.controls["genre"].enable();
-      this.movieForm.reset();
     }
 
     if (element.id == "title" && event.type == "focus") {
       this.setDisableDate();
       this.setDisableGenre();
+      this.movieForm.controls['date'].reset();
+      this.movieForm.controls['genre'].reset()
     }
 
     if (element.id == "date" && event.type == "focus") {
       this.setDisableTitle();
       this.setDisableGenre();
+      this.movieForm.controls['title'].reset();
+      this.movieForm.controls['genre'].reset();
     }
 
     if (element.id == "genre" && event.type == "focus") {
       this.setDisableTitle();
       this.setDisableDate();
+      this.movieForm.controls['title'].reset();
+      this.movieForm.controls['date'].reset();
     }
   }
 

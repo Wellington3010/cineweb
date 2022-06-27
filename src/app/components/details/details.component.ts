@@ -17,6 +17,6 @@ export class DetailsComponent implements OnInit {
   ngOnInit(): void {
     this.effects.findMovieByParameter$.subscribe((item) => this.movie = item.payload[0]);
 
-    this.store.dispatch({type: '[FindMoviesByParameter] Movies', title: this.movieTitle });
+    this.store.dispatch({type: '[FindMoviesByParameter] Movies', parameter: this.movieTitle, parameterType: "title" });
   }
 }

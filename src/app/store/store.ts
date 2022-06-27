@@ -15,7 +15,7 @@ export const getComingSoonMovies = createAction(
 
 export const findMoviesByParameter = createAction(
     '[FindMoviesByParameter] Movies',
-    props<{title: string}>()
+    props<{parameter: string, parameterType: string }>()
 )
 
 let movieState!: IterableIterator<IMovie>;

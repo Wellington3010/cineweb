@@ -46,15 +46,17 @@ export class PagesCarouselComponent implements OnInit {
     switch(this.currentPage) {
       case "current-movies":
         this.effect.currentMovies$.subscribe((item) => this.list = item.payload);
+        this.effect.findMovieByParameter$.subscribe((item) => this.list = item.payload);
         break;
       case "home-movies":
         this.effect.homeMovies$.subscribe((item) => this.list = item.payload);
         break;
       case "future-movies":
         this.effect.comingSoonMovies$.subscribe((item) => this.list = item.payload);
+        this.effect.findMovieByParameter$.subscribe((item) => this.list = item.payload);
         break;
       default:
-        this.effect.currentMovies$.subscribe((item) => this.list = item.payload);
+        this.effect.findMovieByParameter$.subscribe((item) => this.list = item.payload);
         break;
     }
   }
