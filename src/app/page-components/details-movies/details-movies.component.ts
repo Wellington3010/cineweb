@@ -8,12 +8,14 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class DetailsMoviesComponent implements OnInit {
   movieTitle!: String;
+  fromPage!: String;
 
   constructor(private route: ActivatedRoute) { }
 
   ngOnInit(): void {
     this.route.queryParams.subscribe((params) => {
       this.movieTitle = params['title'];
+      this.fromPage = params['fromPage'];
     });
   }
 }
