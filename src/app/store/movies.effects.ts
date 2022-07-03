@@ -62,7 +62,6 @@ export class MovieEffects {
       return of(this.cache.get("home-movies")) as Observable<IMovie[]>;
     }
     else {
-      console.log("Well from api");
       this.moviesService.getHomeMovies().subscribe(item  => this.cache.set("home-movies", item));
       return this.moviesService.getHomeMovies();
     }
@@ -90,7 +89,6 @@ export class MovieEffects {
 
   findMoviesByParameter(parameter: string, parameterType: string, page: string) : Observable<IMovie[]> {
     var arrayMovies: IMovie[] = [];
-    console.log(this.cache.get(page) as IMovie[]);
 
     if(this.cache.has(page)) {
       if(parameterType == "title") {
