@@ -96,7 +96,6 @@ export class MovieEffects {
       if(parameterType == "title") {
         let moviesList = this.cache.get(page) as IMovie[];
         let movieSelected = moviesList?.filter(x => x.title.toLowerCase() == parameter.toLowerCase());
-        console.log(movieSelected);
         return of(movieSelected) as Observable<IMovie[]>;
       }
 
@@ -105,7 +104,7 @@ export class MovieEffects {
         let movieSelected = moviesList?.filter(x => x.genre.toLowerCase() == parameter.toLowerCase());
         return of(movieSelected) as Observable<IMovie[]>;
       }
-      
+
       if(parameterType == "date") {
         let moviesList = this.cache.get(page) as IMovie[];
         let movieSelected = moviesList?.filter(x => x.date == new Date(parameter));
