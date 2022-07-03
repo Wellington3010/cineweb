@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { IMovie } from 'src/app/interfaces/IMovie';
@@ -10,6 +10,7 @@ import { MovieEffects } from 'src/app/store/movies.effects';
   styleUrls: ['./banner-search.component.scss']
 })
 export class BannerSearchComponent implements OnInit {
+  @Input() page!: string;
   movieForm!: FormGroup;
   searchButtonOver: boolean = false;
   disableTitle: boolean = false;
@@ -34,15 +35,15 @@ export class BannerSearchComponent implements OnInit {
   submitForm() {
 
     if(this.movieForm.value['title'] != null) {
-      this.store.dispatch({ type: '[FindMoviesByParameter] Movies', parameter: this.movieForm.value['title'], parameterType: "title" })
+      this.store.dispatch({ type: '[FindMoviesByParameter] Movies', parameter: this.movieForm.value['title'], parameterType: "title", page: this.page })
     }
 
     if(this.movieForm.value['date'] != null) {
-      this.store.dispatch({ type: '[FindMoviesByParameter] Movies', parameter: this.movieForm.value['date'], parameterType: "date" })
+      this.store.dispatch({ type: '[FindMoviesByParameter] Movies', parameter: this.movieForm.value['date'], parameterType: "date", page: this.page })
     }
 
     if(this.movieForm.value['genre'] != null) {
-      this.store.dispatch({ type: '[FindMoviesByParameter] Movies', parameter: this.movieForm.value['genre'], parameterType: "genre" })
+      this.store.dispatch({ type: '[FindMoviesByParameter] Movies', parameter: this.movieForm.value['genre'], parameterType: "genre", page: this.page })
     }
 
     console.log(this.movieForm.value);

@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { IMovie } from 'src/app/interfaces/IMovie';
 import { Store } from '@ngrx/store';
 import { MovieEffects } from 'src/app/store/movies.effects';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-pages-carousel',
@@ -16,7 +17,7 @@ export class PagesCarouselComponent implements OnInit {
   startMovie: number = 0;
   endMovie: number = 3;
 
-  constructor(private store: Store<{movies: IMovie[]}>, private effect: MovieEffects) { }
+  constructor(private store: Store<{movies: IMovie[]}>, private effect: MovieEffects, private router: Router) { }
 
   ngOnInit(): void {
     this.listenerEffects();
@@ -45,18 +46,42 @@ export class PagesCarouselComponent implements OnInit {
   listenerEffects() {
     switch(this.currentPage) {
       case "current-movies":
-        this.effect.currentMovies$.subscribe((item) => this.list = item.payload);
-        this.effect.findMovieByParameter$.subscribe((item) => this.list = item.payload);
+        this.effect.currentMovies$.subscribe((item) => {
+          this.list = item.payload;
+          if(this.list.length == 0)
+            this.router.navigate(['**']);
+        });
+        this.effect.findMovieByParameter$.subscribe((item) => {
+          this.list = item.payload;
+          if(this.list.length == 0)
+            this.router.navigate(['**']);
+        });
         break;
       case "home-movies":
-        this.effect.homeMovies$.subscribe((item) => this.list = item.payload);
+        this.effect.homeMovies$.subscribe((item) => {
+          this.list = item.payload;
+          if(this.list.length == 0)
+            this.router.navigate(['**']);
+        });
         break;
       case "future-movies":
-        this.effect.comingSoonMovies$.subscribe((item) => this.list = item.payload);
-        this.effect.findMovieByParameter$.subscribe((item) => this.list = item.payload);
+        this.effect.comingSoonMovies$.subscribe((item) => {
+          this.list = item.payload;
+          if(this.list.length == 0)
+            this.router.navigate(['**']);
+        });
+        this.effect.findMovieByParameter$.subscribe((item) => {
+          this.list = item.payload;
+          if(this.list.length == 0)
+            this.router.navigate(['**']);
+        });
         break;
       default:
-        this.effect.findMovieByParameter$.subscribe((item) => this.list = item.payload);
+        this.effect.findMovieByParameter$.subscribe((item) => {
+          this.list = item.payload;
+          if(this.list.length == 0)
+            this.router.navigate(['**']);
+        });
         break;
     }
   }

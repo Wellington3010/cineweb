@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { props } from '@ngrx/store';
 import { EMPTY, Observable, of } from 'rxjs';
 import { map, mergeMap, catchError, switchMap } from 'rxjs/operators';
 import { IMovie } from '../interfaces/IMovie';
@@ -49,7 +48,7 @@ export class MovieEffects {
 
   findMovieByParameter$ = createEffect(() => this.actions$.pipe(
     ofType(findMoviesByParameter),
-    mergeMap((action) => this.findMoviesByParameter(action.parameter, action.parameterType)
+    mergeMap((action) => this.findMoviesByParameter(action.parameter, action.parameterType, action.page)
     .pipe(
       map(movies => {
         return ({type: '[FindMoviesByParameter] Movies Loaded with sucess', payload: movies})
@@ -89,14 +88,36 @@ export class MovieEffects {
     }
   }
 
-  findMoviesByParameter(parameter: string, parameterType: string) : Observable<IMovie[]> {
-    if(this.cache.has(parameter)) {
-      return of(this.cache.get(parameter)) as Observable<IMovie[]>;
+  findMoviesByParameter(parameter: string, parameterType: string, page: string) : Observable<IMovie[]> {
+    var arrayMovies: IMovie[] = [];
+    console.log(this.cache.get(page) as IMovie[]);
+
+    if(this.cache.has(page)) {
+      if(parameterType == "title") {
+        let moviesList = this.cache.get(page) as IMovie[];
+        let movieSelected = moviesList?.filter(x => x.title.toLowerCase() == parameter.toLowerCase());
+        console.log(movieSelected);
+        return of(movieSelected) as Observable<IMovie[]>;
+      }
+
+      if(parameterType == "genre") {
+        let moviesList = this.cache.get(page) as IMovie[];
+        let movieSelected = moviesList?.filter(x => x.genre.toLowerCase() == parameter.toLowerCase());
+        return of(movieSelected) as Observable<IMovie[]>;
+      }
+      
+      if(parameterType == "date") {
+        let moviesList = this.cache.get(page) as IMovie[];
+        let movieSelected = moviesList?.filter(x => x.date == new Date(parameter));
+        return of(movieSelected) as Observable<IMovie[]>;
+      }
     }
     else {
       this.moviesService.getMoviesByParameter(parameter, parameterType).subscribe((item) => this.cache.set(parameter, item));
       return this.moviesService.getMoviesByParameter(parameter, parameterType);
     }
+
+    return of(arrayMovies);
   }
  
   constructor(

@@ -11,11 +11,12 @@
         <div [ngClass]="'search-group'">
             <label for="genre">Gênero</label>
             <select id="genre" [class.high-opacity]="disableGenre" [ngClass]="'form-item select'" formControlName="genre" (focus)="focusEvent($event)" (focusout)="focusEvent($event)">
-                <option value="volvo">AÇÃO</option>
-                <option value="saab">AVENTURA</option>
-                <option value="fiat">TERROR</option>
-                <option value="audi">DRAMA</option>
-                <option value="audi">COMÉDIA</option>
+                <option value="ação">AÇÃO</option>
+                <option value="aventura">AVENTURA</option>
+                <option value="terror">TERROR</option>
+                <option value="drama">DRAMA</option>
+                <option value="comédia">COMÉDIA</option>
+                <option value="romance">ROMANCE</option>
             </select>
         </div>
         <div>
