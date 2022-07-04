@@ -5,9 +5,19 @@ ul {
     justify-content: center;
     flex-wrap: wrap;
     padding: 0;
+    max-width: 400px;
+    margin: 16px 0px -35px 0px;
 
     > li {
         padding: 10px;
+    }
+
+    @media(min-width: 720px) {
+        margin: 16px 0px -84px 0px;
+    }
+    @media(min-width: 1024px) {
+        max-width: unset;
+        margin: unset;
     }
 }
 

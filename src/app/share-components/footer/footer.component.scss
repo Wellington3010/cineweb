@@ -24,6 +24,12 @@ footer {
         top: 22vh;
     }
 
+    @media(min-width: 1920px) {
+       position: absolute;
+       bottom: 0px;
+       top: unset;
+    }
+
 
     
     .footer-link {
