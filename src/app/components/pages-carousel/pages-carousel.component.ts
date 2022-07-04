@@ -16,6 +16,7 @@ export class PagesCarouselComponent implements OnInit {
   pagesPreviousButtonOver: boolean = false;
   startMovie: number = 0;
   endMovie: number = 3;
+  currentWindow: Window = window;
 
   constructor(private store: Store<{movies: IMovie[]}>, private effect: MovieEffects, private router: Router) { }
 
@@ -43,16 +44,27 @@ export class PagesCarouselComponent implements OnInit {
     return;
   }
 
+  setMoviesRangePerResolution() {
+    if(this.currentWindow.innerWidth < 1024) {
+      this.endMovie = this.list.length;
+    }
+    else {
+      this.endMovie = 3;
+    }
+  }
+
   listenerEffects() {
     switch(this.currentPage) {
       case "current-movies":
         this.effect.currentMovies$.subscribe((item) => {
           this.list = item.payload;
+          this.setMoviesRangePerResolution();
           if(this.list.length == 0)
             this.router.navigate(['**']);
         });
         this.effect.findMovieByParameter$.subscribe((item) => {
           this.list = item.payload;
+          this.setMoviesRangePerResolution();
           if(this.list.length == 0)
             this.router.navigate(['**']);
         });
@@ -60,6 +72,7 @@ export class PagesCarouselComponent implements OnInit {
       case "home-movies":
         this.effect.homeMovies$.subscribe((item) => {
           this.list = item.payload;
+          this.setMoviesRangePerResolution();
           if(this.list.length == 0)
             this.router.navigate(['**']);
         });
@@ -67,11 +80,13 @@ export class PagesCarouselComponent implements OnInit {
       case "future-movies":
         this.effect.comingSoonMovies$.subscribe((item) => {
           this.list = item.payload;
+          this.setMoviesRangePerResolution();
           if(this.list.length == 0)
             this.router.navigate(['**']);
         });
         this.effect.findMovieByParameter$.subscribe((item) => {
           this.list = item.payload;
+          this.setMoviesRangePerResolution();
           if(this.list.length == 0)
             this.router.navigate(['**']);
         });
@@ -79,6 +94,7 @@ export class PagesCarouselComponent implements OnInit {
       default:
         this.effect.findMovieByParameter$.subscribe((item) => {
           this.list = item.payload;
+          this.setMoviesRangePerResolution();
           if(this.list.length == 0)
             this.router.navigate(['**']);
         });

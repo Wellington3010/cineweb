@@ -1,5 +1,5 @@
 <div [ngClass]="'carousel-pages'">
-    <button [ngClass]="'buttonCarrouselPageTop'" [class.carouselButtonOver]="pagesPreviousButtonOver" 
+    <button *ngIf="currentWindow.innerWidth >= 1024" [ngClass]="'buttonCarrouselPageTop'" [class.carouselButtonOver]="pagesPreviousButtonOver" 
     (mouseover)="pagesPreviousButtonOver = true" (mouseout)="pagesPreviousButtonOver = false" (click)="previousMovie()">
         <img src="assets/images/next_button.png" alt=""/>
     </button>
@@ -11,7 +11,7 @@
             </a>
         </li>
     </ul>
-    <button [ngClass]="'buttonCarrouselPageBottom'" [class.carouselButtonOver]="pagesNextButtonOver" 
+    <button *ngIf="currentWindow.innerWidth >= 1024" [ngClass]="'buttonCarrouselPageBottom'" [class.carouselButtonOver]="pagesNextButtonOver" 
     (mouseover)="pagesNextButtonOver = true" (mouseout)="pagesNextButtonOver = false" (click)="nextMovie()">
         <img src="assets/images/previous_button.png" alt=""/>
     </button>
