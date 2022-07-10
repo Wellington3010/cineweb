@@ -1,6 +1,6 @@
 <nav [class.default-topbar]="!detailsMoviePage" [class.default-topbar-secondary]="detailsMoviePage">
     <div [ngClass]="'topbar-logo-menu'">
-        <a [ngClass]="'topbar-link'" [routerLink]="['/']">CineWeb</a>
+        <a [ngClass]="'topbar-link-icon'" [routerLink]="['/']">CineWeb</a>
 
         <ng-template [ngIf]="!detailsMoviePage">
             <svg [ngClass]="'topbar-icon'" width="140" height="140" viewBox="0 0 140 140" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -18,7 +18,7 @@
         <a [ngClass]="'topbar-link'" [routerLink]="['/']">Home</a>
         <a [ngClass]="'topbar-link'" [routerLink]="['/em-cartaz']">Em Cartaz</a>
         <a [ngClass]="'topbar-link'" [routerLink]="['/em-breve']">Em Breve</a>
-        <a [ngClass]="'topbar-link'" [routerLink]="">Login</a>
+        <a [ngClass]="'topbar-link'" [routerLink]="['/login']">Login</a>
         <a [ngClass]="'topbar-link'" [routerLink]="">Registre-se</a>
     </div>
 </nav>

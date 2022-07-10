@@ -1,0 +1,10 @@
+.home-footer {
+    position: relative !important;
+    bottom: -1px !important;
+    width: 100%;
+
+    @media(min-width: 1024px) {
+        position: absolute !important;
+        bottom: -130px !important;
+    }
+}

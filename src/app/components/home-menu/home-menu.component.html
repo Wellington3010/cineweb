@@ -11,7 +11,7 @@
             </a>
         </li>
         <li [class.button-over]=buttonOverThree (mouseover)="buttonOverThree = true" (mouseout)="buttonOverThree = false"> 
-            <a [ngClass]="'home-menu-link'" href="" [routerLink]="">
+            <a [ngClass]="'home-menu-link'" href="" [routerLink]="['login']">
                 <img [ngClass]="'home-menu-item login'" src="assets/images/login.svg" alt=""/> <p>Login</p>
             </a>
         </li>

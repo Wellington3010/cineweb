@@ -1,0 +1,82 @@
+.login-form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.userform-login {
+    background: linear-gradient(180deg, #F19E21 0%, #EF6416 100%);
+    color: #600C0C;
+    min-width: 95%;
+    border-radius: 20px;
+
+    @media(min-width: 1024px) {
+        min-width: unset;
+        width: 620px;
+    }
+
+}
+
+.label-userform-login {
+    font-size: 28px;
+
+    @media(min-width: 1024px) {
+        display: none;
+    }
+}
+
+#label-id {
+    font-weight: 800;
+}
+
+.userform-search-group {
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    @media(min-width: 1024px) {
+        flex-direction: row;
+        padding: 20px;
+    }
+}
+
+#email, #senha {
+    margin-left: 5px;
+}
+
+.form-item {
+    width: 235px;
+    height: 50px;
+    left: 125.5px;
+    top: 122px;
+    background: #600C0C;
+    border-radius: 10px;
+    border: 0px;
+    color: #FF9533;
+    font-size: 18px;
+    text-align: center;
+    font-weight: 600;
+    text-transform: uppercase;
+
+    @media(min-width: 1280px) {
+        width: 265px;
+    }
+}
+
+.search-button {
+    min-width: 210px;
+    height: 48px;
+    border-radius: 50px;
+    color: #FF9533;
+    background-color: #600C0C;
+    font-weight: 700;
+    font-size: 24px;
+    border: 0px;
+
+    @media(min-width: 1024px) {
+        margin-left: 40px;
+    }
+}

@@ -46,7 +46,6 @@ export class BannerSearchComponent implements OnInit {
       this.store.dispatch({ type: '[FindMoviesByParameter] Movies', parameter: this.movieForm.value['genre'], parameterType: "genre", page: this.page })
     }
 
-    console.log(this.movieForm.value);
     this.movieForm.reset();
   }
 

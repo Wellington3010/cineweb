@@ -18,7 +18,7 @@ export class TopbarComponent implements OnInit {
   ngOnInit(): void {
     this.location.onUrlChange((url) => {
       this.currentRouter = this.location.path(false);
-      this.detailsMoviePage = this.location.path(false).startsWith('/movie-details');
+      this.detailsMoviePage = this.location.path(false).startsWith('/movie-details') || this.location.path(false).startsWith('/login');
     });
   }
 }

@@ -27,6 +27,8 @@ import { SynopsisComponent } from './components/synopsis/synopsis.component';
 import { DetailsComponent } from './components/details/details.component';
 import { EffectsModule } from '@ngrx/effects';
 import { MovieEffects } from './store/movies.effects';
+import { UserAccessComponent } from './page-components/user-access/user-access.component';
+import { LoginFormComponent } from './login-form/login-form.component';
 
 @NgModule({
   declarations: [
@@ -45,7 +47,9 @@ import { MovieEffects } from './store/movies.effects';
     BannerSearchComponent,
     BannerComponent,
     PagesCarouselComponent,
-    SynopsisComponent
+    SynopsisComponent,
+    UserAccessComponent,
+    LoginFormComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }),
@@ -59,6 +63,7 @@ import { MovieEffects } from './store/movies.effects';
       { path: 'em-cartaz', component: CurrentMoviesComponent },
       { path: 'em-breve', component: FutureMoviesComponent },
       { path: 'movie-details', component: DetailsMoviesComponent },
+      { path: 'login', component: UserAccessComponent },
       { path: '**', component: NotFoundComponent }
     ]),
     BrowserAnimationsModule,

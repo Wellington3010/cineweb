@@ -48,10 +48,22 @@
     width: 100%;
     background: linear-gradient(360deg, #F19E21 20%, #EF6416 100%);
 
-    .topbar-link {
+    .topbar-link-icon {
         padding: 10px;
         text-decoration: none;
         color: #600C0C;
+    }
+
+    .topbar-link {
+        font-size: 12px;
+        padding: 7px;
+        text-decoration: none;
+        color: #600C0C;
+
+        @media(min-width: 720px) {
+            padding: 10px;
+            font-size: 15px;
+        }
     }
 
     @include commom-style();
@@ -60,11 +72,23 @@
 .default-topbar {
     background-color: #600C0C;
     width: 100%;
-    
-    .topbar-link {
+
+    .topbar-link-icon {
         padding: 10px;
         text-decoration: none;
         color: #FF9533;
+    }
+    
+    .topbar-link {
+        font-size: 12px;
+        padding: 7px;
+        text-decoration: none;
+        color: #FF9533;
+
+        @media(min-width: 720px) {
+            padding: 10px;
+            font-size: 15px;
+        }
     }
 
     @include commom-style();

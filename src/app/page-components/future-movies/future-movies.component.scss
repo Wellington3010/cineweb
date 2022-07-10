@@ -1,0 +1,14 @@
+.future-movies-footer {
+    position: relative !important;
+    bottom: -10% !important;
+    width: 100%;
+
+    @media(min-width: 720px) {
+        bottom: -20% !important;
+    }
+
+    @media(min-width: 1280px) {
+        position: absolute !important;
+        bottom: 0 !important;
+    }
+}

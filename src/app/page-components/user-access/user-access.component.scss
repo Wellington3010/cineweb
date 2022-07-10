@@ -1,0 +1,24 @@
+.user-access-footer {
+    position: absolute !important;
+    bottom: -1px !important;
+    width: 100%;
+}
+
+app-label-page {
+    position: relative;
+    top: 10;
+
+    @media(min-width: 1024px) {
+        top: 15%;
+    }
+  
+}
+
+app-login-form {
+    position: relative;
+    top: 10%;
+
+    @media(min-width: 1024px) {
+        top: 15%;
+    }
+}
