@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
+import { UserManagerService } from '../services/user-manager.service';
 
 @Component({
   selector: 'app-login-form',
@@ -10,7 +11,7 @@ import { Router } from '@angular/router';
 export class LoginFormComponent implements OnInit {
   userForm!: FormGroup;
 
-  constructor(private router: Router, private formBuilder: FormBuilder) { }
+  constructor(private formBuilder: FormBuilder, private userManager: UserManagerService) { }
 
   ngOnInit(): void {
     this.formCreate();
@@ -24,6 +25,11 @@ export class LoginFormComponent implements OnInit {
   }
 
   submitForm() {
+    let email = this.userForm.value['email'];
+    let senha = this.userForm.value['senha'];
+
+    this.userManager.logarUsuario(email, senha);
+    alert("Login realizado com sucesso");
     this.userForm.reset();
   }
 
