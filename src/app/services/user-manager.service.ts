@@ -18,10 +18,10 @@ export class UserManagerService {
     password: senha 
     }).subscribe(async (data) => {
 
-      let arrayResult = data.toString().split(":");
+      let arrayResult = data.toString().split("_");
       
       this.cacheService
-      .addToCache({ key: "loggedUser", value: arrayResult[2] })
+      .addToCache({ key: "loggedUser", value: `${arrayResult[2]}_${arrayResult[1]}`})
       .then((result) => {
         if(result) {
           alert("Login realizado com sucesso");
