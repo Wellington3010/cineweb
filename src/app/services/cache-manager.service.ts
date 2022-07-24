@@ -17,12 +17,14 @@ export class CacheManagerService {
     }
   }
 
-  public async getFromCache({ key }: { key: string; }) : Promise<string | undefined> {
+  public async getFromCache({ key, value }: { key: string; value: string }) : Promise<FormData | undefined> {
     try {
-      return (await caches.keys()).find(x => x == key);
-    }
-    catch(error) {
-      throw new Error("Não foi possivel acessar cache" + error);
+      let cacheOpened = await caches.open(key);
+      let cachedValue = await cacheOpened.match(value);
+
+      return cachedValue?.formData();
+    } catch (error) {
+      throw new Error("Não foi possível acessar os dados no cache" + error);
     }
   }
 
