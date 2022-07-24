@@ -19,7 +19,7 @@ export class UserManagerService {
     }).subscribe(async (data) => {
 
       let arrayResult = data.toString().split("_");
-      
+
       this.cacheService
       .addToCache({ key: "loggedUser", value: `${arrayResult[2]}_${arrayResult[1]}`})
       .then((result) => {
@@ -57,8 +57,16 @@ export class UserManagerService {
     return "";
   }
 
-  public usuarioLogado(): boolean {
+  public usuarioLogado(): string | undefined {
+    let userLogged: string | undefined = undefined;
 
-    return true
+    this.cacheService.getFromCache({ key: "loggedUser" })
+    .then((data) => {
+      userLogged = data?.split("_")[0];
+    }).catch((error) => {
+      this.router.navigate(['/login']);
+    });
+
+    return userLogged;
   }
 }

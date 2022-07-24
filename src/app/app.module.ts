@@ -28,7 +28,7 @@ import { DetailsComponent } from './components/details/details.component';
 import { EffectsModule } from '@ngrx/effects';
 import { MovieEffects } from './store/movies.effects';
 import { UserAccessComponent } from './page-components/user-access/user-access.component';
-import { LoginFormComponent } from './login-form/login-form.component';
+import { LoginFormComponent } from './components/login-form/login-form.component';
 
 @NgModule({
   declarations: [
