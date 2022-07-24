@@ -27,9 +27,7 @@ export class LoginFormComponent implements OnInit {
   submitForm() {
     let email = this.userForm.value['email'];
     let senha = this.userForm.value['senha'];
-
-    var retorno = this.userManager.logarUsuario(email, senha);
-    alert("Login realizado com sucesso");
+    this.userManager.logarUsuario(email, senha);
     this.userForm.reset();
   }
 
