@@ -12,20 +12,14 @@ export class UserManagerService {
   constructor(private http: HttpClient, private router: Router) { }
 
   public logarUsuario(email: string, senha: string) {
-
-    // let params = new HttpParams();
-    // params.set("email", email);
-    // params.set("password", senha);
-    let loginUsuario = "";
-    console.log(email, senha);
     
-    this.http.post<any>(endpoints.USER_LOGIN, { email: email, password: senha }).subscribe((resposta) => {
-      loginUsuario = resposta as string;
-      console.log(resposta);
-      this.cache.set("loginUsuario", loginUsuario);
-      this.router.navigate(['']);
-    },(error) => {
-      console.log(error);
+    this.http.post(endpoints.USER_LOGIN, {
+    email: email,
+    password: senha 
+    }).subscribe((data) => {
+      console.log(data);
+    }, (error) => {
+      console.log("Well");
     });
   }
 
