@@ -1,5 +1,5 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Injectable, Output, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
 import { CacheManagerService } from './cache-manager.service';
 import { endpoints } from './endpoints';
@@ -8,29 +8,20 @@ import { endpoints } from './endpoints';
   providedIn: 'root'
 })
 export class UserManagerService {
-  public static cache: Map<string, string> = new Map();
+  public cacheLogin: Map<string, string> = new Map();
 
-  constructor(private http: HttpClient, private cacheService: CacheManagerService, private router: Router) { }
+  constructor(private http: HttpClient, private router: Router) { }
 
-  public  logarUsuario(email: string, senha: string) {
+  public logarUsuario(email: string, senha: string) {
     this.http.post(endpoints.USER_LOGIN, {
     email: email,
     password: senha 
-    }).subscribe(async (data) => {
+    }).subscribe((data) => {
 
       let arrayResult = data.toString().split("_");
-
-      this.cacheService
-      .addToCache({ key: "loggedUser", value: `${arrayResult[2]}_${arrayResult[1]}`})
-      .then((result) => {
-        if(result) {
-          alert("Login realizado com sucesso");
-          this.router.navigate(['/']);
-        }
-      }).catch((error) => {
-        alert("Não foi possível realizar o login. Tente novamente");
-        console.log(error);
-      });
+      this.cacheLogin.set("LoggedUser", `${arrayResult[2]}_${arrayResult[1]}`);
+      alert("Login realizado com sucesso");
+      this.router.navigate(['/']);
 
     }, (error) => {
       alert("Não foi possível realizar o login. Tente novamente");
@@ -38,18 +29,14 @@ export class UserManagerService {
     });
   }
 
-  public deslogarUsuario(): boolean {
-    let retorno: boolean = false;
+  public deslogarUsuario() {
+    try {
+      this.cacheLogin.clear();
+      return true;
 
-    this.cacheService.clearCache({ key: "loggedUser" })
-    .then((data) => {
-      retorno = data;
-    }).catch((error) => {
-      alert("Não foi possível realizar o logout. Tente novamente");
-      console.log(error);
-    });
-
-    return retorno;
+    } catch (error) {
+      throw new Error("Não foi possivel realizar o logout" + error);
+    }
   }
 
   public cadastrarUsuario(): string {
@@ -58,15 +45,6 @@ export class UserManagerService {
   }
 
   public usuarioLogado(): string | undefined {
-    let userLogged: string | undefined = undefined;
-
-    this.cacheService.getFromCache({ key: "loggedUser" })
-    .then((data) => {
-      userLogged = data?.split("_")[0];
-    }).catch((error) => {
-      this.router.navigate(['/login']);
-    });
-
-    return userLogged;
+    return this.cacheLogin.get("LoggedUser")?.split("_")[0];
   }
 }
