@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Location } from "@angular/common";
 import { UserManagerService } from 'src/app/services/user-manager.service';
-import { NavigationEnd, Router, RoutesRecognized } from '@angular/router';
+import { Router, RoutesRecognized } from '@angular/router';
 
 @Component({
   selector: 'app-topbar',
