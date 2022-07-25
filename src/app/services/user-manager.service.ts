@@ -29,11 +29,9 @@ export class UserManagerService {
     });
   }
 
-  public deslogarUsuario() {
+  public deslogarUsuario(): void {
     try {
       this.cacheLogin.clear();
-      return true;
-
     } catch (error) {
       throw new Error("Não foi possivel realizar o logout" + error);
     }
