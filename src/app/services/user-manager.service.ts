@@ -37,9 +37,23 @@ export class UserManagerService {
     }
   }
 
-  public cadastrarUsuario(): string {
+  public cadastrarUsuario(nome: string, email: string, senha: string) {
 
-    return "";
+    this.http.post(endpoints.USER_REGISTER, {
+      name: nome,
+      email: email,
+      password: senha
+      }).subscribe((data) => {
+  
+        let arrayResult = data.toString().split("_");
+        this.cacheLogin.set("LoggedUser", `${arrayResult[2]}_${arrayResult[1]}`);
+        alert("Cadastro realizado com sucesso");
+        this.router.navigate(['/']);
+  
+      }, (error) => {
+        alert("Não foi possível realizar o cadastro. Tente novamente");
+        this.router.navigate(['/register']);
+      });
   }
 
   public usuarioLogado(): string | undefined {

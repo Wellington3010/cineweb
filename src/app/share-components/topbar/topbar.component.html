@@ -20,11 +20,11 @@
         <a [ngClass]="'topbar-link'" [routerLink]="['/em-breve']">Em Breve</a>
         <ng-template [ngIf]="nameUserLogged == undefined">
             <a [ngClass]="'topbar-link'" [routerLink]="['/login']">Login</a>
-            <a [ngClass]="'topbar-link'" [routerLink]="">Registre-se</a>
+            <a [ngClass]="'topbar-link'" [routerLink]="['/register']">Registre-se</a>
         </ng-template>
         <ng-template [ngIf]="nameUserLogged != undefined">
             <a [ngClass]="'topbar-link'" [routerLink]="">Bem vindo {{nameUserLogged}}</a>
-            <a [ngClass]="'topbar-link'" (click)="logoutUser()" [routerLink]="">Logout</a>
+            <a [ngClass]="'topbar-link'" (click)="logoutUser()" href="#">Logout</a>
         </ng-template>
     </div>
 </nav>

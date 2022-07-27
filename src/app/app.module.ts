@@ -64,6 +64,7 @@ import { LoginFormComponent } from './components/login-form/login-form.component
       { path: 'em-breve', component: FutureMoviesComponent },
       { path: 'movie-details', component: DetailsMoviesComponent },
       { path: 'login', component: UserAccessComponent },
+      { path: 'register', component: UserAccessComponent },
       { path: '**', component: NotFoundComponent }
     ]),
     BrowserAnimationsModule,

@@ -10,12 +10,31 @@
     color: #600C0C;
     min-width: 95%;
     border-radius: 20px;
+    height: 300px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
     @media(min-width: 1024px) {
         min-width: unset;
         width: 620px;
     }
+}
 
+.userform-register {
+    background: linear-gradient(180deg, #F19E21 0%, #EF6416 100%);
+    color: #600C0C;
+    min-width: 95%;
+    border-radius: 20px;
+    height: 360px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    @media(min-width: 1024px) {
+        min-width: unset;
+        width: 620px;
+    }
 }
 
 .label-userform-login {

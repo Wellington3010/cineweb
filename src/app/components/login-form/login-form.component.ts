@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UserManagerService } from '../../services/user-manager.service';
@@ -10,6 +10,7 @@ import { UserManagerService } from '../../services/user-manager.service';
 })
 export class LoginFormComponent implements OnInit {
   userForm!: FormGroup;
+  @Input() page!: string;
 
   constructor(private formBuilder: FormBuilder, private userManager: UserManagerService) { }
 
@@ -19,15 +20,23 @@ export class LoginFormComponent implements OnInit {
 
   formCreate() {
     this.userForm = this.formBuilder.group({
+      nome:  [''],
       email: [''],
       senha: [''],
     });
   }
 
   submitForm() {
+    let nome = this.userForm.value['nome']
     let email = this.userForm.value['email'];
     let senha = this.userForm.value['senha'];
-    this.userManager.logarUsuario(email, senha);
+
+    if(this.page != "Cadastro")
+      this.userManager.logarUsuario(email, senha);
+
+    if(this.page == "Cadastro")
+    this.userManager.cadastrarUsuario(nome, email, senha);
+
     this.userForm.reset();
   }
 

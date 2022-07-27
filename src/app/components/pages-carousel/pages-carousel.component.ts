@@ -16,13 +16,14 @@ export class PagesCarouselComponent implements OnInit {
   pagesPreviousButtonOver: boolean = false;
   startMovie: number = 0;
   endMovie: number = 3;
-  currentWindow: Window = window;
+  currentWindow!: Window;
 
   constructor(private store: Store<{movies: IMovie[]}>, private effect: MovieEffects, private router: Router) { }
 
   ngOnInit(): void {
     this.listenerEffects();
     findMoviesByCurrentPage(this.currentPage, this.store);
+    this.currentWindow = window;
   }
 
 
