@@ -18,11 +18,11 @@
         <a [ngClass]="'topbar-link'" [routerLink]="['/']">Home</a>
         <a [ngClass]="'topbar-link'" [routerLink]="['/em-cartaz']">Em Cartaz</a>
         <a [ngClass]="'topbar-link'" [routerLink]="['/em-breve']">Em Breve</a>
-        <ng-template [ngIf]="nameUserLogged == undefined">
+        <ng-template [ngIf]="nameUserLogged == ''">
             <a [ngClass]="'topbar-link'" [routerLink]="['/login']">Login</a>
             <a [ngClass]="'topbar-link'" [routerLink]="['/register']">Registre-se</a>
         </ng-template>
-        <ng-template [ngIf]="nameUserLogged != undefined">
+        <ng-template [ngIf]="nameUserLogged != ''">
             <a [ngClass]="'topbar-link'" [routerLink]="">Bem vindo {{nameUserLogged}}</a>
             <a [ngClass]="'topbar-link'" (click)="logoutUser()" href="#">Logout</a>
         </ng-template>

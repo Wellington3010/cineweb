@@ -62,7 +62,7 @@
     }
 }
 
-#email, #senha {
+#nome, #email, #senha {
     margin-left: 5px;
 }
 
@@ -78,7 +78,6 @@
     font-size: 18px;
     text-align: center;
     font-weight: 600;
-    text-transform: uppercase;
 
     @media(min-width: 1280px) {
         width: 265px;
@@ -98,4 +97,8 @@
     @media(min-width: 1024px) {
         margin-left: 40px;
     }
+}
+
+#email {
+    text-transform: lowercase;
 }

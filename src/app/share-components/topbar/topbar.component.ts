@@ -13,7 +13,7 @@ export class TopbarComponent implements OnInit {
   detailsMoviePage!: boolean;
   currentRouter!: string;
   topbarIconColor!: string;
-  nameUserLogged!: string | undefined;
+  nameUserLogged!: string;
 
   constructor(private location: Location, private userManager: UserManagerService, private router: Router) {
   }
@@ -30,7 +30,8 @@ export class TopbarComponent implements OnInit {
       if(val instanceof RoutesRecognized) {
 
         if((val as RoutesRecognized).url == "/") {
-          this.nameUserLogged = this.userManager.usuarioLogado(); 
+          let userNameArray = this.userManager.usuarioLogado()?.split(" ");
+          this.nameUserLogged = userNameArray == undefined ? "" : userNameArray[0];
         }
       }
     });
@@ -39,6 +40,6 @@ export class TopbarComponent implements OnInit {
   logoutUser() {
     this.userManager.deslogarUsuario();
     alert("Logout realizado com sucesso");
-    this.nameUserLogged = undefined;
+    this.nameUserLogged = "";
   }
 }
