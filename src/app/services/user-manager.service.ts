@@ -19,10 +19,15 @@ export class UserManagerService {
     }).subscribe((data) => {
 
       let arrayResult = data.toString().split("_");
-      this.cacheLogin.set("LoggedUser", `${arrayResult[2]}_${arrayResult[1]}`);
+      this.cacheLogin.set("LoggedUser", `${arrayResult[2]}_${arrayResult[1]}_${arrayResult[3]}`);
       alert("Login realizado com sucesso");
-      this.router.navigate(['/']);
 
+      if(this.loggedUserIsAdmin()) {
+        this.router.navigate(['/movies-admin']);
+      }
+      else {
+        this.router.navigate(['/']);
+      }
     }, (error) => {
       alert("Não foi possível realizar o login. Tente novamente");
       this.router.navigate(['/login']);
@@ -58,5 +63,9 @@ export class UserManagerService {
 
   public usuarioLogado(): string | undefined {
     return this.cacheLogin.get("LoggedUser")?.split("_")[0];
+  }
+
+  public loggedUserIsAdmin() : boolean | undefined {
+    return this.cacheLogin.get("LoggedUser")?.split("_")[2] as boolean | undefined;
   }
 }

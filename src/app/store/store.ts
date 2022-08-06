@@ -18,6 +18,10 @@ export const findMoviesByParameter = createAction(
     props<{parameter: string, parameterType: string, page: string }>()
 )
 
+export const findAllMovies = createAction(
+    '[AllMovies Movies] Movies',
+)
+
 let movieState!: IterableIterator<IMovie>;
 
 export const reducer = (state = movieState, action: Action) => {
@@ -27,6 +31,8 @@ export const reducer = (state = movieState, action: Action) => {
         case '[ComingSoonMovies Movies] Movies':
             return state;
         case '[Current Movies] Movies':
+            return state;
+        case '[AllMovies Movies] Movies':
             return state;
         case '[FindMoviesByParameter] Movies':
             return state;

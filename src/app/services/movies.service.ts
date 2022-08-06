@@ -40,6 +40,10 @@ export class MoviesService {
     }) as Observable<IMovie[]>;
   }
 
+  public getAllMovies() : Observable<IMovie[]> {
+    return this.http.get(endpoints.ALL_MOVIES) as Observable<IMovie[]>;
+  }
+  
   public getMoviesByParameter(parameter: string, parameterType: string) : Observable<IMovie[]> {
     let params = new HttpParams().set('parameter', parameter).set('parameterType', parameterType);
 

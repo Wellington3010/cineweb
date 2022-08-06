@@ -29,6 +29,7 @@ import { EffectsModule } from '@ngrx/effects';
 import { MovieEffects } from './store/movies.effects';
 import { UserAccessComponent } from './page-components/user-access/user-access.component';
 import { LoginFormComponent } from './components/login-form/login-form.component';
+import { MoviesAdminComponent } from './page-components/movies-admin/movies-admin.component';
 
 @NgModule({
   declarations: [
@@ -49,7 +50,8 @@ import { LoginFormComponent } from './components/login-form/login-form.component
     PagesCarouselComponent,
     SynopsisComponent,
     UserAccessComponent,
-    LoginFormComponent
+    LoginFormComponent,
+    MoviesAdminComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }),
@@ -65,6 +67,7 @@ import { LoginFormComponent } from './components/login-form/login-form.component
       { path: 'movie-details', component: DetailsMoviesComponent },
       { path: 'login', component: UserAccessComponent },
       { path: 'register', component: UserAccessComponent },
+      { path: 'movies-admin', component: MoviesAdminComponent },
       { path: '**', component: NotFoundComponent }
     ]),
     BrowserAnimationsModule,

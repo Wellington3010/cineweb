@@ -26,14 +26,18 @@ export class LoginFormComponent implements OnInit {
   }
 
   submitForm() {
+    console.log(this.page);
     let nome = this.userForm.value['nome'].toString().trimStart();
     let email = this.userForm.value['email'].toString().trimStart();
     let senha = this.userForm.value['senha'];
 
-    let validacaoNome = this.validarNome(nome);
+    let validacaoNome = "";
     let validacaoEmail = this.validarEmail(email);
     let validacaoSenha = this.validarSenha(senha);
-    
+
+    if(this.page == "Cadastro") {
+      validacaoNome = this.validarNome(nome);
+    }
 
     if(this.page != "Cadastro" && validacaoNome == "" && validacaoEmail == "" && validacaoSenha == "") {
       this.userManager.logarUsuario(email, senha);

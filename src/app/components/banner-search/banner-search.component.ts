@@ -16,6 +16,7 @@ export class BannerSearchComponent implements OnInit {
   disableTitle: boolean = false;
   disableGenre: boolean = false;
   disableDate: boolean = false;
+  disableStatus: boolean = false;
  
   constructor(private formBuilder: FormBuilder, private store: Store<{movies: IMovie[]}>, private effects: MovieEffects) {
   }
@@ -28,7 +29,8 @@ export class BannerSearchComponent implements OnInit {
     this.movieForm = this.formBuilder.group({
       title: [''],
       date: [''],
-      genre: ['']
+      genre: [''],
+      status: ['']
     });
   }
 
@@ -46,6 +48,10 @@ export class BannerSearchComponent implements OnInit {
       this.store.dispatch({ type: '[FindMoviesByParameter] Movies', parameter: this.movieForm.value['genre'], parameterType: "genre", page: this.page })
     }
 
+    if(this.movieForm.value['status'] != null) {
+      this.store.dispatch({ type: '[FindMoviesByParameter] Movies', parameter: this.movieForm.value['status'], parameterType: "status", page: this.page })
+    }
+
     this.movieForm.reset();
   }
 
@@ -60,30 +66,47 @@ export class BannerSearchComponent implements OnInit {
       this.disableTitle = false;
       this.disableDate = false;
       this.disableGenre = false;
+      this.disableStatus = false;
       this.movieForm.controls["title"].enable();
       this.movieForm.controls["date"].enable();
       this.movieForm.controls["genre"].enable();
+      this.movieForm.controls["status"].enable();
     }
 
     if (element.id == "title" && event.type == "focus") {
       this.setDisableDate();
       this.setDisableGenre();
+      this.setDisableStatus();
       this.movieForm.controls['date'].reset();
-      this.movieForm.controls['genre'].reset()
+      this.movieForm.controls['genre'].reset();
+      this.movieForm.controls['status'].reset();
     }
 
     if (element.id == "date" && event.type == "focus") {
       this.setDisableTitle();
       this.setDisableGenre();
+      this.setDisableStatus();
       this.movieForm.controls['title'].reset();
       this.movieForm.controls['genre'].reset();
+      this.movieForm.controls['status'].reset();
     }
 
     if (element.id == "genre" && event.type == "focus") {
       this.setDisableTitle();
       this.setDisableDate();
+      this.setDisableStatus();
       this.movieForm.controls['title'].reset();
       this.movieForm.controls['date'].reset();
+      this.movieForm.controls['status'].reset();
+    }
+
+    if (element.id == "status" && event.type == "focus") {
+      this.setDisableTitle();
+      this.setDisableDate();
+      this.setDisableGenre();
+      this.movieForm.controls['title'].reset();
+      this.movieForm.controls['date'].reset();
+      this.movieForm.controls['genre'].reset();
     }
   }
 
@@ -100,5 +123,10 @@ export class BannerSearchComponent implements OnInit {
   setDisableGenre() {
     this.disableGenre = true;
     this.movieForm.controls["genre"].disable();
+  }
+
+  setDisableStatus() {
+    this.disableStatus = true;
+    this.movieForm.controls["status"].disable();
   }
 }

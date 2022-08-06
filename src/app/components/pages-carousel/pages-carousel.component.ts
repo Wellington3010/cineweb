@@ -92,6 +92,20 @@ export class PagesCarouselComponent implements OnInit {
             this.router.navigate(['**']);
         });
         break;
+      case "admin-movies":
+        this.effect.allMovies$.subscribe((item) => {
+          this.list = item.payload;
+          this.setMoviesRangePerResolution();
+          if(this.list.length == 0)
+            this.router.navigate(['**']);
+        });
+        this.effect.findMovieByParameter$.subscribe((item) => {
+          this.list = item.payload;
+          this.setMoviesRangePerResolution();
+          if(this.list.length == 0)
+            this.router.navigate(['**']);
+        });
+        break;
       default:
         this.effect.findMovieByParameter$.subscribe((item) => {
           this.list = item.payload;
@@ -115,6 +129,9 @@ function findMoviesByCurrentPage(page: string, store: Store<{movies: IMovie[]}>)
     case "future-movies":
       findComingSoonMovies(store);
       break;
+    case "admin-movies":
+      findAllMovies(store);
+      break;
     default:
       findCurrentMovies(store);
       break;
@@ -131,5 +148,9 @@ function findHomeMovies(store: Store<{movies: IMovie[]}>) {
 
 function findComingSoonMovies(store: Store<{movies: IMovie[]}>) {
   store.dispatch({ type: '[ComingSoonMovies Movies] Movies'});
+}
+
+function findAllMovies(store: Store<{movies: IMovie[]}>) {
+  store.dispatch({ type: '[AllMovies Movies] Movies'});
 }
 

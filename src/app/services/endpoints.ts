@@ -3,6 +3,7 @@ export const endpoints = {
     COMING_SOON_MOVIES: "https://cineweb-movies-api-app.herokuapp.com/movies/coming-soon",
     COMMING_SOON_MOVIES_BY_DATE: "https://cineweb-movies-api-app.herokuapp.com/movies/coming-soon/by-date",
     CURRENT_MOVIES: "https://cineweb-movies-api-app.herokuapp.com/movies/current",
+    ALL_MOVIES: "https://cineweb-movies-api-app.herokuapp.com/movies/admin/all-movies",
     CURRENT_MOVIES_BY_DATE: "https://cineweb-movies-api-app.herokuapp.com/movies/current/by-date",
     MOVIES_BY_PARAMETER: "https://cineweb-movies-api-app.herokuapp.com/movies/by-parameter",
     USER_LOGIN: "https://localhost:5001/users/login",

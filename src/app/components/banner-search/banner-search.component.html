@@ -19,6 +19,15 @@
                 <option value="romance">ROMANCE</option>
             </select>
         </div>
+        <ng-template [ngIf]="page == 'admin-movies'">
+            <div [ngClass]="'search-group'">
+                <label for="status">Status</label>
+                <select id="status" [class.high-opacity]="disableStatus" [ngClass]="'form-item select'" formControlName="status" (focus)="focusEvent($event)" (focusout)="focusEvent($event)">
+                    <option value="ativo">Ativo</option>
+                    <option value="inativo">Inativo</option>
+                </select>
+            </div>
+        </ng-template>
         <div>
             <button [class.search-button-over]="searchButtonOver" (mouseover)="setSearchButtonOver()" (mouseout)="setSearchButtonOver()" [ngClass]="'search-button'">Pesquisar</button>
         </div>
