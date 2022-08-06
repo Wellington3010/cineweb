@@ -10,24 +10,17 @@
         flex-direction: row-reverse;
     }
 
-    @media(min-width: 720px) {
-        top: 17vh;
-    }
-
+  
     @media(min-width: 1024px) {
         flex-direction: row;
         justify-content: space-between;
         width: 100%;
-        top: 22vh;
     }
 
     @media(min-width: 1920px) {
        position: absolute;
        bottom: 0px;
-       top: unset;
     }
-
-
     
     .footer-link {
         padding: 10px;
