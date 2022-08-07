@@ -9,6 +9,7 @@ import { endpoints } from './endpoints';
 })
 export class UserManagerService {
   public cacheLogin: Map<string, string> = new Map();
+  public cacheUserType: Map<string, boolean> = new Map();
 
   constructor(private http: HttpClient, private router: Router) { }
 
@@ -19,7 +20,8 @@ export class UserManagerService {
     }).subscribe((data) => {
 
       let arrayResult = data.toString().split("_");
-      this.cacheLogin.set("LoggedUser", `${arrayResult[2]}_${arrayResult[1]}_${arrayResult[3]}`);
+      this.cacheLogin.set("LoggedUser", `${arrayResult[2]}_${arrayResult[1]}`);
+      this.cacheUserType.set("LoggedUserIsAdmin", arrayResult[3] == "True" ? true : false);
       alert("Login realizado com sucesso");
 
       if(this.loggedUserIsAdmin()) {
@@ -65,7 +67,7 @@ export class UserManagerService {
     return this.cacheLogin.get("LoggedUser")?.split("_")[0];
   }
 
-  public loggedUserIsAdmin() : boolean | undefined {
-    return this.cacheLogin.get("LoggedUser")?.split("_")[2] as boolean | undefined;
+  public loggedUserIsAdmin() : boolean {
+    return this.cacheUserType.get("LoggedUserIsAdmin") as boolean;
   }
 }
