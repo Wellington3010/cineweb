@@ -1,0 +1,37 @@
+<section [ngClass]="'banner-search'">
+    <form [formGroup]="movieForm" (ngSubmit)="submitForm()" [ngClass]="'search-fields'">
+        <div [ngClass]="'search-group'">
+            <label for="title">Título</label>
+            <input id="title" [class.high-opacity]="" [ngClass]="'form-item'" type="text" formControlName="title">
+        </div>
+        <div [ngClass]="'search-group date'">
+            <label for="date">Data</label>
+            <input id="date" [class.high-opacity]="" [ngClass]="'form-item'" type="date" formControlName="date">
+        </div>
+        <div [ngClass]="'search-group'">
+            <label for="genre">Gênero</label>
+            <select id="genre" [class.high-opacity]="" [ngClass]="'form-item select'" formControlName="genre">
+                <option value="ação">AÇÃO</option>
+                <option value="aventura">AVENTURA</option>
+                <option value="terror">TERROR</option>
+                <option value="drama">DRAMA</option>
+                <option value="comédia">COMÉDIA</option>
+                <option value="romance">ROMANCE</option>
+            </select>
+        </div>
+        <div [ngClass]="'search-group'">
+            <label for="status">Status</label>
+            <select id="status" [class.high-opacity]="" [ngClass]="'form-item select'" formControlName="status">
+                <option value="ativo">Ativo</option>
+                <option value="inativo">Inativo</option>
+            </select>
+        </div>
+        <div [ngClass]="'search-group'">
+            <label id="file-poster" [ngClass]="'search-button'" for="poster">Pôster</label>
+            <input id="poster" accept="image/webp" type="file" formControlName="poster"/>
+        </div>
+        <div>
+            <button [ngClass]="'search-button'">Cadastrar</button>
+        </div>
+    </form>
+</section>

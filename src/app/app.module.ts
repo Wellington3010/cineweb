@@ -30,6 +30,9 @@ import { MovieEffects } from './store/movies.effects';
 import { UserAccessComponent } from './page-components/user-access/user-access.component';
 import { LoginFormComponent } from './components/login-form/login-form.component';
 import { MoviesAdminComponent } from './page-components/movies-admin/movies-admin.component';
+import { MoviesRegisterComponent } from './page-components/movies-register/movies-register.component';
+import { MoviesFormComponent } from './components/movies-form/movies-form.component';
+import { UploadPreviewComponent } from './components/upload-preview/upload-preview.component';
 
 @NgModule({
   declarations: [
@@ -51,7 +54,10 @@ import { MoviesAdminComponent } from './page-components/movies-admin/movies-admi
     SynopsisComponent,
     UserAccessComponent,
     LoginFormComponent,
-    MoviesAdminComponent
+    MoviesAdminComponent,
+    MoviesRegisterComponent,
+    MoviesFormComponent,
+    UploadPreviewComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }),
@@ -68,6 +74,7 @@ import { MoviesAdminComponent } from './page-components/movies-admin/movies-admi
       { path: 'login', component: UserAccessComponent },
       { path: 'register', component: UserAccessComponent },
       { path: 'movies-admin', component: MoviesAdminComponent },
+      { path: 'cadastro-de-filmes', component: MoviesRegisterComponent },
       { path: '**', component: NotFoundComponent }
     ]),
     BrowserAnimationsModule,

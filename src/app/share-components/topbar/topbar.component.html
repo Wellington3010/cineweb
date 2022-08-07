@@ -21,7 +21,7 @@
             <a [ngClass]="'topbar-link'" [routerLink]="['/em-breve']">Em Breve</a>
         </ng-template>
         <ng-template [ngIf]="loggedUserIsAdmin">
-            <a [ngClass]="'topbar-link'" [routerLink]="['/']">Cadastrar Filme</a>
+            <a [ngClass]="'topbar-link'" [routerLink]="['/cadastro-de-filmes']">Cadastrar Filme</a>
             <a [ngClass]="'topbar-link'" [routerLink]="['/movies-admin']">Pesquisar Filmes</a>
         </ng-template>
         <ng-template [ngIf]="nameUserLogged == 'none'">
