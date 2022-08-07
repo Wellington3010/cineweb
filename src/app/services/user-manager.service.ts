@@ -39,6 +39,7 @@ export class UserManagerService {
   public deslogarUsuario(): void {
     try {
       this.cacheLogin.clear();
+      this.cacheUserType.clear();
     } catch (error) {
       throw new Error("Não foi possivel realizar o logout" + error);
     }

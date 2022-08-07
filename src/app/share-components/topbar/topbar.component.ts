@@ -13,7 +13,8 @@ export class TopbarComponent implements OnInit {
   detailsMoviePage!: boolean;
   currentRouter!: string;
   topbarIconColor!: string;
-  nameUserLogged!: string;
+  nameUserLogged: string = "none";
+  loggedUserIsAdmin: boolean = false;
 
   constructor(private location: Location, private userManager: UserManagerService, private router: Router) {
   }
@@ -31,7 +32,8 @@ export class TopbarComponent implements OnInit {
 
         if((val as RoutesRecognized).url == "/" || (val as RoutesRecognized).url == "/movies-admin") {
           let userNameArray = this.userManager.usuarioLogado()?.split(" ");
-          this.nameUserLogged = userNameArray == undefined ? "" : userNameArray[0];
+          this.nameUserLogged = userNameArray == undefined ? "none" : userNameArray[0];
+          this.loggedUserIsAdmin = this.userManager.loggedUserIsAdmin();
         }
       }
     });
@@ -40,6 +42,7 @@ export class TopbarComponent implements OnInit {
   logoutUser() {
     this.userManager.deslogarUsuario();
     alert("Logout realizado com sucesso");
-    this.nameUserLogged = "";
+    this.nameUserLogged = "none";
+    this.loggedUserIsAdmin = false;
   }
 }
