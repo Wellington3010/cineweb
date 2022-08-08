@@ -3,5 +3,6 @@ export interface IMovie {
     date: Date,
     genre: string,
     moviePoster: string
-    movieHome: boolean
+    movieHome: boolean,
+    active: boolean
 }

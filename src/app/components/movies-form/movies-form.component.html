@@ -22,8 +22,8 @@
         <div [ngClass]="'search-group'">
             <label for="status">Status</label>
             <select id="status" [class.high-opacity]="" [ngClass]="'form-item select'" formControlName="status">
-                <option value="ativo">Ativo</option>
-                <option value="inativo">Inativo</option>
+                <option value=true>Ativo</option>
+                <option value=false>Inativo</option>
             </select>
         </div>
         <div [ngClass]="'search-group'">
