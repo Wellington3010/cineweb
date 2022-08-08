@@ -28,7 +28,7 @@
         </div>
         <div [ngClass]="'search-group'">
             <label id="file-poster" [ngClass]="'search-button'" for="poster">Pôster</label>
-            <input id="poster" accept="image/webp" type="file" formControlName="poster"/>
+            <input id="poster" (change)="selectFile($event)" accept="image/webp" type="file" formControlName="poster"/>
         </div>
         <div>
             <button [ngClass]="'search-button'">Cadastrar</button>

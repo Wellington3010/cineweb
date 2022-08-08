@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
 
 @Component({
@@ -8,6 +8,9 @@ import { FormGroup, FormBuilder } from '@angular/forms';
 })
 export class MoviesFormComponent implements OnInit {
   movieForm!: FormGroup;
+  localUrl: any;
+  file!: File;
+  @Output() upload: EventEmitter<any> = new EventEmitter();
 
   constructor(private formBuilder: FormBuilder) { }
 
@@ -27,6 +30,18 @@ export class MoviesFormComponent implements OnInit {
 
   submitForm() {
 
+  }
+
+  selectFile(event: any) {
+    this.file = <File>event.target.files[0];
+    if (event.target.files && event.target.files[0]) {
+      var reader = new FileReader();
+      reader.onload = (event: any) => {
+        this.localUrl = event.target.result;
+        this.upload.emit(this.localUrl);
+      }
+      reader.readAsDataURL(event.target.files[0]);
+    }
   }
  
 }

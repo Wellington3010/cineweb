@@ -32,7 +32,6 @@ import { LoginFormComponent } from './components/login-form/login-form.component
 import { MoviesAdminComponent } from './page-components/movies-admin/movies-admin.component';
 import { MoviesRegisterComponent } from './page-components/movies-register/movies-register.component';
 import { MoviesFormComponent } from './components/movies-form/movies-form.component';
-import { UploadPreviewComponent } from './components/upload-preview/upload-preview.component';
 
 @NgModule({
   declarations: [
@@ -57,7 +56,6 @@ import { UploadPreviewComponent } from './components/upload-preview/upload-previ
     MoviesAdminComponent,
     MoviesRegisterComponent,
     MoviesFormComponent,
-    UploadPreviewComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }),

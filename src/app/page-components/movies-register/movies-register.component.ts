@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'app-movies-register',
@@ -6,10 +6,14 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./movies-register.component.scss']
 })
 export class MoviesRegisterComponent implements OnInit {
+  urlImage: any = undefined;
 
   constructor() { }
 
   ngOnInit(): void {
   }
 
+  onUpload(image: any) {
+    this.urlImage = image;
+  }
 }
