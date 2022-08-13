@@ -10,7 +10,7 @@ import { MoviesService } from 'src/app/services/movies.service';
 })
 export class MoviesFormComponent implements OnInit {
   movieForm!: FormGroup;
-  localUrl: any;
+  localUrl!: any;
   file!: File;
   @Output() upload: EventEmitter<any> = new EventEmitter();
 
@@ -52,6 +52,7 @@ export class MoviesFormComponent implements OnInit {
 
   selectFile(event: any) {
     this.file = <File>event.target.files[0];
+
     if (event.target.files && event.target.files[0]) {
       var reader = new FileReader();
       reader.onload = (event: any) => {

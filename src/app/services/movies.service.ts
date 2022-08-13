@@ -54,13 +54,13 @@ export class MoviesService {
 
   public saveMovie(movie: IMovie) {
     this.http.post(endpoints.SAVE_MOVIE, {
-        title: movie.title,
-        date: movie.date,
-        genre: movie.genre,
-        movieHome: movie.movieHome,
-        moviePoster: movie.moviePoster,
-        active: movie.active
-      }).subscribe((data) => {
+      Title: movie.title,
+      Date: movie.date,
+      Genre: movie.genre,
+      MovieHome: movie.movieHome,
+      MoviePoster: movie.moviePoster,
+      Active: movie.active
+    }).subscribe((data) => {
         alert("Cadastro realizado com sucesso");
       },(error) => {
         alert("Não foi possível cadastrar filme. Tente novamente");
