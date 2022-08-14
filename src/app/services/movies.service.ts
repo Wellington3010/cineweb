@@ -53,13 +53,15 @@ export class MoviesService {
   }
 
   public saveMovie(movie: IMovie) {
+    console.log(movie);
     this.http.post(endpoints.SAVE_MOVIE, {
       Title: movie.title,
       Date: movie.date,
       Genre: movie.genre,
-      MovieHome: movie.movieHome,
+      HomeMovie: movie.movieHome,
       MoviePoster: movie.moviePoster,
-      Active: movie.active
+      Active: movie.active,
+      Sinopse: movie.sinopse
     }).subscribe((data) => {
         alert("Cadastro realizado com sucesso");
       },(error) => {

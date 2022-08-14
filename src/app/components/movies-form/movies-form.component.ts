@@ -26,7 +26,9 @@ export class MoviesFormComponent implements OnInit {
       date: [''],
       genre: [''],
       status: [''],
-      poster: ['']
+      poster: [''],
+      sinopse: [''],
+      home: ['']
     });
   }
 
@@ -35,18 +37,22 @@ export class MoviesFormComponent implements OnInit {
     let date = this.movieForm.value['date'].toString().trimStart();
     let genre = this.movieForm.value['genre'];
     let status = this.movieForm.value['status'];
+    let sinopse = this.movieForm.value['sinopse'];
+    let homePage = this.movieForm.value['home'];
     let poster = this.localUrl;
 
     let movie = {
       title: title, 
       date: date,
       genre: genre,
-      movieHome: false,
+      movieHome: homePage == "true" ? true : false,
       moviePoster: poster,
-      active: status == "true" ? true : false
+      active: status == "true" ? true : false,
+      sinopse: sinopse
     } as IMovie;
 
     console.log(movie);
+
     this.moviesService.saveMovie(movie);
   }
 

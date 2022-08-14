@@ -18,22 +18,18 @@
 }
 
 .search-fields {
-    width: 100%;
+    max-width: 80%;
     display: flex;
-    justify-content: space-evenly;
+    justify-content: center;
     align-items: center;
     flex-direction: column;
     text-align: center;
 
     @media(min-width: 1024px) {
+        max-width: 80%;
         flex-direction: row;
-    }
-
-    @media(min-width: 1366px) {
-        max-width: 1480px;
         flex-wrap: wrap;
     }
-   
 
     label {
         font-size: 24px;
@@ -88,6 +84,7 @@
     flex-direction: column;
     max-width: 250px;
     text-align: center;
+    margin: 10px;
 
     @media(min-width: 1024px) {
         padding: 20px;

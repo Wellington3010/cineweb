@@ -5,4 +5,5 @@ export interface IMovie {
     moviePoster: any
     movieHome: boolean,
     active: boolean
+    sinopse: string
 }

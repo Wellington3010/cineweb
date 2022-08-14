@@ -30,6 +30,17 @@
             <label id="file-poster" [ngClass]="'search-button'" for="poster">Pôster</label>
             <input id="poster" (change)="selectFile($event)" accept="image/webp" type="file" formControlName="poster"/>
         </div>
+        <div [ngClass]="'search-group'">
+            <label id="sinopse-label" for="sinopse">Sinopse</label>
+            <input id="sinopse" type="text" [ngClass]="'form-item'" formControlName="sinopse"/>
+        </div>
+        <div [ngClass]="'search-group'">
+            <label id="pagina-home-label" for="home">Página Home</label>
+            <select id="home" [class.high-opacity]="" [ngClass]="'form-item select'" formControlName="home">
+                <option value=true>Ativo</option>
+                <option value=false>Inativo</option>
+            </select>
+        </div>
         <div>
             <button [ngClass]="'search-button'">Cadastrar</button>
         </div>
