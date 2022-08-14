@@ -13,6 +13,8 @@ export class MoviesFormComponent implements OnInit {
   localUrl!: any;
   file!: File;
   @Output() upload: EventEmitter<any> = new EventEmitter();
+  @Output() resetPreview: EventEmitter<any> = new EventEmitter();
+
 
   constructor(private formBuilder: FormBuilder, private moviesService: MoviesService) { }
 
@@ -51,9 +53,10 @@ export class MoviesFormComponent implements OnInit {
       sinopse: sinopse
     } as IMovie;
 
-    console.log(movie);
-
     this.moviesService.saveMovie(movie);
+
+    this.movieForm.reset();
+    this.resetPreview.emit();
   }
 
   selectFile(event: any) {

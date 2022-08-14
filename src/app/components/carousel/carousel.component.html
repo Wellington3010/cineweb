@@ -30,7 +30,10 @@
         <li *ngFor="let movie of homeMovies | slice:startMovie:endMovie;" id="slider-1">
             <div>
                 <div [ngClass]="'data-movie'"> Em breve <br> {{ movie.date | date: 'dd/MM/yyyy' }} </div>
-                <img [ngClass]="'images'" src={{movie.moviePoster}} />
+                <a [routerLink]="['/movie-details']"
+                   [queryParams]="{ title: movie.title, fromPage: 'home-movies' }" >
+                   <img [ngClass]="'images'" src={{movie.moviePoster}} />
+                </a>
             </div>
         </li>
     </ul>

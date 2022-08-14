@@ -16,4 +16,8 @@ export class MoviesRegisterComponent implements OnInit {
   onUpload(image: any) {
     this.urlImage = image;
   }
+
+  resetPreview() {
+    this.urlImage = undefined;
+  }
 }
