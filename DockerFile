@@ -1,0 +1,16 @@
+FROM node as build
+
+RUN npm install -g @angular/cli
+WORKDIR /app
+RUN ls
+ADD ./package.json /app/
+RUN npm install --force
+ADD ./ /app/
+RUN ng build
+EXPOSE $PORT
+CMD ["node", "dist/cineweb/server/main.js"]
+
+# FROM nginx
+# COPY --from=build /app/dist/cineweb/browser/ /usr/share/nginx/html/
+# WORKDIR /usr/share/nginx/html/
+# CMD [ "node" ]
