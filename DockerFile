@@ -12,3 +12,4 @@ EXPOSE $PORT
 RUN useradd -u 2737 well
 USER well
 CMD ["node", "dist/cineweb/server/main.js"]
+
