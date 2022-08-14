@@ -18,6 +18,14 @@
     justify-content: center;
     align-items: center;
     text-align: center;
+    position: relative;
+    top: 60px;
+
+    @media(min-width: 1024px) {
+        position: unset;
+        top: unset;
+    }
+
 }
 
 .upload-preview-image {
