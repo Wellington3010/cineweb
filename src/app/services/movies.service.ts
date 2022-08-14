@@ -9,7 +9,7 @@ import { IMovie } from '../interfaces/IMovie';
 })
 export class MoviesService {
 
-  constructor(private http: HttpClient) { 
+  constructor(private http: HttpClient) {
   }
 
   public getHomeMovies() : Observable<IMovie[]> {
@@ -43,7 +43,7 @@ export class MoviesService {
   public getAllMovies() : Observable<IMovie[]> {
     return this.http.get(endpoints.ALL_MOVIES) as Observable<IMovie[]>;
   }
-  
+
   public getMoviesByParameter(parameter: string, parameterType: string) : Observable<IMovie[]> {
     let params = new HttpParams().set('parameter', parameter).set('parameterType', parameterType);
 
@@ -52,9 +52,8 @@ export class MoviesService {
     }) as Observable<IMovie[]>;
   }
 
-  public saveMovie(movie: IMovie) {
-    console.log(movie);
-    this.http.post(endpoints.SAVE_MOVIE, {
+  public saveMovie(movie: IMovie) : Observable<boolean> {
+    return this.http.post(endpoints.SAVE_MOVIE, {
       Title: movie.title,
       Date: movie.date,
       Genre: movie.genre,
@@ -62,10 +61,26 @@ export class MoviesService {
       MoviePoster: movie.moviePoster,
       Active: movie.active,
       Sinopse: movie.sinopse
-    }).subscribe((data) => {
-        alert("Cadastro realizado com sucesso");
-      },(error) => {
-        alert("Não foi possível cadastrar filme. Tente novamente");
-      });
+    }) as Observable<boolean>;
+  }
+
+  public updateMovie(movie: IMovie, oldTitle: string) : Observable<boolean> {
+    return this.http.post(endpoints.UPDATE_MOVIE, {
+      Title: movie.title,
+      OldTitle: oldTitle,
+      Date: movie.date,
+      Genre: movie.genre,
+      HomeMovie: movie.movieHome,
+      MoviePoster: movie.moviePoster,
+      Active: movie.active,
+      Sinopse: movie.sinopse
+    }) as Observable<boolean>;
+  }
+
+
+  public deleteMovie(oldTitle: string) : Observable<boolean> {
+      return this.http.post(endpoints.DELETE_MOVIE, {
+        OldTitle: oldTitle
+      }) as Observable<boolean>;
   }
 }

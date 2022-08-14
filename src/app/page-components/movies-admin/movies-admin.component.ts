@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { IMovie } from 'src/app/interfaces/IMovie';
 
 @Component({
   selector: 'app-movies-admin',
@@ -11,5 +13,4 @@ export class MoviesAdminComponent implements OnInit {
 
   ngOnInit(): void {
   }
-
 }

@@ -17,6 +17,7 @@ export class PagesCarouselComponent implements OnInit {
   startMovie: number = 0;
   endMovie: number = 3;
   currentWindow!: Window;
+  moviesDetailsRoute!: string;
 
   constructor(private store: Store<{movies: IMovie[]}>, private effect: MovieEffects, private router: Router) { }
 
@@ -24,6 +25,7 @@ export class PagesCarouselComponent implements OnInit {
     this.listenerEffects();
     findMoviesByCurrentPage(this.currentPage, this.store);
     this.currentWindow = window;
+    this.moviesDetailsRoute = this.currentPage == "admin-movies" ? '/edicao-de-filmes' : '/movie-details';
   }
 
 
@@ -119,6 +121,8 @@ export class PagesCarouselComponent implements OnInit {
 }
 
 function findMoviesByCurrentPage(page: string, store: Store<{movies: IMovie[]}>) {
+  console.log(page);
+
   switch(page) {
     case "current-movies":
       findCurrentMovies(store);

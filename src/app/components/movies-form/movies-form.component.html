@@ -1,5 +1,5 @@
 <section [ngClass]="'banner-search'">
-    <form [formGroup]="movieForm" (ngSubmit)="submitForm()" [ngClass]="'search-fields'">
+    <form [formGroup]="movieForm"  [ngClass]="'search-fields'">
         <div [ngClass]="'search-group'">
             <label for="title">Título</label>
             <input id="title" [class.high-opacity]="" [ngClass]="'form-item'" type="text" formControlName="title">
@@ -42,7 +42,13 @@
             </select>
         </div>
         <div>
-            <button [ngClass]="'search-button'">Cadastrar</button>
+            <ng-template [ngIf]="movie != undefined">
+                <button (click)="submitForm()" [ngClass]="'search-button'">Atualizar Filme</button>
+                <button (click)="deletarFilme()" [ngClass]="'search-button'">Deletar Filme</button>
+            </ng-template>
+            <ng-template [ngIf]="movie == undefined">
+                <button (click)="submitForm()" [ngClass]="'search-button'">Cadastrar</button>
+            </ng-template>
         </div>
     </form>
 </section>

@@ -73,6 +73,7 @@ import { MoviesFormComponent } from './components/movies-form/movies-form.compon
       { path: 'register', component: UserAccessComponent },
       { path: 'movies-admin', component: MoviesAdminComponent },
       { path: 'cadastro-de-filmes', component: MoviesRegisterComponent },
+      { path: 'edicao-de-filmes', component: MoviesRegisterComponent },
       { path: '**', component: NotFoundComponent }
     ]),
     BrowserAnimationsModule,

@@ -46,9 +46,21 @@ export class MovieEffects {
     )
   );
 
+  allMoviesWithCache$ = createEffect(() => this.actions$.pipe(
+    ofType('[AllMovies Movies With Cache] Movies'),
+    mergeMap(() => this.allMoviesWithCache()
+      .pipe(
+        map(movies => {
+          return ({ type: '[AllMovies Movies With Cache] Movies Loaded with success', payload: movies });
+        }),
+        catchError(() => EMPTY)
+      ))
+    )
+  );
+
   allMovies$ = createEffect(() => this.actions$.pipe(
     ofType('[AllMovies Movies] Movies'),
-    mergeMap(() => this.allMoviesWithCache()
+    mergeMap(() => this.allMovies()
       .pipe(
         map(movies => {
           return ({ type: '[AllMovies Movies] Movies Loaded with success', payload: movies });
@@ -107,6 +119,11 @@ export class MovieEffects {
       this.moviesService.getAllMovies().subscribe((item) => this.cache.set("admin-movies", item));
       return this.moviesService.getAllMovies();
     }
+  }
+
+  allMovies() : Observable<IMovie[]> {
+    this.moviesService.getAllMovies().subscribe((item) => this.cache.set("admin-movies", item));
+    return this.moviesService.getAllMovies();
   }
 
   findMoviesByParameter(parameter: string, parameterType: string, page: string) : Observable<IMovie[]> {

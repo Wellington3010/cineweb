@@ -1,5 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
+import { Router } from '@angular/router';
+import { Store } from '@ngrx/store';
 import { IMovie } from 'src/app/interfaces/IMovie';
 import { MoviesService } from 'src/app/services/movies.service';
 
@@ -12,14 +14,19 @@ export class MoviesFormComponent implements OnInit {
   movieForm!: FormGroup;
   localUrl!: any;
   file!: File;
+  @Input() movie!: IMovie;
   @Output() upload: EventEmitter<any> = new EventEmitter();
   @Output() resetPreview: EventEmitter<any> = new EventEmitter();
 
 
-  constructor(private formBuilder: FormBuilder, private moviesService: MoviesService) { }
+  constructor(private formBuilder: FormBuilder, private moviesService: MoviesService, private router: Router, private store: Store<{movies: IMovie[]}>) { }
 
   ngOnInit(): void {
     this.formCreate();
+
+    if(this.movie != undefined) {
+      this.setFormValues();
+    }
   }
 
   formCreate() {
@@ -32,6 +39,16 @@ export class MoviesFormComponent implements OnInit {
       sinopse: [''],
       home: ['']
     });
+  }
+
+  setFormValues() {
+    this.movieForm.controls['title'].setValue(this.movie.title);
+    this.movieForm.controls['date'].setValue(this.movie.date.toLocaleString().split("T")[0]);
+    this.movieForm.controls['genre'].setValue(this.movie.genre);
+    this.movieForm.controls['status'].setValue("true");
+    this.movieForm.controls['sinopse'].setValue(this.movie.sinopse);
+    this.movieForm.controls['home'].setValue(this.movie.movieHome == true ? "true" : "false");
+    this.localUrl = this.movie.moviePoster;
   }
 
   submitForm() {
@@ -53,10 +70,35 @@ export class MoviesFormComponent implements OnInit {
       sinopse: sinopse
     } as IMovie;
 
-    this.moviesService.saveMovie(movie);
-
-    this.movieForm.reset();
-    this.resetPreview.emit();
+    if(this.movie != undefined) {
+      this.moviesService.updateMovie(movie, this.movie.title)
+      .subscribe((retorno) => {
+        if(retorno) {
+          alert("Filme atualizado com sucesso");
+          this.movieForm.reset();
+          this.resetPreview.emit();
+          this.router.navigate(['/movies-admin']);
+        }
+        else {
+          alert("Não foi possível atualizar o filme. Tente novamente mais tarde");
+        }
+      });
+    }
+    else
+    {
+      this.moviesService.saveMovie(movie)
+      .subscribe((retorno) => {
+        if(retorno) {
+          alert("Filme cadastrado com sucesso");
+          this.movieForm.reset();
+          this.resetPreview.emit();
+          this.router.navigate(['/movies-admin']);
+        }
+        else {
+          alert("Não foi possível cadastrar o filme. Tente novamente mais tarde");
+        }
+      });
+    }
   }
 
   selectFile(event: any) {
@@ -70,5 +112,20 @@ export class MoviesFormComponent implements OnInit {
       }
       reader.readAsDataURL(event.target.files[0]);
     }
-  } 
+  }
+
+  deletarFilme() {
+    this.moviesService.deleteMovie(this.movie.title)
+    .subscribe((retorno) => {
+      if(retorno) {
+        alert("Filme deleteado com sucesso");
+        this.movieForm.reset();
+        this.resetPreview.emit();
+        this.router.navigate(['/movies-admin']);
+      }
+      else {
+        alert("Não foi possível deletar o filme. Tente novamente mais tarde");
+      }
+    });
+  }
 }
