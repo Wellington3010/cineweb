@@ -11,9 +11,16 @@
             </a>
         </li>
         <li [class.button-over]=buttonOverThree (mouseover)="buttonOverThree = true" (mouseout)="buttonOverThree = false"> 
-            <a [ngClass]="'home-menu-link'" href="" [routerLink]="['login']">
-                <img [ngClass]="'home-menu-item login'" src="assets/images/login.svg" alt=""/> <p>Login</p>
-            </a>
+            <ng-template [ngIf]="nameUserLogged != 'none'">
+                <a [ngClass]="'home-menu-link'"(click)="logoutUser()" href="#">
+                    <img [ngClass]="'home-menu-item login'" src="assets/images/login.svg" alt=""/> <p>Logout</p>
+                </a>
+            </ng-template>
+            <ng-template [ngIf]="nameUserLogged == 'none'">
+                <a [ngClass]="'home-menu-link'" href="" [routerLink]="['login']">
+                    <img [ngClass]="'home-menu-item login'" src="assets/images/login.svg" alt=""/> <p>Login</p>
+                </a>
+            </ng-template>
         </li>
     </ul>
 </div>

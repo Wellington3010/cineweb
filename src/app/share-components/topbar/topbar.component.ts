@@ -24,7 +24,8 @@ export class TopbarComponent implements OnInit {
       this.currentRouter = this.location.path(false);
       this.detailsMoviePage = this.location.path(false).startsWith('/movie-details') || 
       this.location.path(false).startsWith('/login') ||
-      this.location.path(false).startsWith('/register')
+      this.location.path(false).startsWith('/register') ||
+      this.location.path(false).startsWith('/cart')
     });
 
     this.router.events.subscribe((val) => {

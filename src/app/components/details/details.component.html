@@ -25,5 +25,9 @@
             </ul>
         </ng-template>
     </div>
-    <div [ngClass]="'movie-poster'"></div>
+    <div *ngIf="!naoExiberBotaoComprar" class="buy-button-container container">
+        <button class="buy-button" (click)="buyMovieTicket()">
+            Comprar
+        </button>
+    </div>
 </section>

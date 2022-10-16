@@ -32,6 +32,8 @@ import { LoginFormComponent } from './components/login-form/login-form.component
 import { MoviesAdminComponent } from './page-components/movies-admin/movies-admin.component';
 import { MoviesRegisterComponent } from './page-components/movies-register/movies-register.component';
 import { MoviesFormComponent } from './components/movies-form/movies-form.component';
+import { CartService } from './services/cart.service';
+import { CartComponent } from './page-components/cart/cart.component';
 
 @NgModule({
   declarations: [
@@ -56,6 +58,7 @@ import { MoviesFormComponent } from './components/movies-form/movies-form.compon
     MoviesAdminComponent,
     MoviesRegisterComponent,
     MoviesFormComponent,
+    CartComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }),
@@ -69,6 +72,7 @@ import { MoviesFormComponent } from './components/movies-form/movies-form.compon
       { path: 'em-cartaz', component: CurrentMoviesComponent },
       { path: 'em-breve', component: FutureMoviesComponent },
       { path: 'movie-details', component: DetailsMoviesComponent },
+      { path: 'cart', component: CartComponent },
       { path: 'login', component: UserAccessComponent },
       { path: 'register', component: UserAccessComponent },
       { path: 'movies-admin', component: MoviesAdminComponent },
@@ -81,7 +85,7 @@ import { MoviesFormComponent } from './components/movies-form/movies-form.compon
     HttpClientModule,
     CommonModule
   ],
-  providers: [],
+  providers: [CartService, MovieEffects],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

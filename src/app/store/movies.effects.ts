@@ -1,12 +1,14 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { EMPTY, Observable, of } from 'rxjs';
-import { map, mergeMap, catchError, switchMap } from 'rxjs/operators';
+import { map, mergeMap, catchError } from 'rxjs/operators';
 import { IMovie } from '../interfaces/IMovie';
 import { MoviesService } from '../services/movies.service';
 import { findMoviesByParameter } from './store';
  
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class MovieEffects {
   cache: Map<string, IMovie[]> = new Map();
  

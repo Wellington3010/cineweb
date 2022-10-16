@@ -1,0 +1,23 @@
+<section class="cart">
+    <table class="cart-table">
+        <thead>
+            <tr>
+                <th class="thead-cart-table">Titulo</th>
+                <th class="thead-cart-table">Poster</th>
+                <th class="thead-cart-table">Data</th>
+                <th class="thead-cart-table">Hora</th>
+                <th class="thead-cart-table">Valor</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let movie of cartMovies">
+                <td class="tbody-cart-table">{{ movie.title }}</td>
+                <td class="tbody-cart-table"><img class="movies-images" src="{{ movie.moviePoster }}" alt="{{movie.title}}"></td>
+                <td class="tbody-cart-table">{{ movie.date | date: 'dd/MM/YYYY' }}</td>
+                <td class="tbody-cart-table">{{ movie.date | date: 'hh:mm' }} AM</td>
+                <td class="tbody-cart-table">R$ 30,00 </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+<app-footer [ngClass]="'footer'"></app-footer>
