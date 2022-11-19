@@ -10,8 +10,10 @@ import { UserManagerService } from '../../services/user-manager.service';
 export class LoginFormComponent implements OnInit {
   userForm!: FormGroup;
   @Input() page!: string;
+  cpf!: string;
 
   constructor(private formBuilder: FormBuilder, private userManager: UserManagerService) { }
+
 
   ngOnInit(): void {
     this.formCreate();
@@ -21,22 +23,47 @@ export class LoginFormComponent implements OnInit {
     this.userForm = this.formBuilder.group({
       nome:  [''],
       email: [''],
+      cpf: [''],
       senha: [''],
     });
+  }
+
+  formatarCPF(event: Event) {
+    if(this.userForm.value['cpf'] != null || this.userForm.value['cpf'] != undefined) {
+      let cpf = (event.target as HTMLInputElement).value;
+
+      let cpfAtualizado;
+
+      cpfAtualizado = cpf.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, '$1.$2.$3-$4');
+
+      let validacaoCPF = this.validarCPF(cpfAtualizado);
+      
+      if(validacaoCPF == "") {
+        this.userForm.controls["cpf"].setValue(cpfAtualizado); 
+      }
+       
+      if(validacaoCPF != "") {
+        this.userForm.controls["cpf"].setValue("");
+        alert(validacaoCPF);
+      }
+    }
   }
 
   submitForm() {
     console.log(this.page);
     let nome = this.userForm.value['nome'].toString().trimStart();
     let email = this.userForm.value['email'].toString().trimStart();
+    let cpf = this.userForm.value['cpf'].toString().trimStart();
     let senha = this.userForm.value['senha'];
 
     let validacaoNome = "";
     let validacaoEmail = this.validarEmail(email);
     let validacaoSenha = this.validarSenha(senha);
+    let validacaoCPF = "";
 
     if(this.page == "Cadastro") {
       validacaoNome = this.validarNome(nome);
+      validacaoCPF = this.validarCPF(cpf);
     }
 
     if(this.page != "Cadastro" && validacaoNome == "" && validacaoEmail == "" && validacaoSenha == "") {
@@ -44,7 +71,7 @@ export class LoginFormComponent implements OnInit {
       this.userForm.reset();
     }
 
-    if(this.page == "Cadastro" && validacaoNome == "" && validacaoEmail == "" && validacaoSenha == "") {
+    if(this.page == "Cadastro" && validacaoNome == "" && validacaoEmail == "" && validacaoSenha == "" && validacaoCPF == "") {
       this.userManager.cadastrarUsuario(nome, email, senha);
       this.userForm.reset();
     }
@@ -98,6 +125,24 @@ export class LoginFormComponent implements OnInit {
 
     if(senha.length > 30) {
       return "Campo senha não pode conter mais que 30 caracteres";
+    }
+
+    return "";
+  }
+
+  validarCPF(cpf: string) : string {
+    let regex = new RegExp(/(\d{3})(\d{3})(\d{3})(\d{2})/);
+
+    if(!regex.test(cpf)) {
+      return "No campo cpf só podem ser inseridos dígitos";
+    }
+
+    if(cpf.trim().length == 0) {
+      return "Campo cpf deve ser preenchido";
+    }
+
+    if(cpf.length > 14) {
+      return "Campo cpf não pode conter mais que 11 dígitos";
     }
 
     return "";

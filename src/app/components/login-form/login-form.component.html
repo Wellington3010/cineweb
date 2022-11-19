@@ -9,6 +9,10 @@
                 </div>
             </ng-template>
             <div [ngClass]="'userform-search-group'">
+                <label id="label-id" for="email">CPF</label>
+                <input id="cpf" (change)="formatarCPF($event)" [ngClass]="'form-item'" type="text" formControlName="cpf">
+            </div>
+            <div [ngClass]="'userform-search-group'">
                 <label id="label-id" for="email">Email</label>
                 <input id="email" [ngClass]="'form-item'" type="text" formControlName="email">
             </div>
