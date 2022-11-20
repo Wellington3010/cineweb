@@ -12,5 +12,6 @@ describe('MoviesServiceService', () => {
 
   it('should be created', () => {
     expect(service).toBeTruthy();
+    
   });
 });
