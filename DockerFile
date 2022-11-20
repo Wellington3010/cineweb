@@ -1,11 +1,11 @@
 FROM node as build
 
 RUN npm install -g @angular/cli@13.2.6
-WORKDIR /cineweb
+WORKDIR /app
 RUN ls
-ADD ./package.json /cineweb/
+ADD ./package.json /app/
 RUN npm install --force
-ADD ./ /cineweb/
+ADD ./ /app/
 RUN ng build
 EXPOSE $PORT
 
