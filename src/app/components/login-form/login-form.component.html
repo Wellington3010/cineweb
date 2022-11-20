@@ -1,33 +1,29 @@
 <div [ngClass]="'login-form'">
     <div [class.userform-login]="page != 'Cadastro'" [class.userform-register]="page == 'Cadastro'" [ngClass]="'userform-login'" >
         <label [ngClass]="'label-userform-login'" for="userform-login-id">Login</label>
-        <form id="userform-login-id" [formGroup]="userForm" (ngSubmit)="submitForm()" [ngClass]="'userform-search-fields'">
+        <form id="userform-login-id" [formGroup]="userForm" [ngClass]="'userform-search-fields'">
             <ng-template [ngIf]="page == 'Cadastro'">
                 <div [ngClass]="'userform-search-group'">
                     <label id="label-id" for="nome">Nome</label>
                     <input id="nome" [ngClass]="'form-item'" type="text" formControlName="nome">
+                    <label id="label-id" for="email">CPF</label>
+                    <input id="cpf" (change)="formatarCPF($event)" [ngClass]="'form-item'" type="text" formControlName="cpf">
                 </div>
             </ng-template>
             <div [ngClass]="'userform-search-group'">
-                <label id="label-id" for="email">CPF</label>
-                <input id="cpf" (change)="formatarCPF($event)" [ngClass]="'form-item'" type="text" formControlName="cpf">
-            </div>
-            <div [ngClass]="'userform-search-group'">
                 <label id="label-id" for="email">Email</label>
                 <input id="email" [ngClass]="'form-item'" type="text" formControlName="email">
-            </div>
-            <div [ngClass]="'userform-search-group'">
                 <label id="label-id" for="senha">Senha</label>
                 <input id="senha" [ngClass]="'form-item'" type="password" formControlName="senha">
             </div>
-            <div [ngClass]="'userform-search-group'">
-                <ng-template [ngIf]="page == 'Cadastro'">
-                    <button [ngClass]="'search-button'">Cadastrar</button>
-                </ng-template>
-                <ng-template [ngIf]="page != 'Cadastro'">
-                    <button [ngClass]="'search-button'">Login</button>
-                </ng-template>
-            </div>
         </form>
+        <div [ngClass]="'userform-search-group'">
+            <ng-template [ngIf]="page == 'Cadastro'">
+                <button [ngClass]="'search-button'" (click)="submitForm()">Cadastrar</button>
+            </ng-template>
+            <ng-template [ngIf]="page != 'Cadastro'">
+                <button [ngClass]="'search-button'" (click)="submitForm()">Login</button>
+            </ng-template>
+        </div>
     </div>
 </div>

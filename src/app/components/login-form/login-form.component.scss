@@ -5,6 +5,12 @@
     text-align: center;
 }
 
+.userform-search-fields {
+    display: flex;
+    max-width: 90%;
+    flex-direction: column;
+}
+
 .userform-login {
     background: linear-gradient(180deg, #F19E21 0%, #EF6416 100%);
     color: #600C0C;
@@ -14,8 +20,10 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
 
     @media(min-width: 1024px) {
+        flex-direction: row;
         min-width: unset;
         width: 620px;
     }
@@ -26,14 +34,17 @@
     color: #600C0C;
     min-width: 95%;
     border-radius: 20px;
-    height: 360px;
+    height: 470px;
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
 
     @media(min-width: 1024px) {
+        flex-direction: row;
         min-width: unset;
         width: 620px;
+        height: 380px;
     }
 }
 
@@ -57,7 +68,7 @@
     align-items: center;
 
     @media(min-width: 1024px) {
-        flex-direction: row;
+        flex-direction: column;
         padding: 20px;
     }
 }

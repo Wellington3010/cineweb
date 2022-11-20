@@ -36,7 +36,7 @@ export class LoginFormComponent implements OnInit {
 
       cpfAtualizado = cpf.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, '$1.$2.$3-$4');
 
-      let validacaoCPF = this.validarCPF(cpfAtualizado);
+      let validacaoCPF = this.validarCPF(cpf);
       
       if(validacaoCPF == "") {
         this.userForm.controls["cpf"].setValue(cpfAtualizado); 
@@ -133,16 +133,16 @@ export class LoginFormComponent implements OnInit {
   validarCPF(cpf: string) : string {
     let regex = new RegExp(/(\d{3})(\d{3})(\d{3})(\d{2})/);
 
-    if(!regex.test(cpf)) {
+    if(cpf.length > 14) {
+      return "Campo cpf não pode conter mais que 11 dígitos";
+    }
+
+    if(cpf.length > 0 && !regex.test(cpf)) {
       return "No campo cpf só podem ser inseridos dígitos";
     }
 
     if(cpf.trim().length == 0) {
       return "Campo cpf deve ser preenchido";
-    }
-
-    if(cpf.length > 14) {
-      return "Campo cpf não pode conter mais que 11 dígitos";
     }
 
     return "";
