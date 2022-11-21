@@ -1,4 +1,3 @@
-import { ThisReceiver } from '@angular/compiler';
 import { Injectable } from '@angular/core';
 import { IMovie } from '../interfaces/IMovie';
 
@@ -32,7 +31,7 @@ export class CartService {
   public VerificaSeItemJaExisteNoCarrinho(movie: IMovie) : boolean {
     let listaDeFilmes = this.cache.get("cart") as IMovie[];
 
-    let movieResult = listaDeFilmes.find(x => x.title == movie.title);
+    let movieResult = listaDeFilmes.find(x => x.titulo == movie.titulo);
 
     if(movieResult != undefined || movieResult != null) {
       return true;

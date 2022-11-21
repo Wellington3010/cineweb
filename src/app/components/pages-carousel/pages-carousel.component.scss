@@ -66,3 +66,26 @@ ul {
     width: 180px;
     height: 270px;
 }
+
+.not-found-movies-message {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #FF9533;
+    text-transform: capitalize;
+    font-size: 42px;
+    font-weight: 700;
+    text-align: center;
+    margin-top: 16vh;
+    margin-bottom: 27vh;
+
+    @media(min-width: 720px) {
+        margin-bottom: 22vh;
+        margin-top: 16vh;
+        font-size: 52px;
+    }
+
+    @media(min-width: 1024px) {
+        margin-top: 16vh;
+    }
+}

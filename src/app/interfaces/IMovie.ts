@@ -1,8 +1,8 @@
 export interface IMovie {
-    title: string,
-    date: Date,
-    genre: string,
-    moviePoster: any
+    titulo: string,
+    data: Date,
+    genero: string,
+    poster: any
     movieHome: boolean,
     active: boolean
     sinopse: string

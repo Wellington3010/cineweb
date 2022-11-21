@@ -50,20 +50,21 @@ export class LoginFormComponent implements OnInit {
   }
 
   submitForm() {
-    console.log(this.page);
     let nome = this.userForm.value['nome'].toString().trimStart();
     let email = this.userForm.value['email'].toString().trimStart();
     let cpf = this.userForm.value['cpf'].toString().trimStart();
     let senha = this.userForm.value['senha'];
 
+    console.log(senha);
+    console.log(email);
+    console.log(nome);
+
     let validacaoNome = "";
     let validacaoEmail = this.validarEmail(email);
     let validacaoSenha = this.validarSenha(senha);
-    let validacaoCPF = "";
 
     if(this.page == "Cadastro") {
       validacaoNome = this.validarNome(nome);
-      validacaoCPF = this.validarCPF(cpf);
     }
 
     if(this.page != "Cadastro" && validacaoNome == "" && validacaoEmail == "" && validacaoSenha == "") {
@@ -71,8 +72,8 @@ export class LoginFormComponent implements OnInit {
       this.userForm.reset();
     }
 
-    if(this.page == "Cadastro" && validacaoNome == "" && validacaoEmail == "" && validacaoSenha == "" && validacaoCPF == "") {
-      this.userManager.cadastrarUsuario(nome, email, senha);
+    if(this.page == "Cadastro" && validacaoNome == "" && validacaoEmail == "" && validacaoSenha == "") {
+      this.userManager.cadastrarUsuario(nome, email, senha, cpf);
       this.userForm.reset();
     }
 

@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./pages-carousel.component.scss']
 })
 export class PagesCarouselComponent implements OnInit {
-  list: IMovie[] = [];
+  list!: IMovie[];
   @Input() currentPage!: string;
   pagesNextButtonOver: boolean = false;
   pagesPreviousButtonOver: boolean = false;
@@ -25,7 +25,7 @@ export class PagesCarouselComponent implements OnInit {
     this.listenerEffects();
     findMoviesByCurrentPage(this.currentPage, this.store);
     this.currentWindow = window;
-    this.moviesDetailsRoute = this.currentPage == "admin-movies" ? '/edicao-de-filmes' : '/movie-details';
+    this.moviesDetailsRoute = this.currentPage == "movies-admin" ? '/edicao-de-filmes' : '/movie-details';
   }
 
 
@@ -57,63 +57,49 @@ export class PagesCarouselComponent implements OnInit {
   }
 
   listenerEffects() {
+    console.log(this.currentPage);
     switch(this.currentPage) {
       case "current-movies":
         this.effect.currentMovies$.subscribe((item) => {
           this.list = item.payload;
           this.setMoviesRangePerResolution();
-          if(this.list.length == 0)
-            this.router.navigate(['**']);
         });
         this.effect.findMovieByParameter$.subscribe((item) => {
           this.list = item.payload;
           this.setMoviesRangePerResolution();
-          if(this.list.length == 0)
-            this.router.navigate(['**']);
         });
         break;
       case "home-movies":
         this.effect.homeMovies$.subscribe((item) => {
           this.list = item.payload;
           this.setMoviesRangePerResolution();
-          if(this.list.length == 0)
-            this.router.navigate(['**']);
         });
         break;
       case "future-movies":
         this.effect.comingSoonMovies$.subscribe((item) => {
           this.list = item.payload;
           this.setMoviesRangePerResolution();
-          if(this.list.length == 0)
-            this.router.navigate(['**']);
         });
         this.effect.findMovieByParameter$.subscribe((item) => {
           this.list = item.payload;
           this.setMoviesRangePerResolution();
-          if(this.list.length == 0)
-            this.router.navigate(['**']);
         });
         break;
-      case "admin-movies":
+      case "movies-admin":
         this.effect.allMovies$.subscribe((item) => {
           this.list = item.payload;
+          console.log(this.list);
           this.setMoviesRangePerResolution();
-          if(this.list.length == 0)
-            this.router.navigate(['**']);
         });
         this.effect.findMovieByParameter$.subscribe((item) => {
           this.list = item.payload;
           this.setMoviesRangePerResolution();
-          if(this.list.length == 0)
-            this.router.navigate(['**']);
         });
         break;
       default:
         this.effect.findMovieByParameter$.subscribe((item) => {
           this.list = item.payload;
           this.setMoviesRangePerResolution();
-          if(this.list.length == 0)
-            this.router.navigate(['**']);
         });
         break;
     }
@@ -121,7 +107,6 @@ export class PagesCarouselComponent implements OnInit {
 }
 
 function findMoviesByCurrentPage(page: string, store: Store<{movies: IMovie[]}>) {
-  console.log(page);
 
   switch(page) {
     case "current-movies":
@@ -133,7 +118,7 @@ function findMoviesByCurrentPage(page: string, store: Store<{movies: IMovie[]}>)
     case "future-movies":
       findComingSoonMovies(store);
       break;
-    case "admin-movies":
+    case "movies-admin":
       findAllMovies(store);
       break;
     default:

@@ -1,18 +1,24 @@
 <div [ngClass]="'carousel-pages'">
-    <button *ngIf="currentWindow.innerWidth >= 1024" [ngClass]="'buttonCarrouselPageTop'" [class.carouselButtonOver]="pagesPreviousButtonOver" 
-    (mouseover)="pagesPreviousButtonOver = true" (mouseout)="pagesPreviousButtonOver = false" (click)="previousMovie()">
-        <img src="assets/images/next_button.png" alt="">
-    </button>
-    <ul *ngIf="list != undefined">
-        <li *ngFor="let movie of list | slice:startMovie:endMovie;">
-            <a [routerLink]="[moviesDetailsRoute]"
-               [queryParams]="{ title: movie.title, fromPage: currentPage }" >
-                <img [ngClass]="'carousel-movies-pages-images'" src="{{ movie.moviePoster }}">
-            </a>
-        </li>
-    </ul>
-    <button *ngIf="currentWindow.innerWidth >= 1024" [ngClass]="'buttonCarrouselPageBottom'" [class.carouselButtonOver]="pagesNextButtonOver" 
-    (mouseover)="pagesNextButtonOver = true" (mouseout)="pagesNextButtonOver = false" (click)="nextMovie()">
-        <img src="assets/images/previous_button.png" alt="">
-    </button>
+    <ng-template [ngIf]="list != undefined">
+        <button *ngIf="currentWindow.innerWidth >= 1024" [ngClass]="'buttonCarrouselPageTop'" [class.carouselButtonOver]="pagesPreviousButtonOver" 
+            (mouseover)="pagesPreviousButtonOver = true" (mouseout)="pagesPreviousButtonOver = false" (click)="previousMovie()">
+                <img src="assets/images/next_button.png" alt="">
+            </button>
+            <ul *ngIf="list != undefined">
+                <li *ngFor="let movie of list | slice:startMovie:endMovie;">
+                    <a [routerLink]="[moviesDetailsRoute]"
+                       [queryParams]="{ title: movie.titulo, fromPage: currentPage }" >
+                        <img [ngClass]="'carousel-movies-pages-images'" src="{{ movie.poster }}">
+                    </a>
+                </li>
+            </ul>
+            <button *ngIf="currentWindow.innerWidth >= 1024" [ngClass]="'buttonCarrouselPageBottom'" [class.carouselButtonOver]="pagesNextButtonOver" 
+            (mouseover)="pagesNextButtonOver = true" (mouseout)="pagesNextButtonOver = false" (click)="nextMovie()">
+                <img src="assets/images/previous_button.png" alt="">
+            </button>
+    </ng-template>
+    
+    <ng-template [ngIf]="list == undefined">
+        <p [ngClass]="'not-found-movies-message'">Nenhum filme encontrado</p>
+    </ng-template>
 </div>

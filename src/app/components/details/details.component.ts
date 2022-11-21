@@ -26,7 +26,7 @@ export class DetailsComponent implements OnInit {
     if(this.effects.cache.has(this.fromPage)) {
       var arrayMovies = this.effects.cache.get(this.fromPage);
 
-      this.movie = arrayMovies?.find(x => x.title == this.movieTitle) as IMovie;
+      this.movie = arrayMovies?.find(x => x.titulo == this.movieTitle) as IMovie;
 
       this.naoExiberBotaoComprar = this.cartService.VerificaSeItemJaExisteNoCarrinho(this.movie);
     }

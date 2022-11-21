@@ -42,13 +42,13 @@ export class MoviesFormComponent implements OnInit {
   }
 
   setFormValues() {
-    this.movieForm.controls['title'].setValue(this.movie.title);
-    this.movieForm.controls['date'].setValue(this.movie.date.toLocaleString().split("T")[0]);
-    this.movieForm.controls['genre'].setValue(this.movie.genre);
+    this.movieForm.controls['title'].setValue(this.movie.titulo);
+    this.movieForm.controls['date'].setValue(this.movie.data.toLocaleString().split("T")[0]);
+    this.movieForm.controls['genre'].setValue(this.movie.genero);
     this.movieForm.controls['status'].setValue("true");
     this.movieForm.controls['sinopse'].setValue(this.movie.sinopse);
     this.movieForm.controls['home'].setValue(this.movie.movieHome == true ? "true" : "false");
-    this.localUrl = this.movie.moviePoster;
+    this.localUrl = this.movie.poster;
   }
 
   submitForm() {
@@ -61,17 +61,17 @@ export class MoviesFormComponent implements OnInit {
     let poster = this.localUrl;
 
     let movie = {
-      title: title, 
-      date: date,
-      genre: genre,
+      titulo: title, 
+      data: date,
+      genero: genre,
       movieHome: homePage == "true" ? true : false,
-      moviePoster: poster,
+      poster: poster,
       active: status == "true" ? true : false,
       sinopse: sinopse
     } as IMovie;
 
     if(this.movie != undefined) {
-      this.moviesService.updateMovie(movie, this.movie.title)
+      this.moviesService.updateMovie(movie, this.movie.titulo)
       .subscribe((retorno) => {
         if(retorno) {
           alert("Filme atualizado com sucesso");
@@ -115,7 +115,7 @@ export class MoviesFormComponent implements OnInit {
   }
 
   deletarFilme() {
-    this.moviesService.deleteMovie(this.movie.title)
+    this.moviesService.deleteMovie(this.movie.titulo)
     .subscribe((retorno) => {
       if(retorno) {
         alert("Filme deleteado com sucesso");

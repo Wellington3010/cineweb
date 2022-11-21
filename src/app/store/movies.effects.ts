@@ -134,19 +134,19 @@ export class MovieEffects {
     if(this.cache.has(page)) {
       if(parameterType == "title") {
         let moviesList = this.cache.get(page) as IMovie[];
-        let movieSelected = moviesList?.filter(x => x.title.toLowerCase() == parameter.toLowerCase());
+        let movieSelected = moviesList?.filter(x => x.titulo.toLowerCase() == parameter.toLowerCase());
         return of(movieSelected) as Observable<IMovie[]>;
       }
 
       if(parameterType == "genre") {
         let moviesList = this.cache.get(page) as IMovie[];
-        let movieSelected = moviesList?.filter(x => x.genre.toLowerCase() == parameter.toLowerCase());
+        let movieSelected = moviesList?.filter(x => x.genero.toLowerCase() == parameter.toLowerCase());
         return of(movieSelected) as Observable<IMovie[]>;
       }
 
       if(parameterType == "date") {
         let moviesList = this.cache.get(page) as IMovie[];
-        let movieSelected = moviesList?.filter(x => x.date == new Date(parameter));
+        let movieSelected = moviesList?.filter(x => x.data == new Date(parameter));
         return of(movieSelected) as Observable<IMovie[]>;
       }
     }

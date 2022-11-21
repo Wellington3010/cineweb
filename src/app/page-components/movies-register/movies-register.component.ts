@@ -27,13 +27,13 @@ export class MoviesRegisterComponent implements OnInit {
       if(this.effects.cache.has(this.fromPage)) {
         var arrayMovies = this.effects.cache.get(this.fromPage);
 
-        this.movie = arrayMovies?.find(x => x.title == this.movieTitle) as IMovie;
-        this.urlImage = this.movie.moviePoster;
+        this.movie = arrayMovies?.find(x => x.titulo == this.movieTitle) as IMovie;
+        this.urlImage = this.movie.poster;
       }
       else {
         this.effects.findMovieByParameter$.subscribe((item) => {
           this.movie = item.payload[0];
-          this.urlImage = this.movie.moviePoster;
+          this.urlImage = this.movie.poster;
         });
 
         this.store.dispatch({type: '[FindMoviesByParameter] Movies', parameter: this.movieTitle, parameterType: "title" });

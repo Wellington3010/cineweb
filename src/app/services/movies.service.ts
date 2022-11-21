@@ -54,11 +54,11 @@ export class MoviesService {
 
   public saveMovie(movie: IMovie) : Observable<boolean> {
     return this.http.post(endpoints.SAVE_MOVIE, {
-      Title: movie.title,
-      Date: movie.date,
-      Genre: movie.genre,
+      Titulo: movie.titulo,
+      Data: movie.data,
+      Genero: movie.genero,
       HomeMovie: movie.movieHome,
-      MoviePoster: movie.moviePoster,
+      Poster: movie.poster,
       Active: movie.active,
       Sinopse: movie.sinopse
     }) as Observable<boolean>;
@@ -66,12 +66,12 @@ export class MoviesService {
 
   public updateMovie(movie: IMovie, oldTitle: string) : Observable<boolean> {
     return this.http.post(endpoints.UPDATE_MOVIE, {
-      Title: movie.title,
-      OldTitle: oldTitle,
-      Date: movie.date,
-      Genre: movie.genre,
+      Titulo: movie.titulo,
+      TituloAntigo: oldTitle,
+      Data: movie.data,
+      Genero: movie.genero,
       HomeMovie: movie.movieHome,
-      MoviePoster: movie.moviePoster,
+      Poster: movie.poster,
       Active: movie.active,
       Sinopse: movie.sinopse
     }) as Observable<boolean>;
@@ -80,7 +80,7 @@ export class MoviesService {
 
   public deleteMovie(oldTitle: string) : Observable<boolean> {
       return this.http.post(endpoints.DELETE_MOVIE, {
-        OldTitle: oldTitle
+        TituloAntigo: oldTitle
       }) as Observable<boolean>;
   }
 }

@@ -16,7 +16,7 @@ export class UserManagerService {
   public logarUsuario(email: string, senha: string) {
     this.http.post(endpoints.USER_LOGIN, {
     email: email,
-    password: senha 
+    senha: senha 
     }).subscribe((data) => {
 
       let arrayResult = data.toString().split("_");
@@ -45,12 +45,13 @@ export class UserManagerService {
     }
   }
 
-  public cadastrarUsuario(nome: string, email: string, senha: string) {
+  public cadastrarUsuario(nome: string, email: string, senha: string, cpf: string) {
 
     this.http.post(endpoints.USER_REGISTER, {
-      name: nome,
+      nome: nome,
       email: email,
-      password: senha
+      senha: senha,
+      cpf: cpf
       }).subscribe((data) => {
   
         let arrayResult = data.toString().split("_");

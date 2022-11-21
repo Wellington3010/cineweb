@@ -2,25 +2,25 @@
     <div [ngClass]="'movie-information'">
         <ng-template [ngIf]="movie != null">
             <picture [ngClass]="'movie-poster'">
-                <img src={{movie.moviePoster}} alt="movie">
+                <img src={{movie.poster}} alt="movie">
             </picture>
 
             <ul>
                 <li [ngClass]="'details-list-item'">
                     <div>Título:</div>
-                    <div>{{movie.title}}</div>
+                    <div>{{movie.titulo}}</div>
                 </li>
                 <li [ngClass]="'details-list-item'">
                     <div>Data:</div>
-                    <div>{{movie.date | date: 'dd/MM/yyyy'}}</div>
+                    <div>{{movie.data | date: 'dd/MM/yyyy'}}</div>
                 </li>
                 <li [ngClass]="'details-list-item'">
                     <div>Horário:</div>
-                    <div>{{movie.date | date: 'hh:mm:ss'}}</div>
+                    <div>{{movie.data | date: 'hh:mm:ss'}}</div>
                 </li>
                 <li [ngClass]="'details-list-item'">
                     <div>Gênero:</div>
-                    <div>{{movie.genre}}</div>
+                    <div>{{movie.genero}}</div>
                 </li>
             </ul>
         </ng-template>
