@@ -57,7 +57,7 @@ export class MoviesService {
       Titulo: movie.titulo,
       Data: movie.data,
       Genero: movie.genero,
-      HomeMovie: movie.movieHome,
+      HomeMovie: movie.homeMovie,
       Poster: movie.poster,
       Active: movie.active,
       Sinopse: movie.sinopse
@@ -70,7 +70,7 @@ export class MoviesService {
       TituloAntigo: oldTitle,
       Data: movie.data,
       Genero: movie.genero,
-      HomeMovie: movie.movieHome,
+      HomeMovie: movie.homeMovie,
       Poster: movie.poster,
       Active: movie.active,
       Sinopse: movie.sinopse

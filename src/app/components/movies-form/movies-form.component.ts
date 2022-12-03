@@ -42,12 +42,13 @@ export class MoviesFormComponent implements OnInit {
   }
 
   setFormValues() {
+    console.log(this.movie.homeMovie);
     this.movieForm.controls['title'].setValue(this.movie.titulo);
     this.movieForm.controls['date'].setValue(this.movie.data.toLocaleString().split("T")[0]);
     this.movieForm.controls['genre'].setValue(this.movie.genero);
     this.movieForm.controls['status'].setValue("true");
     this.movieForm.controls['sinopse'].setValue(this.movie.sinopse);
-    this.movieForm.controls['home'].setValue(this.movie.movieHome == true ? "true" : "false");
+    this.movieForm.controls['home'].setValue(this.movie.homeMovie == true ? "ativo" : "inativo");
     this.localUrl = this.movie.poster;
   }
 
@@ -64,7 +65,7 @@ export class MoviesFormComponent implements OnInit {
       titulo: title, 
       data: date,
       genero: genre,
-      movieHome: homePage == "true" ? true : false,
+      homeMovie: homePage == "ativo" ? true : false,
       poster: poster,
       active: status == "true" ? true : false,
       sinopse: sinopse
