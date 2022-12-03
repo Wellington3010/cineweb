@@ -23,7 +23,7 @@ export class MoviesRegisterComponent implements OnInit {
       this.fromPage = params['fromPage'];
     });
 
-    if(this.fromPage == "admin-movies") {
+    if(this.fromPage == "movies-admin") {
       if(this.effects.cache.has(this.fromPage)) {
         var arrayMovies = this.effects.cache.get(this.fromPage);
 
@@ -36,7 +36,7 @@ export class MoviesRegisterComponent implements OnInit {
           this.urlImage = this.movie.poster;
         });
 
-        this.store.dispatch({type: '[FindMoviesByParameter] Movies', parameter: this.movieTitle, parameterType: "title" });
+        this.store.dispatch({type: '[FindMoviesByParameter] Movies', parameter: this.movieTitle, parameterType: "Titulo" });
       }
     }
   }

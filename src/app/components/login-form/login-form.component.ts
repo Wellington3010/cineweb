@@ -55,10 +55,6 @@ export class LoginFormComponent implements OnInit {
     let cpf = this.userForm.value['cpf'].toString().trimStart();
     let senha = this.userForm.value['senha'];
 
-    console.log(senha);
-    console.log(email);
-    console.log(nome);
-
     let validacaoNome = "";
     let validacaoEmail = this.validarEmail(email);
     let validacaoSenha = this.validarSenha(senha);

@@ -114,17 +114,17 @@ export class MovieEffects {
   }
 
   allMoviesWithCache() : Observable<IMovie[]> {
-    if(this.cache.has("admin-movies")) {
-      return of(this.cache.get("admin-movies")) as Observable<IMovie[]>;
+    if(this.cache.has("movies-admin")) {
+      return of(this.cache.get("movies-admin")) as Observable<IMovie[]>;
     }
     else {
-      this.moviesService.getAllMovies().subscribe((item) => this.cache.set("admin-movies", item));
+      this.moviesService.getAllMovies().subscribe((item) => this.cache.set("movies-admin", item));
       return this.moviesService.getAllMovies();
     }
   }
 
   allMovies() : Observable<IMovie[]> {
-    this.moviesService.getAllMovies().subscribe((item) => this.cache.set("admin-movies", item));
+    this.moviesService.getAllMovies().subscribe((item) => this.cache.set("movies-admin", item));
     return this.moviesService.getAllMovies();
   }
 
