@@ -1,6 +1,6 @@
 <div [ngClass]="'carousel-pages'">
     <ng-template [ngIf]="list != undefined">
-        <button *ngIf="currentWindow.innerWidth >= 1024" [ngClass]="'buttonCarrouselPageTop'" [class.carouselButtonOver]="pagesPreviousButtonOver" 
+        <button *ngIf="currentWindow.innerWidth >= 1024 && list.length > 0" [ngClass]="'buttonCarrouselPageTop'" [class.carouselButtonOver]="pagesPreviousButtonOver" 
             (mouseover)="pagesPreviousButtonOver = true" (mouseout)="pagesPreviousButtonOver = false" (click)="previousMovie()">
                 <img src="assets/images/next_button.png" alt="">
             </button>
@@ -12,13 +12,13 @@
                     </a>
                 </li>
             </ul>
-            <button *ngIf="currentWindow.innerWidth >= 1024" [ngClass]="'buttonCarrouselPageBottom'" [class.carouselButtonOver]="pagesNextButtonOver" 
+            <button *ngIf="currentWindow.innerWidth >= 1024 && list.length > 0"  [ngClass]="'buttonCarrouselPageBottom'" [class.carouselButtonOver]="pagesNextButtonOver" 
             (mouseover)="pagesNextButtonOver = true" (mouseout)="pagesNextButtonOver = false" (click)="nextMovie()">
                 <img src="assets/images/previous_button.png" alt="">
             </button>
     </ng-template>
     
-    <ng-template [ngIf]="list == undefined">
+    <ng-template [ngIf]="list == undefined || list.length == 0">
         <p [ngClass]="'not-found-movies-message'">Nenhum filme encontrado</p>
     </ng-template>
 </div>

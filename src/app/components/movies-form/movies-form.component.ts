@@ -1,7 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Store } from '@ngrx/store';
 import { IMovie } from 'src/app/interfaces/IMovie';
 import { MoviesService } from 'src/app/services/movies.service';
 
@@ -12,20 +11,28 @@ import { MoviesService } from 'src/app/services/movies.service';
 })
 export class MoviesFormComponent implements OnInit {
   movieForm!: FormGroup;
+  ticketForm!: FormGroup;
   localUrl!: any;
   file!: File;
+  selectedMovie!: any;
   @Input() movie!: IMovie;
+  @Input() movies!: IMovie[];
+  @Input() currentPage!: string;
   @Output() upload: EventEmitter<any> = new EventEmitter();
+  @Output() selectMovie: EventEmitter<any> = new EventEmitter();
   @Output() resetPreview: EventEmitter<any> = new EventEmitter();
 
-
-  constructor(private formBuilder: FormBuilder, private moviesService: MoviesService, private router: Router, private store: Store<{movies: IMovie[]}>) { }
+  constructor(private formBuilder: FormBuilder, private moviesService: MoviesService, private router: Router) { }
 
   ngOnInit(): void {
     this.formCreate();
 
     if(this.movie != undefined) {
-      this.setFormValues();
+      this.setMovieFormValues();
+    }
+
+    if(this.movies != undefined) {
+      this.setTicketsFormValues();
     }
   }
 
@@ -39,10 +46,15 @@ export class MoviesFormComponent implements OnInit {
       sinopse: [''],
       home: ['']
     });
+
+    // this.ticketForm = this.formBuilder.group({
+    //   title: [''],
+    //   poster: [''],
+    //   quantidadeIngressos: ['']
+    // });
   }
 
-  setFormValues() {
-    console.log(this.movie.homeMovie);
+  setMovieFormValues() {
     this.movieForm.controls['title'].setValue(this.movie.titulo);
     this.movieForm.controls['date'].setValue(this.movie.data.toLocaleString().split("T")[0]);
     this.movieForm.controls['genre'].setValue(this.movie.genero);
@@ -50,6 +62,12 @@ export class MoviesFormComponent implements OnInit {
     this.movieForm.controls['sinopse'].setValue(this.movie.sinopse);
     this.movieForm.controls['home'].setValue(this.movie.homeMovie == true ? "ativo" : "inativo");
     this.localUrl = this.movie.poster;
+  }
+
+  setTicketsFormValues() {
+    // this.movieForm.controls['title'].setValue(this.movies[0].titulo);
+    // this.movieForm.controls['quantidadeIngressos'].setValue(this.movies[0].QuantidadeIngressos);
+    this.localUrl = this.movies[0].poster;
   }
 
   submitForm() {
@@ -119,7 +137,7 @@ export class MoviesFormComponent implements OnInit {
     this.moviesService.deleteMovie(this.movie.titulo)
     .subscribe((retorno) => {
       if(retorno) {
-        alert("Filme deleteado com sucesso");
+        alert("Filme deletado com sucesso");
         this.movieForm.reset();
         this.resetPreview.emit();
         this.router.navigate(['/movies-admin']);
@@ -128,5 +146,10 @@ export class MoviesFormComponent implements OnInit {
         alert("Não foi possível deletar o filme. Tente novamente mais tarde");
       }
     });
+  }
+
+  selectMovieChange(movie: IMovie) {
+    let result = this.movies.find(x => x.titulo == this.selectedMovie) as IMovie;
+    this.selectMovie.emit(result.poster);
   }
 }

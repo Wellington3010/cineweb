@@ -34,6 +34,7 @@ import { MoviesRegisterComponent } from './page-components/movies-register/movie
 import { MoviesFormComponent } from './components/movies-form/movies-form.component';
 import { CartService } from './services/cart.service';
 import { CartComponent } from './page-components/cart/cart.component';
+import { TicketRegisterComponent } from './page-components/ticket-register/ticket-register.component';
 
 @NgModule({
   declarations: [
@@ -58,7 +59,8 @@ import { CartComponent } from './page-components/cart/cart.component';
     MoviesAdminComponent,
     MoviesRegisterComponent,
     MoviesFormComponent,
-    CartComponent
+    CartComponent,
+    TicketRegisterComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }),
@@ -78,6 +80,7 @@ import { CartComponent } from './page-components/cart/cart.component';
       { path: 'movies-admin', component: MoviesAdminComponent },
       { path: 'cadastro-de-filmes', component: MoviesRegisterComponent },
       { path: 'edicao-de-filmes', component: MoviesRegisterComponent },
+      { path: 'cadastro-de-ingressos', component: TicketRegisterComponent },
       { path: '**', component: NotFoundComponent }
     ]),
     BrowserAnimationsModule,

@@ -1,5 +1,5 @@
-<app-movies-form [currentPage]="'cadastro-de-filmes'" [movie]="movie" (resetPreview)="resetPreview()" (upload)="onUpload($event)"></app-movies-form>
-<app-label-page page="Upload Preview"></app-label-page>
+<app-movies-form [currentPage]="'cadastro-de-ingressos'" [movies]="listOfMovies" (selectMovie)="onSelectMovie($event)" (resetPreview)="resetPreview()" (upload)="onUpload($event)"></app-movies-form>
+<app-label-page page="Cadastro de Ingressos"></app-label-page>
 <section class="upload-preview">
     <div class="upload-preview-image">
         <ng-template [ngIf]="urlImage != undefined">
