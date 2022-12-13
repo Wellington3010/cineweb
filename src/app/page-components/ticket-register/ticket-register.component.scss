@@ -1,0 +1,19 @@
+.ticket-register-footer {
+    position: relative !important;
+    bottom: -10% !important;
+    width: 100%;
+
+    @media(min-width: 720px) {
+        bottom: -20% !important;
+    }
+
+    @media(min-width: 1280px) {
+        position: absolute !important;
+        bottom: -10vh !important;
+    }
+}
+
+img {
+    width: 180px;
+    height: 270px;
+}

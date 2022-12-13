@@ -65,7 +65,7 @@
     color: #FF9533;
     background-color: #600C0C;
     font-weight: 700;
-    font-size: 24px;
+    font-size: 20px;
     border: 0px;
     margin-top: 30px;
 
@@ -121,4 +121,9 @@ label#file-poster {
 
 .high-opacity {
     opacity: 80%;
+}
+
+.search-fields.ticket-form {
+    display: flex !important;
+    flex-direction: column !important;
 }

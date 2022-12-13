@@ -40,7 +40,6 @@ export class TicketRegisterComponent implements OnInit {
   }
 
   onSelectMovie(image: any) {
-    console.log(image);
     this.urlImage = image;
   }
 }

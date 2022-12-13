@@ -55,20 +55,24 @@
     </ng-template>
 
     <ng-template [ngIf]="currentPage == 'cadastro-de-ingressos'">
-        <form [formGroup]="movieForm" [ngClass]="'search-fields'">
+        <form [formGroup]="ticketForm" [ngClass]="'search-fields ticket-form'">
             <div [ngClass]="'search-group'">
-                <label for="genre">Filme</label>
-                <select id="genre" [(ngModel)]="selectedMovie" (change)="selectMovieChange(movie)" [ngClass]="'form-item select'" formControlName="title">
+                <div [ngClass]="'labels-align'">
+                    <label for="titulo">Selecione o Filme</label>
+                </div>
+                <select id="titulo" [(ngModel)]="selectedMovieTitle" (change)="selectMovieChange(movie)" [ngClass]="'form-item select'" formControlName="title">
                     <option value="{{ movie.titulo }}" *ngFor="let movie of movies">{{ movie.titulo }}</option>
                 </select>
+                <div [ngClass]="'labels-align'">
+                    <label id="ingressos-label" for="ingressos">Qtd. Ingressos</label>
+                </div>
+                <input id="ingressos" type="number" [ngClass]="'form-item'" formControlName="ingressos"/>
             </div>
             <div>
-                <ng-template [ngIf]="movie != undefined">
-                    <button (click)="submitForm()" [ngClass]="'search-button'">Atualizar Ingressos</button>
-                    <button (click)="deletarFilme()" [ngClass]="'search-button'">Deletar Ingressos</button>
-                </ng-template>
-                <ng-template [ngIf]="movie == undefined">
-                    <button (click)="submitForm()" [ngClass]="'search-button'">Cadastrar Ingressos</button>
+                <ng-template [ngIf]="selectedMovie != undefined">
+                    <button (click)="submitForm()" *ngIf="selectedMovie.QuantidadeIngressos != undefined && selectedMovie.QuantidadeIngressos > 0"  [ngClass]="'search-button'">Atualizar Ingressos</button>
+                    <button (click)="deletarFilme()" *ngIf="selectedMovie.QuantidadeIngressos > 0" [ngClass]="'search-button'">Deletar Ingressos</button>
+                    <button (click)="submitForm()" *ngIf="selectedMovie.QuantidadeIngressos == undefined || selectedMovie.QuantidadeIngressos == 0" [ngClass]="'search-button'">Cadastrar Ingressos</button>
                 </ng-template>
             </div>
         </form>

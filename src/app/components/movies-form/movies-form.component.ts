@@ -14,7 +14,8 @@ export class MoviesFormComponent implements OnInit {
   ticketForm!: FormGroup;
   localUrl!: any;
   file!: File;
-  selectedMovie!: any;
+  selectedMovieTitle!: string;
+  selectedMovie!: IMovie;
   @Input() movie!: IMovie;
   @Input() movies!: IMovie[];
   @Input() currentPage!: string;
@@ -47,11 +48,10 @@ export class MoviesFormComponent implements OnInit {
       home: ['']
     });
 
-    // this.ticketForm = this.formBuilder.group({
-    //   title: [''],
-    //   poster: [''],
-    //   quantidadeIngressos: ['']
-    // });
+    this.ticketForm = this.formBuilder.group({
+      title: [''],
+      ingressos: ['']
+    });
   }
 
   setMovieFormValues() {
@@ -149,7 +149,8 @@ export class MoviesFormComponent implements OnInit {
   }
 
   selectMovieChange(movie: IMovie) {
-    let result = this.movies.find(x => x.titulo == this.selectedMovie) as IMovie;
+    let result = this.movies.find(x => x.titulo == this.selectedMovieTitle) as IMovie;
+    this.selectedMovie = result;
     this.selectMovie.emit(result.poster);
   }
 }
