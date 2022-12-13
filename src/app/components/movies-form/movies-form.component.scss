@@ -125,5 +125,13 @@ label#file-poster {
 
 .search-fields.ticket-form {
     display: flex !important;
-    flex-direction: column !important;
+}
+
+.search-group.ticket-form-fields {
+    min-width: 380px;
+}
+
+.ticket-buttons {
+    display: flex;
+    flex-direction: column;
 }

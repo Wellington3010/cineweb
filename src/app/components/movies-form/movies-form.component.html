@@ -56,7 +56,7 @@
 
     <ng-template [ngIf]="currentPage == 'cadastro-de-ingressos'">
         <form [formGroup]="ticketForm" [ngClass]="'search-fields ticket-form'">
-            <div [ngClass]="'search-group'">
+            <div [ngClass]="'search-group ticket-form-fields'">
                 <div [ngClass]="'labels-align'">
                     <label for="titulo">Selecione o Filme</label>
                 </div>
@@ -67,12 +67,16 @@
                     <label id="ingressos-label" for="ingressos">Qtd. Ingressos</label>
                 </div>
                 <input id="ingressos" type="number" [ngClass]="'form-item'" formControlName="ingressos"/>
+                <div [ngClass]="'labels-align'">
+                    <label id="preco-label" for="preco">Preco</label>
+                </div>
+                <input id="preco" type="number" [ngClass]="'form-item'" formControlName="preco"/>
             </div>
-            <div>
+            <div [ngClass]="'ticket-buttons'">
                 <ng-template [ngIf]="selectedMovie != undefined">
-                    <button (click)="submitForm()" *ngIf="selectedMovie.QuantidadeIngressos != undefined && selectedMovie.QuantidadeIngressos > 0"  [ngClass]="'search-button'">Atualizar Ingressos</button>
-                    <button (click)="deletarFilme()" *ngIf="selectedMovie.QuantidadeIngressos > 0" [ngClass]="'search-button'">Deletar Ingressos</button>
-                    <button (click)="submitForm()" *ngIf="selectedMovie.QuantidadeIngressos == undefined || selectedMovie.QuantidadeIngressos == 0" [ngClass]="'search-button'">Cadastrar Ingressos</button>
+                    <button (click)="atualizarIngressos()" *ngIf="quantidadeIngressos != undefined && quantidadeIngressos > 0"  [ngClass]="'search-button'">Atualizar Ingressos</button>
+                    <button (click)="deletarIngressos()" *ngIf="quantidadeIngressos > 0" [ngClass]="'search-button'">Deletar Ingressos</button>
+                    <button (click)="cadastrarIngressos()" *ngIf="quantidadeIngressos == undefined || quantidadeIngressos == 0" [ngClass]="'search-button'">Cadastrar Ingressos</button>
                 </ng-template>
             </div>
         </form>

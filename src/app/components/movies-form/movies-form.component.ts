@@ -2,6 +2,8 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import { IMovie } from 'src/app/interfaces/IMovie';
+import { TicketDelete } from 'src/app/models/TicketDelete';
+import { TicketRegister } from 'src/app/models/TicketRegister';
 import { MoviesService } from 'src/app/services/movies.service';
 
 @Component({
@@ -15,6 +17,7 @@ export class MoviesFormComponent implements OnInit {
   localUrl!: any;
   file!: File;
   selectedMovieTitle!: string;
+  quantidadeIngressos!: number;
   selectedMovie!: IMovie;
   @Input() movie!: IMovie;
   @Input() movies!: IMovie[];
@@ -31,10 +34,6 @@ export class MoviesFormComponent implements OnInit {
     if(this.movie != undefined) {
       this.setMovieFormValues();
     }
-
-    if(this.movies != undefined) {
-      this.setTicketsFormValues();
-    }
   }
 
   formCreate() {
@@ -50,7 +49,8 @@ export class MoviesFormComponent implements OnInit {
 
     this.ticketForm = this.formBuilder.group({
       title: [''],
-      ingressos: ['']
+      ingressos: [''],
+      preco: ['']
     });
   }
 
@@ -64,11 +64,9 @@ export class MoviesFormComponent implements OnInit {
     this.localUrl = this.movie.poster;
   }
 
-  setTicketsFormValues() {
-    // this.movieForm.controls['title'].setValue(this.movies[0].titulo);
-    // this.movieForm.controls['quantidadeIngressos'].setValue(this.movies[0].QuantidadeIngressos);
-    this.localUrl = this.movies[0].poster;
-  }
+  // setTicketsFormValues() {
+  //   this.localUrl = this.movies[0].poster;
+  // }
 
   submitForm() {
     let title = this.movieForm.value['title'].toString().trimStart();
@@ -120,6 +118,49 @@ export class MoviesFormComponent implements OnInit {
     }
   }
 
+  cadastrarIngressos() {
+    let cadastroIngressos = new TicketRegister (
+      this.selectedMovie.titulo,
+      this.ticketForm.controls['preco'].value,
+      this.ticketForm.controls['ingressos'].value
+    )
+
+    this.moviesService.cadastrarIngressos(cadastroIngressos)
+    .pipe()
+    .subscribe({
+      next: (result) => console.log(result),
+      error: (error) => console.log(error)
+    });
+  }
+
+  atualizarIngressos() {
+    let cadastroIngressos = new TicketRegister (
+      this.selectedMovie.titulo,
+      this.ticketForm.controls['preco'].value,
+      this.ticketForm.controls['ingressos'].value
+    )
+
+    this.moviesService.atualizarIngressos(cadastroIngressos)
+    .pipe()
+    .subscribe({
+      next: (result) => console.log(result),
+      error: (error) => console.log(error)
+    });
+  }
+
+  deletarIngressos() {
+    let remocaoIngressos = new TicketDelete (
+      this.selectedMovie.titulo,
+    )
+
+    this.moviesService.deletarIngressos(remocaoIngressos)
+    .pipe()
+    .subscribe({
+      next: (result) => console.log(result),
+      error: (error) => console.log(error)
+    });
+  }
+
   selectFile(event: any) {
     this.file = <File>event.target.files[0];
 
@@ -149,7 +190,17 @@ export class MoviesFormComponent implements OnInit {
   }
 
   selectMovieChange(movie: IMovie) {
-    let result = this.movies.find(x => x.titulo == this.selectedMovieTitle) as IMovie;
+    const result = this.movies.find(x => x.titulo == this.selectedMovieTitle) as any;
+    this.quantidadeIngressos = result['quantidadeIngressos'];
+
+    if(result['quantidadeIngressos'] == undefined) {
+      this.ticketForm.controls['ingressos'].setValue(0);
+    }
+    else {
+      this.ticketForm.controls['ingressos'].setValue(result['quantidadeIngressos']);
+      this.ticketForm.controls['preco'].setValue(result['preco']);
+    }
+   
     this.selectedMovie = result;
     this.selectMovie.emit(result.poster);
   }

@@ -3,6 +3,8 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { endpoints } from './endpoints';
 import { Observable } from 'rxjs';
 import { IMovie } from '../interfaces/IMovie';
+import { TicketRegister } from '../models/TicketRegister';
+import { TicketDelete } from '../models/TicketDelete';
 
 @Injectable({
   providedIn: 'root'
@@ -82,5 +84,17 @@ export class MoviesService {
       return this.http.post(endpoints.DELETE_MOVIE, {
         TituloAntigo: oldTitle
       }) as Observable<boolean>;
+  }
+
+  public cadastrarIngressos(ingresso: TicketRegister) {
+    return this.http.post(endpoints.TICKET_REGISTER, ingresso);
+  }
+
+  public atualizarIngressos(ingresso: TicketRegister) {
+    return this.http.post(endpoints.TICKET_UPDATE, ingresso);
+  }
+
+  public deletarIngressos(ingresso: TicketDelete) {
+    return this.http.post(endpoints.TICKET_DELETE, ingresso);
   }
 }
