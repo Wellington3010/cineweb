@@ -1,13 +1,12 @@
 const express = require('express');
+const path = require('path');
+const nomeApp = process.env.npm_package_name;
 const app = express();
-const appName = 'cineweb';
 
-const outputPath = `${__dirname}/dist/${appName}`;
-// Serve only the static files form the dist directory
-app.use(express.static(outputPath));
+app.use(express.static(`${__dirname}/dist/${nomeApp}`));
 
 app.get('/*', (req, res) => {
-    res.sendFile(`${outputPath}/index.html`);
+res.sendFile(path.join(`${__dirname}/dist/${nomeApp}/index.html`));
 });
 
-app.listen(process.env.PORT);
+app.listen(process.env.PORT || 8080);
