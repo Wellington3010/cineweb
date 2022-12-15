@@ -10,5 +10,9 @@ export const endpoints = {
     CURRENT_MOVIES_BY_DATE: "https://cineweb-movies-api-app.herokuapp.com/movies/current/by-date",
     MOVIES_BY_PARAMETER: "https://cineweb-movies-api-app.herokuapp.com/movies/by-parameter",
     USER_LOGIN: "https://cineweb-user-api-app.herokuapp.com/users/login",
-    USER_REGISTER: "https://cineweb-user-api-app.herokuapp.com/users/register"
+    USER_REGISTER: "https://cineweb-user-api-app.herokuapp.com/users/register",
+    TICKET_REGISTER: "https://cineweb-movies-api-app.herokuapp.com/ingressos/cadastrar",
+    TICKET_UPDATE: "https://cineweb-movies-api-app.herokuapp.com/ingressos/atualizar",
+    TICKET_DELETE: "https://cineweb-movies-api-app.herokuapp.com/ingressos/deletar",
+    ORDER: "https://cineweb-movies-api-app.herokuapp.com/pedidos/cadastrar"
 }
