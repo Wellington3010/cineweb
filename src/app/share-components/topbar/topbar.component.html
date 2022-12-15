@@ -19,11 +19,12 @@
             <a [ngClass]="'topbar-link'" [routerLink]="['/']">Home</a>
             <a [ngClass]="'topbar-link'" [routerLink]="['/em-cartaz']">Em Cartaz</a>
             <a [ngClass]="'topbar-link'" [routerLink]="['/em-breve']">Em Breve</a>
+            <a [ngClass]="'topbar-link'" *ngIf="carrinho.length > 0" [routerLink]="['/cart']">Pedido</a>
         </ng-template>
         <ng-template [ngIf]="loggedUserIsAdmin">
             <a [ngClass]="'topbar-link'" [routerLink]="['/cadastro-de-filmes']">Cadastrar Filme</a>
-            <a [ngClass]="'topbar-link'" [routerLink]="['/cadastro-de-ingressos']" [queryParams]="{ fromPage: 'movies-admin' }" >Cadastrar Ingressos para Filmes</a>
-            <a [ngClass]="'topbar-link'" [routerLink]="['/movies-admin']">Pesquisar Filmes</a>
+            <a [ngClass]="'topbar-link'" [routerLink]="['/cadastro-de-ingressos']" [queryParams]="{ fromPage: 'movies-admin' }" >Gerenciar Ingressos para Filmes</a>
+            <a [ngClass]="'topbar-link'" [routerLink]="['/movies-admin']">Catálogo de Filmes</a>
         </ng-template>
         <ng-template [ngIf]="nameUserLogged == 'none'">
             <a [ngClass]="'topbar-link'" [routerLink]="['/login']">Login</a>

@@ -128,8 +128,8 @@ export class MoviesFormComponent implements OnInit {
     this.moviesService.cadastrarIngressos(cadastroIngressos)
     .pipe()
     .subscribe({
-      next: (result) => console.log(result),
-      error: (error) => console.log(error)
+      next: (result) => this.onTicketManagerSuccess("Ingressos cadastrados com sucesso"),
+      error: (error) => alert("Não foi possível realizar a operação. Contate o suporte técnico")
     });
   }
 
@@ -143,8 +143,8 @@ export class MoviesFormComponent implements OnInit {
     this.moviesService.atualizarIngressos(cadastroIngressos)
     .pipe()
     .subscribe({
-      next: (result) => console.log(result),
-      error: (error) => console.log(error)
+      next: (result) => this.onTicketManagerSuccess("Ingressos atualizados com sucesso"),
+      error: (error) => alert("Não foi possível realizar a operação. Contate o suporte técnico")
     });
   }
 
@@ -156,8 +156,8 @@ export class MoviesFormComponent implements OnInit {
     this.moviesService.deletarIngressos(remocaoIngressos)
     .pipe()
     .subscribe({
-      next: (result) => console.log(result),
-      error: (error) => console.log(error)
+      next: (result) => this.onTicketManagerSuccess("Ingressos deletados com sucesso"),
+      error: (error) => alert("Não foi possível realizar a operação. Contate o suporte técnico")
     });
   }
 
@@ -203,5 +203,10 @@ export class MoviesFormComponent implements OnInit {
    
     this.selectedMovie = result;
     this.selectMovie.emit(result.poster);
+  }
+
+  onTicketManagerSuccess(message :string) {
+    alert(message);
+    this.router.navigate(['/movies-admin'])
   }
 }

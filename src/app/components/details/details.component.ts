@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { IMovie } from 'src/app/interfaces/IMovie';
 import { CartService } from 'src/app/services/cart.service';
+import { UserManagerService } from 'src/app/services/user-manager.service';
 import { MovieEffects } from 'src/app/store/movies.effects';
 
 @Component({
@@ -12,7 +13,7 @@ import { MovieEffects } from 'src/app/store/movies.effects';
 })
 export class DetailsComponent implements OnInit {
   movie!: IMovie;
-  naoExiberBotaoComprar!: boolean;
+  naoExibirBotaoComprar!: boolean;
   carrinhoComQuantidadeMaxima!: boolean;
   @Input() movieTitle!: string;
   @Input() fromPage!: string;
@@ -20,15 +21,17 @@ export class DetailsComponent implements OnInit {
   constructor(private effects: MovieEffects,
               private router: Router,
               private store: Store<{movies: IMovie[]}>,
-              private cartService: CartService) { }
+              private cartService: CartService,
+              private userManager: UserManagerService) { }
 
   ngOnInit(): void {
     if(this.effects.cache.has(this.fromPage)) {
       var arrayMovies = this.effects.cache.get(this.fromPage);
 
       this.movie = arrayMovies?.find(x => x.titulo == this.movieTitle) as IMovie;
-
-      this.naoExiberBotaoComprar = this.cartService.VerificaSeItemJaExisteNoCarrinho(this.movie);
+      this.naoExibirBotaoComprar = this.validarQuantidadeIngressos(this.movie.quantidadeIngressos);
+      console.log(this.cartService.VerificaSeItemJaExisteNoCarrinho(this.movie));
+      console.log(this.movie.quantidadeIngressos);
     }
     else {
       this.effects.findMovieByParameter$.subscribe((item) => this.movie = item.payload[0]);
@@ -37,7 +40,18 @@ export class DetailsComponent implements OnInit {
     }
   }
 
+  validarQuantidadeIngressos(quantidadeIngressos: number): boolean {
+    return (this.cartService.VerificaSeItemJaExisteNoCarrinho(this.movie) || (quantidadeIngressos == 0))
+  }
+
   buyMovieTicket() {
+    if(!this.userManager.hasLoggedUser()) {
+      alert("Cadastre-se e efetue o login para realizar a compra de ingressos");
+      this.router.navigate(['/login']);
+      return;
+    }
+
+
     this.carrinhoComQuantidadeMaxima = this.cartService.VerificaSeCarrinhoEstaComQuantidadeMaximaItens();
 
     if(this.carrinhoComQuantidadeMaxima) {
@@ -46,6 +60,7 @@ export class DetailsComponent implements OnInit {
     }
 
     this.cartService.AdicionarNoCarrinho(this.movie);
+    alert("Item adicionado ao carrinho. Finalize seu pedido");
     this.router.navigate(['/cart']);
   }
 }

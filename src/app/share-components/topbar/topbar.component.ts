@@ -2,6 +2,8 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Location } from "@angular/common";
 import { UserManagerService } from 'src/app/services/user-manager.service';
 import { Router, RoutesRecognized } from '@angular/router';
+import { CartService } from 'src/app/services/cart.service';
+import { IMovie } from 'src/app/interfaces/IMovie';
 
 @Component({
   selector: 'app-topbar',
@@ -15,11 +17,18 @@ export class TopbarComponent implements OnInit {
   topbarIconColor!: string;
   nameUserLogged: string = "none";
   loggedUserIsAdmin: boolean = false;
+  carrinho: IMovie[] = [];
 
-  constructor(private location: Location, private userManager: UserManagerService, private router: Router) {
+  constructor(
+    private location: Location,
+    private userManager: UserManagerService,
+    private cartService: CartService,
+    private router: Router) {
   }
 
   ngOnInit(): void {
+    this.carrinho = this.cartService.RetornaItensDoCarrinho();
+
     this.location.onUrlChange((url) => {
       this.currentRouter = this.location.path(false);
       this.detailsMoviePage = this.location.path(false).startsWith('/movie-details') || 

@@ -31,6 +31,9 @@ export class CartService {
   public VerificaSeItemJaExisteNoCarrinho(movie: IMovie) : boolean {
     let listaDeFilmes = this.cache.get("cart") as IMovie[];
 
+    if(listaDeFilmes == undefined)
+      return false;
+
     let movieResult = listaDeFilmes.find(x => x.titulo == movie.titulo);
 
     if(movieResult != undefined || movieResult != null) {

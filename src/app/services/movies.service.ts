@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { IMovie } from '../interfaces/IMovie';
 import { TicketRegister } from '../models/TicketRegister';
 import { TicketDelete } from '../models/TicketDelete';
+import { Pedido } from '../models/Pedido';
 
 @Injectable({
   providedIn: 'root'
@@ -96,5 +97,9 @@ export class MoviesService {
 
   public deletarIngressos(ingresso: TicketDelete) {
     return this.http.post(endpoints.TICKET_DELETE, ingresso);
+  }
+
+  public finalizarPedido(pedido: Pedido) {
+    return this.http.post(endpoints.ORDER, pedido);
   }
 }

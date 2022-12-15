@@ -48,12 +48,7 @@ export class PagesCarouselComponent implements OnInit {
   }
 
   setMoviesRangePerResolution() {
-    if(this.currentWindow.innerWidth < 1024) {
-      this.endMovie = this.list.length;
-    }
-    else {
-      this.endMovie = 3;
-    }
+    this.endMovie = 3;
   }
 
   listenerEffects() {

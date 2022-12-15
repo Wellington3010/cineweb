@@ -6,5 +6,6 @@ export interface IMovie {
     homeMovie: boolean;
     active: boolean;
     sinopse: string;
-    QuantidadeIngressos: number;
+    quantidadeIngressos: number;
+    preco: number;
 }

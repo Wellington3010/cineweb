@@ -8,24 +8,28 @@
             <ul>
                 <li [ngClass]="'details-list-item'">
                     <div>Título:</div>
-                    <div>{{movie.titulo}}</div>
+                    <div>{{ movie.titulo }}</div>
                 </li>
                 <li [ngClass]="'details-list-item'">
                     <div>Data:</div>
-                    <div>{{movie.data | date: 'dd/MM/yyyy'}}</div>
+                    <div>{{ movie.data | date: 'dd/MM/yyyy' }}</div>
                 </li>
                 <li [ngClass]="'details-list-item'">
                     <div>Horário:</div>
-                    <div>{{movie.data | date: 'hh:mm:ss'}}</div>
+                    <div>{{ movie.data | date: 'hh:mm:ss' }}</div>
                 </li>
                 <li [ngClass]="'details-list-item'">
                     <div>Gênero:</div>
-                    <div>{{movie.genero}}</div>
+                    <div>{{ movie.genero }}</div>
+                </li>
+                <li *ngIf="movie.preco > 0" [ngClass]="'details-list-item'">
+                    <div>Preço:</div>
+                    <div>R$ {{ movie.preco }}</div>
                 </li>
             </ul>
         </ng-template>
     </div>
-    <div *ngIf="!naoExiberBotaoComprar" class="buy-button-container container">
+    <div *ngIf="!naoExibirBotaoComprar" class="buy-button-container container">
         <button class="buy-button" (click)="buyMovieTicket()">
             Comprar
         </button>

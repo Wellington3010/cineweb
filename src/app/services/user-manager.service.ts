@@ -22,6 +22,7 @@ export class UserManagerService {
       let arrayResult = data.toString().split("_");
       this.cacheLogin.set("LoggedUser", `${arrayResult[2]}_${arrayResult[1]}`);
       this.cacheUserType.set("LoggedUserIsAdmin", arrayResult[3] == "True" ? true : false);
+      this.cacheLogin.set("CpfLoggedUser", arrayResult[4]);
       alert("Login realizado com sucesso");
 
       if(this.loggedUserIsAdmin()) {
@@ -71,5 +72,9 @@ export class UserManagerService {
 
   public loggedUserIsAdmin() : boolean {
     return this.cacheUserType.get("LoggedUserIsAdmin") as boolean;
+  }
+
+  public hasLoggedUser() : boolean {
+    return this.cacheLogin.get("LoggedUser") != undefined;
   }
 }
