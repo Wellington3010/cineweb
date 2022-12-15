@@ -9,5 +9,5 @@ services:
   ports:
   - 5000:5000
   build:
-   context: /app
-   dockerfile: /Dockerfile
+   context: .
+   dockerfile: Dockerfile
