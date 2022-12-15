@@ -10,4 +10,4 @@ services:
   - 5000:5000
   build:
    context: .
-   dockerfile: Dockerfile
+   dockerfile: dockerfile
