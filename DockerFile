@@ -4,6 +4,7 @@ RUN npm install -g @angular/cli@13.2.6
 WORKDIR /app
 RUN ls
 ADD ./package.json /app/
+ADD ./Dockerfile /app/
 RUN npm install --force
 ADD ./ /app/
 RUN ng build
