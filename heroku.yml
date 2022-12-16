@@ -1,6 +1,3 @@
 build:
   docker:
-    release:
-       dockerfile: app/Dockerfile
-       target: builder
-    web: app/Dockerfile
+    web: ./app/Dockerfile
