@@ -7,10 +7,6 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "dev:ssr": "ng run cineweb:serve-ssr",
-    "serve:ssr": "node dist/cineweb/server/main.js",
-    "build:ssr": "ng build && ng run cineweb:server",
-    "prerender": "ng run cineweb:prerender",
     "heroku-postbuild": "ng build --prod"
   },
   "private": true,
@@ -29,7 +25,6 @@
     "@angular/router": "~13.2.0",
     "@ngrx/effects": "^13.2.0",
     "@ngrx/store": "^13.2.0",
-    "@nguniversal/express-engine": "^13.0.2",
     "bootstrap": "^5.2.0",
     "browser-sync": "^2.27.7",
     "engine.io": "^6.1.3",

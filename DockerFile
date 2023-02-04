@@ -1,11 +1,10 @@
-FROM node as build
-
+FROM node:lts-alpine as build
 RUN npm install -g @angular/cli@13.2.6
-WORKDIR /app
+WORKDIR /cineweb
 RUN ls
-ADD ./package.json /app/
+ADD ./package.json /cineweb/
 RUN npm install --force
-ADD ./ /app/
+ADD ./ /cineweb/
 RUN ng build
 EXPOSE 80
 
