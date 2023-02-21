@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { IMovie } from 'src/app/interfaces/IMovie';
 import { Pedido } from 'src/app/models/Pedido';
 import { CartService } from 'src/app/services/cart.service';
+import { CookieService } from 'src/app/services/cookie.service';
 import { MoviesService } from 'src/app/services/movies.service';
 import { NotificationService } from 'src/app/services/notification.service';
 import { UserManagerService } from 'src/app/services/user-manager.service';
@@ -23,6 +24,7 @@ export class CartComponent implements OnInit {
     private userService: UserManagerService,
     private movieService: MoviesService,
     private notificationService: NotificationService,
+    private cookieService: CookieService,
     private router: Router
   ) { }
 
@@ -36,8 +38,8 @@ export class CartComponent implements OnInit {
       this.titulos.push(item.titulo);
     });
 
-    let userName = this.userService.cacheLogin.get("LoggedUser")?.split("_")[0];
-    let cpf = this.userService.cacheLogin.get("CpfLoggedUser")
+    let userName = this.cookieService.getCookie("LoggedUser")?.split("_")[0];
+    let cpf = this.cookieService.getCookie("CpfLoggedUser")
     let pedido = new Pedido(this.totalPedido, cpf as string, userName as string, this.titulos);
 
     this.movieService.finalizarPedido(pedido)

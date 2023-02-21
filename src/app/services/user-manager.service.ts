@@ -1,17 +1,21 @@
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable, Output, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
-import { CacheManagerService } from './cache-manager.service';
 import { endpoints } from './endpoints';
+import { CookieService } from './cookie.service';
+import { NotificationService } from './notification.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserManagerService {
-  public cacheLogin: Map<string, string> = new Map();
-  public cacheUserType: Map<string, boolean> = new Map();
+  httpHeaders!: HttpHeaders;
 
-  constructor(private http: HttpClient, private router: Router) { }
+  constructor(private http: HttpClient,
+    private router: Router,
+    private cookieService: CookieService,
+    private notificationService: NotificationService) {
+    }
 
   public logarUsuario(email: string, senha: string) {
     this.http.post(endpoints.USER_LOGIN, {
@@ -20,10 +24,23 @@ export class UserManagerService {
     }).subscribe((data) => {
 
       let arrayResult = data.toString().split("_");
-      this.cacheLogin.set("LoggedUser", `${arrayResult[2]}_${arrayResult[1]}`);
-      this.cacheUserType.set("LoggedUserIsAdmin", arrayResult[3] == "True" ? true : false);
-      this.cacheLogin.set("CpfLoggedUser", arrayResult[4]);
-      alert("Login realizado com sucesso");
+      this.cookieService.setCookie("LoggedUser", `${arrayResult[2]}_${arrayResult[1]}`, 2);
+      this.cookieService.setCookie("LoggedUserIsAdmin", arrayResult[3] == "True" ? "true" : "false", 2);
+      this.cookieService.setCookie("token", btoa(arrayResult[4]), 2);
+
+      let token = this.cookieService.getCookie("token");
+      this.httpHeaders = new HttpHeaders({
+      Authorization: `Bearer ${token}`
+      })
+
+      this.http.post(endpoints.CLIENT_REGISTER, {
+        NomeCliente: arrayResult[2],
+        CPF: arrayResult[4]
+      }, { headers: this.httpHeaders }).pipe()
+      .subscribe({
+        next: () => this.notificationService.success("Login realizado com sucesso"),
+        error: () => this.notificationService.danger("Erro ao criar o cadastro do cliente")
+      })
 
       if(this.loggedUserIsAdmin()) {
         this.router.navigate(['/movies-admin']);
@@ -39,8 +56,7 @@ export class UserManagerService {
 
   public deslogarUsuario(): void {
     try {
-      this.cacheLogin.clear();
-      this.cacheUserType.clear();
+      this.cookieService.deleteAllCookies();
     } catch (error) {
       throw new Error("Não foi possivel realizar o logout" + error);
     }
@@ -56,7 +72,7 @@ export class UserManagerService {
       }).subscribe((data) => {
   
         let arrayResult = data.toString().split("_");
-        this.cacheLogin.set("LoggedUser", `${arrayResult[2]}_${arrayResult[1]}`);
+        this.cookieService.setCookie("LoggedUser", `${arrayResult[2]}_${arrayResult[1]}`, 2);
         alert("Cadastro realizado com sucesso");
         this.router.navigate(['/']);
   
@@ -67,14 +83,15 @@ export class UserManagerService {
   }
 
   public usuarioLogado(): string | undefined {
-    return this.cacheLogin.get("LoggedUser")?.split("_")[0];
+    return this.cookieService.getCookie("LoggedUser")?.split("_")[0];
   }
 
   public loggedUserIsAdmin() : boolean {
-    return this.cacheUserType.get("LoggedUserIsAdmin") as boolean;
+    let retorno = this.cookieService.getCookie("LoggedUserIsAdmin");
+    return JSON.parse(retorno);
   }
 
   public hasLoggedUser() : boolean {
-    return this.cacheLogin.get("LoggedUser") != undefined;
+    return this.cookieService.getCookie("LoggedUser") != undefined;
   }
 }

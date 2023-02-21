@@ -26,11 +26,11 @@
             <a [ngClass]="'topbar-link'" [routerLink]="['/cadastro-de-ingressos']" [queryParams]="{ fromPage: 'movies-admin' }" >Gerenciar Ingressos para Filmes</a>
             <a [ngClass]="'topbar-link'" [routerLink]="['/movies-admin']">Catálogo de Filmes</a>
         </ng-template>
-        <ng-template [ngIf]="nameUserLogged == 'none'">
+        <ng-template [ngIf]="!nameUserLogged || nameUserLogged == 'none'">
             <a [ngClass]="'topbar-link'" [routerLink]="['/login']">Login</a>
             <a [ngClass]="'topbar-link'" [routerLink]="['/register']">Registre-se</a>
         </ng-template>
-        <ng-template [ngIf]="nameUserLogged != 'none'">
+        <ng-template [ngIf]="nameUserLogged && nameUserLogged != 'none'">
             <a [ngClass]="'topbar-link'" [routerLink]="">Bem vindo {{ nameUserLogged }}</a>
             <a [ngClass]="'topbar-link'" (click)="logoutUser()" href="#">Logout</a>
         </ng-template>

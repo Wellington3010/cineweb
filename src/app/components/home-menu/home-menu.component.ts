@@ -3,6 +3,7 @@ import { Location } from "@angular/common";
 import { UserManagerService } from 'src/app/services/user-manager.service';
 import { Router, RoutesRecognized } from '@angular/router';
 import { NONE_TYPE } from '@angular/compiler';
+import { CookieService } from 'src/app/services/cookie.service';
 
 @Component({
   selector: 'app-home-menu',
@@ -16,14 +17,14 @@ export class HomeMenuComponent implements OnInit {
   buttonOverThree!: boolean;
   nameUserLogged: string = "none";
 
-  constructor(private userManager: UserManagerService, private router: Router) { }
+  constructor(private userManager: UserManagerService, private cookieService: CookieService) { }
 
   ngOnInit(): void {
     this.buttonOverOne = false;
     this.buttonOverTwo = false;
     this.buttonOverThree = false;
 
-    this.nameUserLogged = this.userManager.cacheLogin.has("LoggedUser") ? this.userManager.cacheLogin.get("LoggedUser") as string : "none";
+    this.nameUserLogged = this.cookieService.getCookie("LoggedUser") ? this.cookieService.getCookie("LoggedUser") as string : "none";
   }
 
   logoutUser() {

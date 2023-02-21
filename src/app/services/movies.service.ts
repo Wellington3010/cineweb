@@ -1,18 +1,25 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { endpoints } from './endpoints';
 import { Observable } from 'rxjs';
 import { IMovie } from '../interfaces/IMovie';
 import { TicketRegister } from '../models/TicketRegister';
 import { TicketDelete } from '../models/TicketDelete';
 import { Pedido } from '../models/Pedido';
+import { CookieService } from './cookie.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class MoviesService {
 
-  constructor(private http: HttpClient) {
+  httpHeaders!: HttpHeaders;
+
+  constructor(private http: HttpClient, private cookieService: CookieService) {
+    let token = this.cookieService.getCookie("token");
+    this.httpHeaders = new HttpHeaders({
+      Authorization: `Bearer ${token}`
+    })
   }
 
   public getHomeMovies() : Observable<IMovie[]> {
@@ -63,8 +70,8 @@ export class MoviesService {
       HomeMovie: movie.homeMovie,
       Poster: movie.poster,
       Active: movie.active,
-      Sinopse: movie.sinopse
-    }) as Observable<boolean>;
+      Sinopse: movie.sinopse,
+    }, { headers: this.httpHeaders }) as Observable<boolean>;
   }
 
   public updateMovie(movie: IMovie, oldTitle: string) : Observable<boolean> {
@@ -77,29 +84,29 @@ export class MoviesService {
       Poster: movie.poster,
       Active: movie.active,
       Sinopse: movie.sinopse
-    }) as Observable<boolean>;
+    }, { headers: this.httpHeaders }) as Observable<boolean>;
   }
 
 
   public deleteMovie(oldTitle: string) : Observable<boolean> {
       return this.http.post(endpoints.DELETE_MOVIE, {
         TituloAntigo: oldTitle
-      }) as Observable<boolean>;
+      }, { headers: this.httpHeaders }) as Observable<boolean>;
   }
 
   public cadastrarIngressos(ingresso: TicketRegister) {
-    return this.http.post(endpoints.TICKET_REGISTER, ingresso);
+    return this.http.post(endpoints.TICKET_REGISTER, ingresso, { headers: this.httpHeaders });
   }
 
   public atualizarIngressos(ingresso: TicketRegister) {
-    return this.http.post(endpoints.TICKET_UPDATE, ingresso);
+    return this.http.post(endpoints.TICKET_UPDATE, ingresso, { headers: this.httpHeaders });
   }
 
   public deletarIngressos(ingresso: TicketDelete) {
-    return this.http.post(endpoints.TICKET_DELETE, ingresso);
+    return this.http.post(endpoints.TICKET_DELETE, ingresso, { headers: this.httpHeaders });
   }
 
   public finalizarPedido(pedido: Pedido) {
-    return this.http.post(endpoints.ORDER, pedido);
+    return this.http.post(endpoints.ORDER, pedido, { headers: this.httpHeaders });
   }
 }
