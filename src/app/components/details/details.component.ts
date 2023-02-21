@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { IMovie } from 'src/app/interfaces/IMovie';
 import { CartService } from 'src/app/services/cart.service';
+import { NotificationService } from 'src/app/services/notification.service';
 import { UserManagerService } from 'src/app/services/user-manager.service';
 import { MovieEffects } from 'src/app/store/movies.effects';
 
@@ -22,7 +23,8 @@ export class DetailsComponent implements OnInit {
               private router: Router,
               private store: Store<{movies: IMovie[]}>,
               private cartService: CartService,
-              private userManager: UserManagerService) { }
+              private userManager: UserManagerService,
+              private notificationService: NotificationService) { }
 
   ngOnInit(): void {
     if(this.effects.cache.has(this.fromPage)) {
@@ -46,8 +48,12 @@ export class DetailsComponent implements OnInit {
 
   buyMovieTicket() {
     if(!this.userManager.hasLoggedUser()) {
-      alert("Cadastre-se e efetue o login para realizar a compra de ingressos");
-      this.router.navigate(['/login']);
+      this.notificationService.warning("Cadastre-se e efetue o login para realizar a compra de ingressos");
+      
+      setTimeout(() => {
+        this.router.navigate(['/login']);
+      }, 3000);
+      
       return;
     }
 

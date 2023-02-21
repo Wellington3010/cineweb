@@ -4,6 +4,7 @@ import { IMovie } from 'src/app/interfaces/IMovie';
 import { Pedido } from 'src/app/models/Pedido';
 import { CartService } from 'src/app/services/cart.service';
 import { MoviesService } from 'src/app/services/movies.service';
+import { NotificationService } from 'src/app/services/notification.service';
 import { UserManagerService } from 'src/app/services/user-manager.service';
 
 @Component({
@@ -21,6 +22,7 @@ export class CartComponent implements OnInit {
     private cartService: CartService,
     private userService: UserManagerService,
     private movieService: MoviesService,
+    private notificationService: NotificationService,
     private router: Router
   ) { }
 
@@ -34,8 +36,6 @@ export class CartComponent implements OnInit {
       this.titulos.push(item.titulo);
     });
 
-    console.log(this.totalPedido);
-
     let userName = this.userService.cacheLogin.get("LoggedUser")?.split("_")[0];
     let cpf = this.userService.cacheLogin.get("CpfLoggedUser")
     let pedido = new Pedido(this.totalPedido, cpf as string, userName as string, this.titulos);
@@ -44,13 +44,16 @@ export class CartComponent implements OnInit {
     .pipe()
     .subscribe({
       next: () => this.onOrderSuccess("Pedido finalizado com sucesso"),
-      error:(error) => console.log(error)
+      error:() => this.notificationService.danger("Erro ao finalizar pedido")
     });
   }
 
   onOrderSuccess(message: string) {
-    alert(message);
+    this.notificationService.success(message);
     this.cartService.LimparCarrinho();
-    this.router.navigate(['/em-breve']);
+    
+    setTimeout(() => {
+      this.router.navigate(['/em-breve']);
+    }, 3000);
   }
 }

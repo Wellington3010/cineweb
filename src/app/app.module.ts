@@ -35,6 +35,8 @@ import { MoviesFormComponent } from './components/movies-form/movies-form.compon
 import { CartService } from './services/cart.service';
 import { CartComponent } from './page-components/cart/cart.component';
 import { TicketRegisterComponent } from './page-components/ticket-register/ticket-register.component';
+import { HttpRequestMessagesComponent } from './share-components/http-request-messages/http-request-messages.component';
+import { NotificationService } from './services/notification.service';
 
 @NgModule({
   declarations: [
@@ -60,7 +62,8 @@ import { TicketRegisterComponent } from './page-components/ticket-register/ticke
     MoviesRegisterComponent,
     MoviesFormComponent,
     CartComponent,
-    TicketRegisterComponent
+    TicketRegisterComponent,
+    HttpRequestMessagesComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }),
@@ -88,7 +91,7 @@ import { TicketRegisterComponent } from './page-components/ticket-register/ticke
     HttpClientModule,
     CommonModule
   ],
-  providers: [CartService, MovieEffects],
+  providers: [CartService, MovieEffects, NotificationService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

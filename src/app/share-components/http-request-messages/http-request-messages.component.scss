@@ -1,0 +1,37 @@
+.alert {
+    top: 10%;
+    left: 50%;
+    position: absolute;
+    transform: translate(-50%, -50%);
+    max-width: 500px;
+    min-width: 320px;
+
+    text-align: center;
+    word-wrap: keep-all;
+    font: bold 12pt "Arial", "Sans-Serif", "Helvetica";
+    z-index: 9999;
+}
+
+.alert.alert-message-success {
+    background-color: rgb(53, 209, 53);
+    color: #fff;
+    border: 1px solid rgb(243, 243, 242);
+    position: fixed;
+    text-align: center;
+}
+
+.alert.alert-message-danger {
+    background-color: red;
+    color: #fff;
+    border: 1px solid rgb(243, 243, 242);
+    position: fixed;
+    text-align: center;
+}
+
+.alert.alert-message-warning {
+    background-color: rgb(231, 192, 17);
+    border: 1px solid rgb(34, 33, 32);
+    color: #22211f;
+    position: fixed;
+    text-align: center;
+}

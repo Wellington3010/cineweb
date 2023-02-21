@@ -46,6 +46,10 @@ export class CartService {
   public VerificaSeCarrinhoEstaComQuantidadeMaximaItens() : boolean {
     let listaDeFilmes = this.cache.get("cart") as IMovie[];
 
-    return listaDeFilmes.length >= 5;
+    if(listaDeFilmes != undefined) {
+      return listaDeFilmes.length >= 5;
+    }
+
+    return false;
   }
 }
