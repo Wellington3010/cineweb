@@ -37,6 +37,7 @@ import { CartComponent } from './page-components/cart/cart.component';
 import { TicketRegisterComponent } from './page-components/ticket-register/ticket-register.component';
 import { HttpRequestMessagesComponent } from './share-components/http-request-messages/http-request-messages.component';
 import { NotificationService } from './services/notification.service';
+import { CookieService } from './services/cookie.service';
 
 @NgModule({
   declarations: [
@@ -91,7 +92,7 @@ import { NotificationService } from './services/notification.service';
     HttpClientModule,
     CommonModule
   ],
-  providers: [CartService, MovieEffects, NotificationService],
+  providers: [CartService, MovieEffects, NotificationService, CookieService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
