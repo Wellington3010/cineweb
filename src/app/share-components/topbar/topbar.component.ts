@@ -39,12 +39,9 @@ export class TopbarComponent implements OnInit {
 
     this.router.events.subscribe((val) => {
       if(val instanceof RoutesRecognized) {
-
-        if((val as RoutesRecognized).url == "/" || (val as RoutesRecognized).url == "/movies-admin") {
-          let userNameArray = this.userManager.usuarioLogado()?.split(" ");
-          this.nameUserLogged = userNameArray == undefined ? "none" : userNameArray[0];
-          this.loggedUserIsAdmin = this.userManager.loggedUserIsAdmin();
-        }
+        let userNameArray = this.userManager.usuarioLogado()?.split(" ");
+        this.nameUserLogged = userNameArray == undefined ? "none" : userNameArray[0];
+        this.loggedUserIsAdmin = this.userManager.loggedUserIsAdmin();
       }
     });
   }

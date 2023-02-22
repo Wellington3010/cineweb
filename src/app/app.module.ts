@@ -38,6 +38,10 @@ import { TicketRegisterComponent } from './page-components/ticket-register/ticke
 import { HttpRequestMessagesComponent } from './share-components/http-request-messages/http-request-messages.component';
 import { NotificationService } from './services/notification.service';
 import { CookieService } from './services/cookie.service';
+import { InterceptorService } from './services/interceptor.service';
+import { LoaderService } from './services/loader.service';
+import { LoaderComponent } from './share-components/loader/loader.component';
+import { AppInterceptorModule } from './app-interceptor.module';
 
 @NgModule({
   declarations: [
@@ -64,9 +68,11 @@ import { CookieService } from './services/cookie.service';
     MoviesFormComponent,
     CartComponent,
     TicketRegisterComponent,
-    HttpRequestMessagesComponent
+    HttpRequestMessagesComponent,
+    LoaderComponent
   ],
   imports: [
+    AppInterceptorModule,
     BrowserModule.withServerTransition({ appId: 'serverApp' }),
     AppRoutingModule,
     EffectsModule.forRoot([MovieEffects]),
@@ -92,7 +98,12 @@ import { CookieService } from './services/cookie.service';
     HttpClientModule,
     CommonModule
   ],
-  providers: [CartService, MovieEffects, NotificationService, CookieService],
+  providers: [CartService,
+  MovieEffects,
+  NotificationService,
+  CookieService,
+  InterceptorService,
+  LoaderService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

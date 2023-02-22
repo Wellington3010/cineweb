@@ -52,7 +52,6 @@ export class PagesCarouselComponent implements OnInit {
   }
 
   listenerEffects() {
-    console.log(this.currentPage);
     switch(this.currentPage) {
       case "current-movies":
         this.effect.currentMovies$.subscribe((item) => {
@@ -83,7 +82,6 @@ export class PagesCarouselComponent implements OnInit {
       case "movies-admin":
         this.effect.allMovies$.subscribe((item) => {
           this.list = item.payload;
-          console.log(this.list);
           this.setMoviesRangePerResolution();
         });
         this.effect.findMovieByParameter$.subscribe((item) => {
