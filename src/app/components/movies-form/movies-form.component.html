@@ -3,15 +3,15 @@
         <form [formGroup]="movieForm"  [ngClass]="'search-fields'">
             <div [ngClass]="'search-group'">
                 <label for="title">Título</label>
-                <input id="title" [class.high-opacity]="" [ngClass]="'form-item'" type="text" formControlName="title">
+                <input id="title" [class.high-opacity]="" [ngClass]="'form-item'" type="text" formControlName="titulo">
             </div>
             <div [ngClass]="'search-group date'">
                 <label for="date">Data</label>
-                <input id="date" [class.high-opacity]="" [ngClass]="'form-item'" type="date" formControlName="date">
+                <input id="date" [class.high-opacity]="" [ngClass]="'form-item'" type="date" formControlName="data">
             </div>
             <div [ngClass]="'search-group'">
                 <label for="genre">Gênero</label>
-                <select id="genre" [class.high-opacity]="" [ngClass]="'form-item select'" formControlName="genre">
+                <select id="genre" [class.high-opacity]="" [ngClass]="'form-item select'" formControlName="genero">
                     <option value="ação">AÇÃO</option>
                     <option value="aventura">AVENTURA</option>
                     <option value="terror">TERROR</option>
@@ -23,8 +23,8 @@
             <div [ngClass]="'search-group'">
                 <label for="status">Status</label>
                 <select id="status" [class.high-opacity]="" [ngClass]="'form-item select'" formControlName="status">
-                    <option value=true>Ativo</option>
-                    <option value=false>Inativo</option>
+                    <option value="true">Ativo</option>
+                    <option value="false">Inativo</option>
                 </select>
             </div>
             <div [ngClass]="'search-group'">
@@ -38,8 +38,8 @@
             <div [ngClass]="'search-group'">
                 <label id="pagina-home-label" for="home">Página Home</label>
                 <select id="home" [class.high-opacity]="" [ngClass]="'form-item select'" formControlName="home">
-                    <option value="ativo">Ativo</option>
-                    <option value="inativo">Inativo</option>
+                    <option value="true">Ativo</option>
+                    <option value="false">Inativo</option>
                 </select>
             </div>
             <div>

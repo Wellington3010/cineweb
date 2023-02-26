@@ -2,9 +2,11 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import { IMovie } from 'src/app/interfaces/IMovie';
+import { MovieError } from 'src/app/models/MovieError';
 import { TicketDelete } from 'src/app/models/TicketDelete';
 import { TicketRegister } from 'src/app/models/TicketRegister';
 import { MoviesService } from 'src/app/services/movies.service';
+import { NotificationService } from 'src/app/services/notification.service';
 
 @Component({
   selector: 'app-movies-form',
@@ -26,7 +28,10 @@ export class MoviesFormComponent implements OnInit {
   @Output() selectMovie: EventEmitter<any> = new EventEmitter();
   @Output() resetPreview: EventEmitter<any> = new EventEmitter();
 
-  constructor(private formBuilder: FormBuilder, private moviesService: MoviesService, private router: Router) { }
+  constructor(private formBuilder: FormBuilder,
+    private moviesService: MoviesService,
+    private router: Router,
+    private notificationService: NotificationService) { }
 
   ngOnInit(): void {
     this.formCreate();
@@ -38,9 +43,9 @@ export class MoviesFormComponent implements OnInit {
 
   formCreate() {
     this.movieForm = this.formBuilder.group({
-      title: [''],
-      date: [''],
-      genre: [''],
+      titulo: [''],
+      data: [''],
+      genero: [''],
       status: [''],
       poster: [''],
       sinopse: [''],
@@ -55,67 +60,110 @@ export class MoviesFormComponent implements OnInit {
   }
 
   setMovieFormValues() {
-    this.movieForm.controls['title'].setValue(this.movie.titulo);
-    this.movieForm.controls['date'].setValue(this.movie.data.toLocaleString().split("T")[0]);
-    this.movieForm.controls['genre'].setValue(this.movie.genero);
-    this.movieForm.controls['status'].setValue("true");
+    this.movieForm.controls['titulo'].setValue(this.movie.titulo);
+    this.movieForm.controls['data'].setValue(this.movie.data.toLocaleString().split("T")[0]);
+    this.movieForm.controls['genero'].setValue(this.movie.genero);
+    this.movie.active ? this.movieForm.controls['status'].setValue("true") : this.movieForm.controls['status'].setValue("false");
     this.movieForm.controls['sinopse'].setValue(this.movie.sinopse);
-    this.movieForm.controls['home'].setValue(this.movie.homeMovie == true ? "ativo" : "inativo");
+    this.movieForm.controls['home'].setValue(this.movie.homeMovie);
     this.localUrl = this.movie.poster;
   }
 
-  // setTicketsFormValues() {
-  //   this.localUrl = this.movies[0].poster;
-  // }
-
   submitForm() {
-    let title = this.movieForm.value['title'].toString().trimStart();
-    let date = this.movieForm.value['date'].toString().trimStart();
-    let genre = this.movieForm.value['genre'];
-    let status = this.movieForm.value['status'];
+    let title = this.movieForm.value['titulo'].toString().trimStart();
+    let date = this.movieForm.value['data'].toString().trimStart();
+    let genre = this.movieForm.value['genero'];
+    let status = JSON.parse(this.movieForm.value['status']);
     let sinopse = this.movieForm.value['sinopse'];
-    let homePage = this.movieForm.value['home'];
+    let homePage = JSON.parse(this.movieForm.value['home']);
     let poster = this.localUrl;
 
     let movie = {
       titulo: title, 
       data: date,
       genero: genre,
-      homeMovie: homePage == "ativo" ? true : false,
+      homeMovie: homePage,
       poster: poster,
-      active: status == "true" ? true : false,
+      active: status,
       sinopse: sinopse
     } as IMovie;
 
     if(this.movie != undefined) {
+      this.movie.poster = this.localUrl;
       this.moviesService.updateMovie(movie, this.movie.titulo)
-      .subscribe((retorno) => {
-        if(retorno) {
-          alert("Filme atualizado com sucesso");
-          this.movieForm.reset();
-          this.resetPreview.emit();
-          this.router.navigate(['/movies-admin']);
-        }
-        else {
-          alert("Não foi possível atualizar o filme. Tente novamente mais tarde");
-        }
+      .pipe()
+      .subscribe({
+        next:(retorno) => this.tratarRetornoAoAtualizarFilme(retorno),
+        error:() => this.notificationService.danger("Erro ao atualizar o cadastro. Verifique o preenchimento dos campos e tente novamente")
       });
     }
     else
     {
       this.moviesService.saveMovie(movie)
-      .subscribe((retorno) => {
-        if(retorno) {
-          alert("Filme cadastrado com sucesso");
-          this.movieForm.reset();
-          this.resetPreview.emit();
-          this.router.navigate(['/movies-admin']);
-        }
-        else {
-          alert("Não foi possível cadastrar o filme. Tente novamente mais tarde");
-        }
+      .pipe()
+      .subscribe({
+        next:(retorno) => this.tratarRetornoAoCadastrarFilme(retorno),
+        error:(error: any) => this.tratarRetornoComErro(error)
       });
     }
+  }
+
+  tratarRetornoAoAtualizarFilme(retorno: boolean) {
+    if(retorno) {
+      this.notificationService.success("Filme atualizado com sucesso");
+      this.movieForm.reset();
+      this.resetPreview.emit();
+      this.router.navigate(['/movies-admin']);
+    }
+    else {
+      this.notificationService.danger("Não foi possível atualizar o filme. Tente novamente mais tarde");
+    }
+  }
+
+  tratarRetornoAoCadastrarFilme(retorno: boolean) {
+    if(retorno) {
+      this.notificationService.success("Filme cadastrado com sucesso");
+      this.movieForm.reset();
+      this.resetPreview.emit();
+      this.router.navigate(['/movies-admin']);
+    }
+    else {
+      this.notificationService.danger("Não foi possível cadastrar o filme. Tente novamente mais tarde");
+    }
+  }
+
+  tratarRetornoComErro(error: any) {
+    let errors = error.error['errors'] as MovieError;
+
+   if(errors != undefined) {
+
+    if(errors.Active != undefined && errors.Active.length > 0) {
+      this.notificationService.danger(errors.Active[0]);
+    }
+
+    if(errors.Poster != undefined && errors.Poster.length > 0) {
+      this.notificationService.danger(errors.Poster[0]);
+    }
+
+    if(errors.Titulo != undefined && errors.Titulo.length > 0) {
+      this.notificationService.danger(errors.Titulo[0]);
+    }
+
+    if(errors.Sinopse != undefined && errors.Sinopse.length > 0) {
+      this.notificationService.danger(errors.Sinopse[0]);
+    }
+
+    if(errors.Data != undefined && errors.Data.length > 0) {
+      this.notificationService.danger(errors.Data[0]);
+    }
+
+    if(errors.Genero != undefined && errors.Genero.length > 0) {
+      this.notificationService.danger(errors.Genero[0]);
+    }
+   }
+   else {
+    this.notificationService.danger("Não foi possível concluir a operação");
+   }
   }
 
   cadastrarIngressos() {
