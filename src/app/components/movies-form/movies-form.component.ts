@@ -94,7 +94,7 @@ export class MoviesFormComponent implements OnInit {
       .pipe()
       .subscribe({
         next:(retorno) => this.tratarRetornoAoAtualizarFilme(retorno),
-        error:() => this.notificationService.danger("Erro ao atualizar o cadastro. Verifique o preenchimento dos campos e tente novamente")
+        error:(error: any) => this.tratarRetornoComErro(error)
       });
     }
     else
@@ -138,27 +138,27 @@ export class MoviesFormComponent implements OnInit {
    if(errors != undefined) {
 
     if(errors.Active != undefined && errors.Active.length > 0) {
-      this.notificationService.danger(errors.Active[0]);
+      this.notificationService.warning(errors.Active[0]);
     }
 
     if(errors.Poster != undefined && errors.Poster.length > 0) {
-      this.notificationService.danger(errors.Poster[0]);
+      this.notificationService.warning(errors.Poster[0]);
     }
 
     if(errors.Titulo != undefined && errors.Titulo.length > 0) {
-      this.notificationService.danger(errors.Titulo[0]);
+      this.notificationService.warning(errors.Titulo[0]);
     }
 
     if(errors.Sinopse != undefined && errors.Sinopse.length > 0) {
-      this.notificationService.danger(errors.Sinopse[0]);
+      this.notificationService.warning(errors.Sinopse[0]);
     }
 
     if(errors.Data != undefined && errors.Data.length > 0) {
-      this.notificationService.danger(errors.Data[0]);
+      this.notificationService.warning(errors.Data[0]);
     }
 
     if(errors.Genero != undefined && errors.Genero.length > 0) {
-      this.notificationService.danger(errors.Genero[0]);
+      this.notificationService.warning(errors.Genero[0]);
     }
    }
    else {
