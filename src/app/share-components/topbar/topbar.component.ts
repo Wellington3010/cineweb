@@ -4,6 +4,7 @@ import { UserManagerService } from 'src/app/services/user-manager.service';
 import { Router, RoutesRecognized } from '@angular/router';
 import { CartService } from 'src/app/services/cart.service';
 import { IMovie } from 'src/app/interfaces/IMovie';
+import { NotificationService } from 'src/app/services/notification.service';
 
 @Component({
   selector: 'app-topbar',
@@ -23,7 +24,8 @@ export class TopbarComponent implements OnInit {
     private location: Location,
     private userManager: UserManagerService,
     private cartService: CartService,
-    private router: Router) {
+    private router: Router,
+    private notificationService: NotificationService) {
   }
 
   ngOnInit(): void {
@@ -48,7 +50,7 @@ export class TopbarComponent implements OnInit {
 
   logoutUser() {
     this.userManager.deslogarUsuario();
-    alert("Logout realizado com sucesso");
+    this.notificationService.success("Logout realizado com sucesso");
     this.nameUserLogged = "none";
     this.loggedUserIsAdmin = false;
   }

@@ -39,7 +39,7 @@ export class CartComponent implements OnInit {
     });
 
     let userName = this.cookieService.getCookie("LoggedUser")?.split("_")[0];
-    let cpf = this.cookieService.getCookie("CpfLoggedUser")
+    let cpf = atob(this.cookieService.getCookie("token"));
     let pedido = new Pedido(this.totalPedido, cpf as string, userName as string, this.titulos);
 
     this.movieService.finalizarPedido(pedido)
@@ -55,7 +55,7 @@ export class CartComponent implements OnInit {
     this.cartService.LimparCarrinho();
     
     setTimeout(() => {
-      this.router.navigate(['/em-breve']);
+      this.router.navigate(['/em-cartaz']);
     }, 3000);
   }
 }

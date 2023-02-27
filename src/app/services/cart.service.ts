@@ -9,12 +9,11 @@ export class CartService {
   moviesList: IMovie[] = [];
 
   constructor() {
+    this.cache = new Map();
     this.cache.set("cart", this.moviesList);
   }
 
-  /**
-   * name
-   */
+  
   public AdicionarNoCarrinho(movie: IMovie) : void {
     this.moviesList.push(movie);
     this.cache.set("cart", this.moviesList);
@@ -25,7 +24,9 @@ export class CartService {
   }
 
   public LimparCarrinho() : void {
-    this.cache.clear();
+    this.cache = new Map();
+    this.moviesList = [];
+    this.cache.set("cart", this.moviesList);
   }
 
   public VerificaSeItemJaExisteNoCarrinho(movie: IMovie) : boolean {

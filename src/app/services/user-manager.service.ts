@@ -49,7 +49,7 @@ export class UserManagerService {
         this.router.navigate(['/']);
       }
     }, (error) => {
-      alert("Não foi possível realizar o login. Tente novamente");
+      this.notificationService.danger("Não foi possível realizar o login. Tente novamente");
       this.router.navigate(['/login']);
     });
   }
@@ -73,11 +73,11 @@ export class UserManagerService {
   
         let arrayResult = data.toString().split("_");
         this.cookieService.setCookie("LoggedUser", `${arrayResult[2]}_${arrayResult[1]}`, 2);
-        alert("Cadastro realizado com sucesso");
+        this.notificationService.success("Cadastro realizado com sucesso");
         this.router.navigate(['/']);
   
       }, (error) => {
-        alert("Não foi possível realizar o cadastro. Tente novamente");
+        this.notificationService.danger("Não foi possível realizar o cadastro. Tente novamente");
         this.router.navigate(['/register']);
       });
   }

@@ -2,6 +2,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import { IMovie } from 'src/app/interfaces/IMovie';
+import { IngressoError } from 'src/app/models/IngressoError';
 import { MovieError } from 'src/app/models/MovieError';
 import { TicketDelete } from 'src/app/models/TicketDelete';
 import { TicketRegister } from 'src/app/models/TicketRegister';
@@ -94,7 +95,7 @@ export class MoviesFormComponent implements OnInit {
       .pipe()
       .subscribe({
         next:(retorno) => this.tratarRetornoAoAtualizarFilme(retorno),
-        error:(error: any) => this.tratarRetornoComErro(error)
+        error:(error: any) => this.tratarRetornoFilmesComErro(error)
       });
     }
     else
@@ -103,7 +104,7 @@ export class MoviesFormComponent implements OnInit {
       .pipe()
       .subscribe({
         next:(retorno) => this.tratarRetornoAoCadastrarFilme(retorno),
-        error:(error: any) => this.tratarRetornoComErro(error)
+        error:(error: any) => this.tratarRetornoFilmesComErro(error)
       });
     }
   }
@@ -132,7 +133,7 @@ export class MoviesFormComponent implements OnInit {
     }
   }
 
-  tratarRetornoComErro(error: any) {
+  tratarRetornoFilmesComErro(error: any) {
     let errors = error.error['errors'] as MovieError;
 
    if(errors != undefined) {
@@ -166,6 +167,28 @@ export class MoviesFormComponent implements OnInit {
    }
   }
 
+  tratarRetornoIngressosComErro(error: any) {
+    let errors = error.error['errors'] as IngressoError;
+
+   if(errors != undefined) {
+
+    if(errors.Titulo != undefined && errors.Titulo.length > 0) {
+      this.notificationService.warning(errors.Titulo[0]);
+    }
+
+    if(errors.Preco != undefined && errors.Preco.length > 0) {
+      this.notificationService.warning(errors.Preco[0]);
+    }
+
+    if(errors.Quantidade != undefined && errors.Quantidade.length > 0) {
+      this.notificationService.warning(errors.Quantidade[0]);
+    }
+   }
+   else {
+    this.notificationService.danger("Não foi possível concluir a operação");
+   }
+  }
+
   cadastrarIngressos() {
     let cadastroIngressos = new TicketRegister (
       this.selectedMovie.titulo,
@@ -177,7 +200,7 @@ export class MoviesFormComponent implements OnInit {
     .pipe()
     .subscribe({
       next: (result) => this.onTicketManagerSuccess("Ingressos cadastrados com sucesso"),
-      error: (error) => alert("Não foi possível realizar a operação. Contate o suporte técnico")
+      error: (error: any) => this.tratarRetornoIngressosComErro(error)
     });
   }
 
@@ -192,7 +215,7 @@ export class MoviesFormComponent implements OnInit {
     .pipe()
     .subscribe({
       next: (result) => this.onTicketManagerSuccess("Ingressos atualizados com sucesso"),
-      error: (error) => alert("Não foi possível realizar a operação. Contate o suporte técnico")
+      error: (error: any) => this.tratarRetornoIngressosComErro(error)
     });
   }
 
@@ -205,7 +228,7 @@ export class MoviesFormComponent implements OnInit {
     .pipe()
     .subscribe({
       next: (result) => this.onTicketManagerSuccess("Ingressos deletados com sucesso"),
-      error: (error) => alert("Não foi possível realizar a operação. Contate o suporte técnico")
+      error: (error: any) => this.tratarRetornoIngressosComErro(error)
     });
   }
 
@@ -226,13 +249,13 @@ export class MoviesFormComponent implements OnInit {
     this.moviesService.deleteMovie(this.movie.titulo)
     .subscribe((retorno) => {
       if(retorno) {
-        alert("Filme deletado com sucesso");
+        this.notificationService.success("Filme deletado com sucesso");
         this.movieForm.reset();
         this.resetPreview.emit();
         this.router.navigate(['/movies-admin']);
       }
       else {
-        alert("Não foi possível deletar o filme. Tente novamente mais tarde");
+        this.notificationService.danger("Não foi possível deletar o filme");
       }
     });
   }
@@ -254,7 +277,7 @@ export class MoviesFormComponent implements OnInit {
   }
 
   onTicketManagerSuccess(message :string) {
-    alert(message);
+    this.notificationService.success(message);
     this.router.navigate(['/movies-admin'])
   }
 }
