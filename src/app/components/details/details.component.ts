@@ -14,7 +14,7 @@ import { MovieEffects } from 'src/app/store/movies.effects';
 })
 export class DetailsComponent implements OnInit {
   movie!: IMovie;
-  naoExibirBotaoComprar!: boolean;
+  exibirBotaoComprar: boolean = false;
   carrinhoComQuantidadeMaxima!: boolean;
   @Input() movieTitle!: string;
   @Input() fromPage!: string;
@@ -31,19 +31,13 @@ export class DetailsComponent implements OnInit {
       var arrayMovies = this.effects.cache.get(this.fromPage);
 
       this.movie = arrayMovies?.find(x => x.titulo == this.movieTitle) as IMovie;
-      this.naoExibirBotaoComprar = this.validarQuantidadeIngressos(this.movie.quantidadeIngressos);
-      console.log(this.cartService.VerificaSeItemJaExisteNoCarrinho(this.movie));
-      console.log(this.movie.quantidadeIngressos);
+      this.exibirBotaoComprar = (this.cartService.ItemNaoExisteNoCarrinho(this.movie) && this.movie.active == true && this.movie.quantidadeIngressos > 0)
     }
     else {
       this.effects.findMovieByParameter$.subscribe((item) => this.movie = item.payload[0]);
 
       this.store.dispatch({type: '[FindMoviesByParameter] Movies', parameter: this.movieTitle, parameterType: "title" });
     }
-  }
-
-  validarQuantidadeIngressos(quantidadeIngressos: number): boolean {
-    return (this.cartService.VerificaSeItemJaExisteNoCarrinho(this.movie) || (quantidadeIngressos == 0))
   }
 
   buyMovieTicket() {
@@ -61,12 +55,12 @@ export class DetailsComponent implements OnInit {
     this.carrinhoComQuantidadeMaxima = this.cartService.VerificaSeCarrinhoEstaComQuantidadeMaximaItens();
 
     if(this.carrinhoComQuantidadeMaxima) {
-      alert("O número máximo de itens para o pedido é de 5. Finalize este pedido para realizar uma nova compra.");
+      this.notificationService.warning("O número máximo de itens para o pedido é de 5. Finalize este pedido para realizar uma nova compra.");
       return;
     }
 
     this.cartService.AdicionarNoCarrinho(this.movie);
-    alert("Item adicionado ao carrinho. Finalize seu pedido");
+    this.notificationService.success("Item adicionado ao carrinho. Finalize seu pedido");
     this.router.navigate(['/cart']);
   }
 }

@@ -29,19 +29,19 @@ export class CartService {
     this.cache.set("cart", this.moviesList);
   }
 
-  public VerificaSeItemJaExisteNoCarrinho(movie: IMovie) : boolean {
+  public ItemNaoExisteNoCarrinho(movie: IMovie) : boolean {
     let listaDeFilmes = this.cache.get("cart") as IMovie[];
 
     if(listaDeFilmes == undefined)
-      return false;
+      return true;
 
     let movieResult = listaDeFilmes.find(x => x.titulo == movie.titulo);
 
     if(movieResult != undefined || movieResult != null) {
-      return true;
+      return false;
     }
 
-    return false;
+    return true;
   }
 
   public VerificaSeCarrinhoEstaComQuantidadeMaximaItens() : boolean {

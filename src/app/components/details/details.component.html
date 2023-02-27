@@ -29,7 +29,7 @@
             </ul>
         </ng-template>
     </div>
-    <div *ngIf="!naoExibirBotaoComprar" class="buy-button-container container">
+    <div *ngIf="exibirBotaoComprar == true" class="buy-button-container container">
         <button class="buy-button" (click)="buyMovieTicket()">
             Comprar
         </button>
