@@ -4,8 +4,8 @@
 
 export const environment = {
   production: false,
-  moviesApiBaseUrl: "https://cineweb-movies-api-app.herokuapp.com/movies",
-  usersApiBaseUrl:"https://cineweb-user-api-app.herokuapp.com/users"
+  moviesApiBaseUrl: "https://cineweb-movies-api-1722303389.sa-east-1.elb.amazonaws.com/movies",
+  usersApiBaseUrl:"https://cineweb-user-api-1019093983.sa-east-1.elb.amazonaws.com/users"
 };
 
 /*
